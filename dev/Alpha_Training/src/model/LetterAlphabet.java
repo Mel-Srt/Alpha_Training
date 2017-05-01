@@ -10,6 +10,7 @@ public class LetterAlphabet extends Character {
 	public LetterAlphabet(char name){
 		this.name = name;
 		this.sound = new File("sounds/" + name + ".WAV");
+
 	}
 
 	public void playSound() {
