@@ -11,7 +11,6 @@ import view.MainFrame;
 public class Main {
 
     public static void main(String[] args) {
-        //test
         //Model:
         DataGame dataGame = new DataGame();
 
@@ -20,8 +19,6 @@ public class Main {
 
         //View:		
         alphabetGame.createFrame();
-        //MainFrame frame = new MainFrame(alphabetGame);
-        //dataGame.addObserver(frame);
     }
 
 }
