@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Events>
+    <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentResized"/>
+  </Events>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,88,0,0,3,102"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+    <Property name="columns" type="int" value="9"/>
+    <Property name="rows" type="int" value="3"/>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="A">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="A"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="B">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="B"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="C">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="C"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="D">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="D"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="E">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="E"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="F">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="F"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="G">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="G"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="H">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="H"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="I">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="I"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="J">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="J"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="K">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="K"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="L">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="M">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="M"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="N">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="N"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="O">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="O"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="P">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="P"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="Q">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Q"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="R">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="R"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="S">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="S"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="T">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="T"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="U">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="U"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="V">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="V"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="W">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="W"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="X">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="X"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="Y">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Y"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="Z">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Z"/>
+        <Property name="focusable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>
