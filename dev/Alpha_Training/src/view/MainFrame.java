@@ -32,18 +32,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         this.alphabetGame = alphabetGame;
         initComponents();
-
-        Pnl_Global.removeAll();
-        Pnl_Global.repaint();
-        Pnl_Global.revalidate();
-
-        //Adding Pannels
-        Pnl_Global.add(Pnl_MainMenu);
-        Pnl_Global.repaint();
-        Pnl_Global.revalidate();
-
+        changePanel(Pnl_MainMenu);
         keyboardBind(Btn_Exit, KeyEvent.VK_ESCAPE);
-
         this.setVisible(true);
     }
 
@@ -56,11 +46,14 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_Global.add(namePanel);
         Pnl_Global.repaint();
         Pnl_Global.revalidate();
-
+        
+        if (namePanel == Pnl_MainMenu){
+            Btn_Play.requestFocus();
+        }
         if (namePanel == Pnl_LettersMenu) {
             keyboardBind(Btn_Cancel_Letters, KeyEvent.VK_ESCAPE);
+            Btn_Cancel_Letters.requestFocus();
         }
-
         if (namePanel == Pnl_Game) {
             keyboardBind(Btn_ReturnMenu, KeyEvent.VK_ESCAPE);
             keyboardBind(Btn_PlayLetter, KeyEvent.VK_SPACE);
@@ -131,7 +124,6 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 500));
-        setPreferredSize(new java.awt.Dimension(900, 600));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
@@ -259,6 +251,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_LettersMenu.setLayout(new java.awt.GridBagLayout());
 
         Lbl_Letters.setText("Choose your letters:");
+        Lbl_Letters.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -277,6 +270,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_LettersMenu.add(Btn_Alphabet, gridBagConstraints);
 
         Btn_Vowels.setText("Vowels");
+        Btn_Vowels.setRequestFocusEnabled(false);
         Btn_Vowels.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_VowelsActionPerformed(evt);
@@ -289,6 +283,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_LettersMenu.add(Btn_Vowels, gridBagConstraints);
 
         Btn_Consonnants.setText("Consonnants");
+        Btn_Consonnants.setRequestFocusEnabled(false);
         Btn_Consonnants.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_ConsonnantsActionPerformed(evt);
@@ -301,6 +296,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_LettersMenu.add(Btn_Consonnants, gridBagConstraints);
 
         Lbl_Mode.setText("Mode:");
+        Lbl_Mode.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -308,6 +304,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Btn_Training.setText("Training");
         Btn_Training.setEnabled(false);
+        Btn_Training.setRequestFocusEnabled(false);
         Btn_Training.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_TrainingActionPerformed(evt);
@@ -321,6 +318,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Btn_Chrono.setText("Chrono 30'");
         Btn_Chrono.setEnabled(false);
+        Btn_Chrono.setRequestFocusEnabled(false);
         Btn_Chrono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_ChronoActionPerformed(evt);
@@ -333,6 +331,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_LettersMenu.add(Btn_Chrono, gridBagConstraints);
 
         Btn_Cancel_Letters.setText("Cancel");
+        Btn_Cancel_Letters.setSelected(true);
         Btn_Cancel_Letters.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_Cancel_LettersActionPerformed(evt);
@@ -351,9 +350,15 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_MainMenu.setLayout(new java.awt.GridBagLayout());
 
         Btn_Play.setText("Play");
+        Btn_Play.setRequestFocusEnabled(false);
         Btn_Play.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_PlayActionPerformed(evt);
+            }
+        });
+        Btn_Play.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_PlayKeyPressed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -378,6 +383,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Btn_Exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_ExitActionPerformed(evt);
+            }
+        });
+        Btn_Exit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_ExitKeyPressed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -513,13 +523,12 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         alphabetGame.getDataGame().setTrainingMode(isTrainingMode);
         alphabetGame.start();
         changePanel(Pnl_Game);
-        if(isTrainingMode){
+        if (isTrainingMode) {
             Lbl_ScoreFixed.setVisible(false);
             Lbl_ScoreVar.setVisible(false);
             Lbl_TimerFixed.setVisible(false);
             Lbl_TimerVar.setVisible(false);
-        }
-        else{
+        } else {
             Lbl_ScoreFixed.setVisible(true);
             Lbl_ScoreVar.setVisible(true);
             Lbl_TimerFixed.setVisible(true);
@@ -567,6 +576,19 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_QuitScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_QuitScoreActionPerformed
         changePanel(Pnl_MainMenu);
     }//GEN-LAST:event_Btn_QuitScoreActionPerformed
+
+    //Navigation by Keyboard
+    private void Btn_PlayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_PlayKeyPressed
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_Exit.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_PlayKeyPressed
+
+    private void Btn_ExitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_ExitKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == 38) Btn_Play.requestFocus();
+    }//GEN-LAST:event_Btn_ExitKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
