@@ -140,7 +140,7 @@ public class VowelsPanel extends javax.swing.JPanel {
 
         char charE = evt.getActionCommand().charAt(0);
         aG.sendAnswer(charE);
-        this.requestFocus();
+        
     }//GEN-LAST:event_AActionPerformed
 
     private void EActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EActionPerformed

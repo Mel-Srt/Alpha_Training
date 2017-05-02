@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import observer.Observer;
 
 /**
@@ -46,13 +47,17 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_Global.add(namePanel);
         Pnl_Global.repaint();
         Pnl_Global.revalidate();
-        
-        if (namePanel == Pnl_MainMenu){
+
+        if (namePanel == Pnl_MainMenu) {
             Btn_Play.requestFocus();
         }
         if (namePanel == Pnl_LettersMenu) {
             keyboardBind(Btn_Cancel_Letters, KeyEvent.VK_ESCAPE);
-            Btn_Cancel_Letters.requestFocus();
+             SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    Btn_Alphabet.requestFocus();
+                }
+            });
         }
         if (namePanel == Pnl_Game) {
             keyboardBind(Btn_ReturnMenu, KeyEvent.VK_ESCAPE);
@@ -587,7 +592,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private void Btn_ExitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_ExitKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == 38) Btn_Play.requestFocus();
+        if (evt.getKeyCode() == 38) {
+            Btn_Play.requestFocus();
+        }
     }//GEN-LAST:event_Btn_ExitKeyPressed
 
 
