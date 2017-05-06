@@ -11,7 +11,7 @@ import view.MainFrame;
 public class Main {
 
     public static void main(String[] args) {
-        ///Model:
+        //Model:
         DataGame dataGame = new DataGame();
 
         //Controller:
