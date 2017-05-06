@@ -22,8 +22,8 @@ import javax.swing.KeyStroke;
  */
 public class VowelsPanel extends javax.swing.JPanel {
 
-    AlphabetGame aG;
-
+    private AlphabetGame aG;
+    private String myFont = "ARIAL BLACK";
     public void setAlphabetGame(AlphabetGame aG) {
         this.aG = aG;
         this.resizeButtonFont();
@@ -73,7 +73,7 @@ public class VowelsPanel extends javax.swing.JPanel {
         U = new javax.swing.JButton();
         Y = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(204, 255, 255));
+        setBackground(new java.awt.Color(255, 242, 225));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
@@ -169,12 +169,12 @@ public class VowelsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_formComponentResized
     private void resizeButtonFont() {
         int width = this.getWidth();
-        A.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        E.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        I.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        O.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        U.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        Y.setFont(new Font("Arial", Font.PLAIN, width / 40));
+        A.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        E.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        I.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        O.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        U.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        Y.setFont(new Font(myFont, Font.PLAIN, width / 40));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
