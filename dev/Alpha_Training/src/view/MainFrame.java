@@ -53,7 +53,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         }
         if (namePanel == Pnl_LettersMenu) {
             keyboardBind(Btn_Cancel_Letters, KeyEvent.VK_ESCAPE);
-             SwingUtilities.invokeLater(new Runnable() {
+            SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     Btn_Alphabet.requestFocus();
                 }
@@ -128,6 +128,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_Credits = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setFocusable(false);
         setMinimumSize(new java.awt.Dimension(600, 500));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
@@ -135,6 +136,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             }
         });
 
+        Pnl_Global.setFocusable(false);
         Pnl_Global.setMinimumSize(new java.awt.Dimension(600, 400));
         Pnl_Global.setLayout(new java.awt.CardLayout());
 
@@ -252,6 +254,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Global.add(Pnl_Game, "card3");
 
+        Pnl_LettersMenu.setFocusable(false);
         Pnl_LettersMenu.setPreferredSize(new java.awt.Dimension(900, 600));
         Pnl_LettersMenu.setLayout(new java.awt.GridBagLayout());
 
@@ -268,6 +271,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_AlphabetActionPerformed(evt);
             }
         });
+        Btn_Alphabet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_AlphabetKeyPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -281,6 +289,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_VowelsActionPerformed(evt);
             }
         });
+        Btn_Vowels.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_VowelsKeyPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -292,6 +305,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Btn_Consonnants.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_ConsonnantsActionPerformed(evt);
+            }
+        });
+        Btn_Consonnants.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_ConsonnantsKeyPressed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -315,6 +333,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_TrainingActionPerformed(evt);
             }
         });
+        Btn_Training.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_TrainingKeyPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -327,6 +350,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Btn_Chrono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_ChronoActionPerformed(evt);
+            }
+        });
+        Btn_Chrono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_ChronoKeyPressed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -342,15 +370,21 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_Cancel_LettersActionPerformed(evt);
             }
         });
+        Btn_Cancel_Letters.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_Cancel_LettersKeyPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridheight = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(31, 0, 31, 0);
         Pnl_LettersMenu.add(Btn_Cancel_Letters, gridBagConstraints);
 
         Pnl_Global.add(Pnl_LettersMenu, "card4");
 
+        Pnl_MainMenu.setFocusable(false);
         Pnl_MainMenu.setPreferredSize(new java.awt.Dimension(900, 600));
         Pnl_MainMenu.setLayout(new java.awt.GridBagLayout());
 
@@ -596,6 +630,88 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             Btn_Play.requestFocus();
         }
     }//GEN-LAST:event_Btn_ExitKeyPressed
+
+    private void Btn_AlphabetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_AlphabetKeyPressed
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            if (Btn_Training.isEnabled()) {
+                Btn_Training.requestFocus();
+            } else {
+                Btn_Cancel_Letters.requestFocus();
+            }
+        }
+        //Right Arrow
+        if (evt.getKeyCode() == 39) {
+            Btn_Vowels.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_AlphabetKeyPressed
+
+    private void Btn_VowelsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_VowelsKeyPressed
+        //Left Arrow
+        if (evt.getKeyCode() == 37) {
+            Btn_Alphabet.requestFocus();
+        }
+        //Right Arrow
+        if (evt.getKeyCode() == 39) {
+            Btn_Consonnants.requestFocus();
+        }
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_Cancel_Letters.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_VowelsKeyPressed
+
+    private void Btn_ConsonnantsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_ConsonnantsKeyPressed
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            if (Btn_Chrono.isEnabled()) {
+                Btn_Chrono.requestFocus();
+            } else {
+                Btn_Cancel_Letters.requestFocus();
+            }
+        }
+        //Left Arrow
+        if (evt.getKeyCode() == 37) {
+            Btn_Vowels.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_ConsonnantsKeyPressed
+
+    private void Btn_Cancel_LettersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_Cancel_LettersKeyPressed
+        //Up Arrow:
+        if (evt.getKeyCode() == 38) {
+            Btn_Vowels.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_Cancel_LettersKeyPressed
+
+    private void Btn_TrainingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_TrainingKeyPressed
+        //Up Arrow:
+        if (evt.getKeyCode() == 38) {
+            Btn_Alphabet.requestFocus();
+        }
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_Cancel_Letters.requestFocus();
+        }
+        //Right Arrow
+        if (evt.getKeyCode() == 39) {
+            Btn_Chrono.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_TrainingKeyPressed
+
+    private void Btn_ChronoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_ChronoKeyPressed
+        //Up Arrow:
+        if (evt.getKeyCode() == 38) {
+            Btn_Consonnants.requestFocus();
+        }
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_Cancel_Letters.requestFocus();
+        }
+        //Left Arrow
+        if (evt.getKeyCode() == 37) {
+            Btn_Training.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_ChronoKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
