@@ -198,9 +198,11 @@ public class AlphabetGame {
     public void sendAnswer(char answer) {
 
         answer = Character.toUpperCase(answer);
-
+        
+        //Check if the answer is right or false
         if (selectedLetter != null) {
             if (answer == selectedLetter.getName()) {
+                this.dataGame.notifyCorrection(true, answer);
                 if (!dataGame.isTrainingMode()) {
                     calculateScore();
                 }
@@ -215,6 +217,7 @@ public class AlphabetGame {
                 pickNewLetter();
 
             } else if (answer != selectedLetter.getName()) {
+                this.dataGame.notifyCorrection(false, answer);
                 Thread threadSound = new Thread(new PlayLetter(new LetterAlphabet(answer)));
                 if (!dataGame.isTrainingMode()) {
                     dataGame.decrementScore(0.50f);
