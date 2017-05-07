@@ -114,7 +114,6 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_TopGame = new javax.swing.JPanel();
         Lbl_TimerFixed = new javax.swing.JLabel();
         Lbl_TimerVar = new javax.swing.JLabel();
-        Btn_PlayLetter = new javax.swing.JButton();
         Lbl_ScoreFixed = new javax.swing.JLabel();
         Lbl_ScoreVar = new javax.swing.JLabel();
         Pnl_BotGame = new javax.swing.JPanel();
@@ -127,6 +126,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         consonnantsPanel1 = new view.Panels.ConsonnantsPanel();
         vowelsPanel1 = new view.Panels.VowelsPanel();
         Lbl_Correction = new javax.swing.JLabel();
+        Btn_PlayLetter = new javax.swing.JButton();
         Pnl_LettersMenu = new javax.swing.JPanel();
         Lbl_Letters = new javax.swing.JLabel();
         Btn_Alphabet = new javax.swing.JToggleButton();
@@ -192,10 +192,14 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_Game.setLayout(new java.awt.BorderLayout());
 
         Pnl_TopGame.setBackground(new java.awt.Color(255, 242, 225));
-        Pnl_TopGame.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout Pnl_TopGameLayout = new java.awt.GridBagLayout();
+        Pnl_TopGameLayout.columnWidths = new int[] {0, 400};
+        Pnl_TopGame.setLayout(Pnl_TopGameLayout);
 
         Lbl_TimerFixed.setText("Timer:");
-        Pnl_TopGame.add(Lbl_TimerFixed, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        Pnl_TopGame.add(Lbl_TimerFixed, gridBagConstraints);
 
         Lbl_TimerVar.setText("0s");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -203,26 +207,16 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridy = 1;
         Pnl_TopGame.add(Lbl_TimerVar, gridBagConstraints);
 
-        Btn_PlayLetter.setText("Play Letter (Press Space)");
-        Btn_PlayLetter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_PlayLetterActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        Pnl_TopGame.add(Btn_PlayLetter, gridBagConstraints);
-
         Lbl_ScoreFixed.setText("Score:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         Pnl_TopGame.add(Lbl_ScoreFixed, gridBagConstraints);
 
         Lbl_ScoreVar.setText("0");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 1;
         Pnl_TopGame.add(Lbl_ScoreVar, gridBagConstraints);
 
@@ -293,7 +287,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.gridwidth = 6;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         Pnl_CenGame.add(Pnl_KeyBoard, gridBagConstraints);
@@ -301,11 +295,21 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_Correction.setText("Press a letter...");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 25, 10);
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 30, 10);
         Pnl_CenGame.add(Lbl_Correction, gridBagConstraints);
+
+        Btn_PlayLetter.setText("Listen Letter (Press Space)");
+        Btn_PlayLetter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_PlayLetterActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
+        Pnl_CenGame.add(Btn_PlayLetter, gridBagConstraints);
 
         Pnl_Game.add(Pnl_CenGame, java.awt.BorderLayout.CENTER);
 

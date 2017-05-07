@@ -185,7 +185,7 @@ public class AlphabetGame {
     }
 
     public void pickNewLetter() {
-        if(previousLetter == null){
+        if(selectedLetter == null){
             selectedLetter = this.randomLetter();
         }
         else{
