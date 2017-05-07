@@ -15,6 +15,7 @@ import sound.SoundGame;
 import view.MainFrame;
 
 public class AlphabetGame {
+
     List<LetterAlphabet> letters;
     DataGame dataGame;
     MainFrame frame;
@@ -226,8 +227,10 @@ public class AlphabetGame {
     }
 
     public void playLetter() {
-        Thread threadSound = new Thread(new PlayLetter(selectedLetter));
-        threadSound.start();
+        if (selectedLetter != null) {
+            Thread threadSound = new Thread(new PlayLetter(selectedLetter));
+            threadSound.start();
+        }
     }
 
     public DataGame getDataGame() {

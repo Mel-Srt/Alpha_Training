@@ -6,6 +6,7 @@
 package view;
 
 import controller.AlphabetGame;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -17,6 +18,7 @@ import javax.swing.JButton;
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import observer.Observer;
 
 /**
@@ -26,24 +28,15 @@ import observer.Observer;
 public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private AlphabetGame alphabetGame;
-    private String font = "ARIAL";
+    private String font = "EMMETT";
 
     public MainFrame(AlphabetGame alphabetGame) {
 
         this.alphabetGame = alphabetGame;
         initComponents();
-
-        Pnl_Global.removeAll();
-        Pnl_Global.repaint();
-        Pnl_Global.revalidate();
-
-        //Adding Pannels
-        Pnl_Global.add(Pnl_MainMenu);
-        Pnl_Global.repaint();
-        Pnl_Global.revalidate();
-
+        customizeButton();
+        changePanel(Pnl_MainMenu);
         keyboardBind(Btn_Exit, KeyEvent.VK_ESCAPE);
-
         this.setVisible(true);
     }
 
@@ -57,16 +50,28 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_Global.repaint();
         Pnl_Global.revalidate();
 
+        if (namePanel == Pnl_MainMenu) {
+            Btn_Play.requestFocus();
+        }
         if (namePanel == Pnl_LettersMenu) {
             keyboardBind(Btn_Cancel_Letters, KeyEvent.VK_ESCAPE);
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    Btn_Alphabet.requestFocus();
+                }
+            });
         }
-
         if (namePanel == Pnl_Game) {
             keyboardBind(Btn_ReturnMenu, KeyEvent.VK_ESCAPE);
             keyboardBind(Btn_PlayLetter, KeyEvent.VK_SPACE);
         }
         if (namePanel == Pnl_Score) {
             keyboardBind(Btn_QuitScore, KeyEvent.VK_ESCAPE);
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    Btn_QuitScore.requestFocus();
+                }
+            });
         }
     }
 
@@ -80,6 +85,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 letterButton.doClick();
             }
         });
+    }
+
+    private void customizeButton() {
+        Color colorBtn = new java.awt.Color(204, 255, 255);
+        //Btn_Play.setBackground(colorBtn);
     }
 
     /**
@@ -130,17 +140,20 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_Credits = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setFocusable(false);
         setMinimumSize(new java.awt.Dimension(600, 500));
-        setPreferredSize(new java.awt.Dimension(900, 600));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
             }
         });
 
+        Pnl_Global.setFocusable(false);
         Pnl_Global.setMinimumSize(new java.awt.Dimension(600, 400));
         Pnl_Global.setLayout(new java.awt.CardLayout());
 
+        Pnl_Score.setBackground(new java.awt.Color(255, 242, 225));
+        Pnl_Score.setFocusable(false);
         Pnl_Score.setLayout(new java.awt.GridBagLayout());
 
         Lbl_FinalScoreVar.setText("x");
@@ -158,6 +171,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_QuitScoreActionPerformed(evt);
             }
         });
+        Btn_QuitScore.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_QuitScoreKeyPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -168,6 +186,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_Game.setMinimumSize(new java.awt.Dimension(600, 500));
         Pnl_Game.setLayout(new java.awt.BorderLayout());
 
+        Pnl_TopGame.setBackground(new java.awt.Color(255, 242, 225));
         Pnl_TopGame.setLayout(new java.awt.GridBagLayout());
 
         Lbl_TimerFixed.setText("Timer:");
@@ -206,6 +225,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_BotGame.setLayout(new java.awt.GridLayout(1, 0));
 
+        jPanel1.setBackground(new java.awt.Color(255, 242, 225));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -227,6 +248,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         });
         Pnl_BotGame.add(Btn_ReturnMenu);
 
+        jPanel2.setBackground(new java.awt.Color(255, 242, 225));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -242,11 +265,19 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Game.add(Pnl_BotGame, java.awt.BorderLayout.PAGE_END);
 
+        Pnl_CenGame.setBackground(new java.awt.Color(255, 242, 225));
         Pnl_CenGame.setLayout(new java.awt.GridBagLayout());
 
         Pnl_KeyBoard.setLayout(new java.awt.CardLayout());
+
+        alphabetPanel1.setBackground(new java.awt.Color(255, 242, 225));
         Pnl_KeyBoard.add(alphabetPanel1, "card2");
+
+        consonnantsPanel1.setBackground(new java.awt.Color(255, 242, 225));
         Pnl_KeyBoard.add(consonnantsPanel1, "card3");
+
+        vowelsPanel1.setBackground(new java.awt.Color(255, 242, 225));
+        vowelsPanel1.setToolTipText("");
         Pnl_KeyBoard.add(vowelsPanel1, "card4");
 
         Pnl_CenGame.add(Pnl_KeyBoard, new java.awt.GridBagConstraints());
@@ -255,13 +286,17 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Global.add(Pnl_Game, "card3");
 
+        Pnl_LettersMenu.setBackground(new java.awt.Color(255, 242, 225));
+        Pnl_LettersMenu.setFocusable(false);
         Pnl_LettersMenu.setPreferredSize(new java.awt.Dimension(900, 600));
         Pnl_LettersMenu.setLayout(new java.awt.GridBagLayout());
 
         Lbl_Letters.setText("Choose your letters:");
+        Lbl_Letters.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Lbl_Letters, gridBagConstraints);
 
         Btn_Alphabet.setText("Alphabet");
@@ -270,96 +305,147 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_AlphabetActionPerformed(evt);
             }
         });
+        Btn_Alphabet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_AlphabetKeyPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Btn_Alphabet, gridBagConstraints);
 
         Btn_Vowels.setText("Vowels");
+        Btn_Vowels.setRequestFocusEnabled(false);
         Btn_Vowels.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_VowelsActionPerformed(evt);
             }
         });
+        Btn_Vowels.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_VowelsKeyPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Btn_Vowels, gridBagConstraints);
 
         Btn_Consonnants.setText("Consonnants");
+        Btn_Consonnants.setRequestFocusEnabled(false);
         Btn_Consonnants.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_ConsonnantsActionPerformed(evt);
+            }
+        });
+        Btn_Consonnants.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_ConsonnantsKeyPressed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Btn_Consonnants, gridBagConstraints);
 
         Lbl_Mode.setText("Mode:");
+        Lbl_Mode.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Lbl_Mode, gridBagConstraints);
 
         Btn_Training.setText("Training");
         Btn_Training.setEnabled(false);
+        Btn_Training.setRequestFocusEnabled(false);
         Btn_Training.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_TrainingActionPerformed(evt);
+            }
+        });
+        Btn_Training.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_TrainingKeyPressed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Btn_Training, gridBagConstraints);
 
         Btn_Chrono.setText("Chrono 30'");
         Btn_Chrono.setEnabled(false);
+        Btn_Chrono.setRequestFocusEnabled(false);
         Btn_Chrono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_ChronoActionPerformed(evt);
+            }
+        });
+        Btn_Chrono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_ChronoKeyPressed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Btn_Chrono, gridBagConstraints);
 
         Btn_Cancel_Letters.setText("Cancel");
+        Btn_Cancel_Letters.setSelected(true);
         Btn_Cancel_Letters.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_Cancel_LettersActionPerformed(evt);
             }
         });
+        Btn_Cancel_Letters.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_Cancel_LettersKeyPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridheight = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
         Pnl_LettersMenu.add(Btn_Cancel_Letters, gridBagConstraints);
 
         Pnl_Global.add(Pnl_LettersMenu, "card4");
 
+        Pnl_MainMenu.setBackground(new java.awt.Color(255, 242, 225));
+        Pnl_MainMenu.setFocusable(false);
         Pnl_MainMenu.setPreferredSize(new java.awt.Dimension(900, 600));
         Pnl_MainMenu.setLayout(new java.awt.GridBagLayout());
 
         Btn_Play.setText("Play");
+        Btn_Play.setRequestFocusEnabled(false);
         Btn_Play.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_PlayActionPerformed(evt);
+            }
+        });
+        Btn_Play.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_PlayKeyPressed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_MainMenu.add(Btn_Play, gridBagConstraints);
 
         Btn_Options.setText("Options");
@@ -372,6 +458,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_MainMenu.add(Btn_Options, gridBagConstraints);
 
         Btn_Exit.setText("Exit");
@@ -380,23 +467,33 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_ExitActionPerformed(evt);
             }
         });
+        Btn_Exit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_ExitKeyPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_MainMenu.add(Btn_Exit, gridBagConstraints);
 
-        Lbl_Title.setText("Alpha Training");
+        Lbl_Title.setFont(new java.awt.Font("Emmett", 0, 48)); // NOI18N
+        Lbl_Title.setForeground(new java.awt.Color(0, 51, 102));
+        Lbl_Title.setText("Alpha Training v0.5");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 100, 0);
         Pnl_MainMenu.add(Lbl_Title, gridBagConstraints);
 
         Lbl_Credits.setText("Credits: Mel-Srt");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_END;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
         Pnl_MainMenu.add(Lbl_Credits, gridBagConstraints);
 
         Pnl_Global.add(Pnl_MainMenu, "card4");
@@ -423,7 +520,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         int width = this.getWidth();
         int heigth = this.getHeight();
         //Panel Main Menu
-        Lbl_Title.setFont(new Font(font, Font.PLAIN, width / 8));
+        Lbl_Title.setFont(new Font(font, Font.PLAIN, width / 10));
         Btn_Play.setFont(new Font(font, Font.PLAIN, width / 40));
         Btn_Options.setFont(new Font(font, Font.PLAIN, width / 40));
         Btn_Options.setVisible(false);
@@ -513,13 +610,12 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         alphabetGame.getDataGame().setTrainingMode(isTrainingMode);
         alphabetGame.start();
         changePanel(Pnl_Game);
-        if(isTrainingMode){
+        if (isTrainingMode) {
             Lbl_ScoreFixed.setVisible(false);
             Lbl_ScoreVar.setVisible(false);
             Lbl_TimerFixed.setVisible(false);
             Lbl_TimerVar.setVisible(false);
-        }
-        else{
+        } else {
             Lbl_ScoreFixed.setVisible(true);
             Lbl_ScoreVar.setVisible(true);
             Lbl_TimerFixed.setVisible(true);
@@ -567,6 +663,140 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_QuitScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_QuitScoreActionPerformed
         changePanel(Pnl_MainMenu);
     }//GEN-LAST:event_Btn_QuitScoreActionPerformed
+
+    //Navigation by Keyboard
+    private void Btn_PlayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_PlayKeyPressed
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_Exit.requestFocus();
+        }
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_Play.doClick();
+        }
+    }//GEN-LAST:event_Btn_PlayKeyPressed
+
+    private void Btn_ExitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_ExitKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == 38) {
+            Btn_Play.requestFocus();
+        }
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_Exit.doClick();
+        }
+    }//GEN-LAST:event_Btn_ExitKeyPressed
+
+    private void Btn_AlphabetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_AlphabetKeyPressed
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_Alphabet.doClick();
+        }//Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            if (Btn_Training.isEnabled()) {
+                Btn_Training.requestFocus();
+            } else {
+                Btn_Cancel_Letters.requestFocus();
+            }
+        }
+        //Right Arrow
+        if (evt.getKeyCode() == 39) {
+            Btn_Vowels.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_AlphabetKeyPressed
+
+    private void Btn_VowelsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_VowelsKeyPressed
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_Vowels.doClick();
+        }//Left Arrow
+        if (evt.getKeyCode() == 37) {
+            Btn_Alphabet.requestFocus();
+        }
+        //Right Arrow
+        if (evt.getKeyCode() == 39) {
+            Btn_Consonnants.requestFocus();
+        }
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_Cancel_Letters.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_VowelsKeyPressed
+
+    private void Btn_ConsonnantsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_ConsonnantsKeyPressed
+        ///Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_Consonnants.doClick();
+        }
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            if (Btn_Chrono.isEnabled()) {
+                Btn_Chrono.requestFocus();
+            } else {
+                Btn_Cancel_Letters.requestFocus();
+            }
+        }
+        //Left Arrow
+        if (evt.getKeyCode() == 37) {
+            Btn_Vowels.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_ConsonnantsKeyPressed
+
+    private void Btn_Cancel_LettersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_Cancel_LettersKeyPressed
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_Cancel_Letters.doClick();
+        }
+        //Up Arrow:
+        if (evt.getKeyCode() == 38) {
+            Btn_Vowels.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_Cancel_LettersKeyPressed
+
+    private void Btn_TrainingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_TrainingKeyPressed
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_Training.doClick();
+        }
+        //Up Arrow:
+        if (evt.getKeyCode() == 38) {
+            Btn_Alphabet.requestFocus();
+        }
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_Cancel_Letters.requestFocus();
+        }
+        //Right Arrow
+        if (evt.getKeyCode() == 39) {
+            Btn_Chrono.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_TrainingKeyPressed
+
+    private void Btn_ChronoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_ChronoKeyPressed
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_Chrono.doClick();
+        }
+        //Up Arrow:
+        if (evt.getKeyCode() == 38) {
+            Btn_Consonnants.requestFocus();
+        }
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_Cancel_Letters.requestFocus();
+        }
+        //Left Arrow
+        if (evt.getKeyCode() == 37) {
+            Btn_Training.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_ChronoKeyPressed
+
+    private void Btn_QuitScoreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_QuitScoreKeyPressed
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_QuitScore.doClick();
+        }
+    }//GEN-LAST:event_Btn_QuitScoreKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

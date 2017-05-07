@@ -21,7 +21,8 @@ import javax.swing.KeyStroke;
  * @author actim
  */
 public class AlphabetPanel extends javax.swing.JPanel {
-    AlphabetGame aG;
+    private AlphabetGame aG;
+    private String myFont = "ARIAL BLACK";
 
     public void setAlphabetGame(AlphabetGame aG) {
         this.aG = aG;
@@ -110,6 +111,7 @@ public class AlphabetPanel extends javax.swing.JPanel {
         Y = new javax.swing.JButton();
         Z = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 242, 225));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
@@ -363,32 +365,32 @@ public class AlphabetPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_formComponentResized
     private void resizeButtonFont() {
         int width = this.getWidth();
-        A.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        B.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        C.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        D.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        E.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        F.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        G.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        H.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        I.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        J.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        K.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        L.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        M.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        N.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        O.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        P.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        Q.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        R.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        S.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        T.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        U.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        V.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        W.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        X.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        Y.setFont(new Font("Arial", Font.PLAIN, width / 40));
-        Z.setFont(new Font("Arial", Font.PLAIN, width / 40));
+        A.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        B.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        C.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        D.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        E.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        F.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        G.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        H.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        I.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        J.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        K.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        L.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        M.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        N.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        O.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        P.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        Q.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        R.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        S.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        T.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        U.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        V.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        W.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        X.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        Y.setFont(new Font(myFont, Font.PLAIN, width / 40));
+        Z.setFont(new Font(myFont, Font.PLAIN, width / 40));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
