@@ -15,6 +15,7 @@ Practice with the training mode or test yourself with the Chrono 30' mode.
 * Scoreboard
 * Words game type
 * Number game type
+* Other languages
 
 ## Built With
 * Netbeans IDE 8.2
