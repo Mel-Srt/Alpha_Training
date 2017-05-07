@@ -326,9 +326,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_LettersMenu.setBackground(new java.awt.Color(255, 242, 225));
         Pnl_LettersMenu.setFocusable(false);
         Pnl_LettersMenu.setPreferredSize(new java.awt.Dimension(900, 600));
-        java.awt.GridBagLayout Pnl_LettersMenuLayout = new java.awt.GridBagLayout();
-        Pnl_LettersMenuLayout.columnWidths = new int[] {200, 200, 200, 200};
-        Pnl_LettersMenu.setLayout(Pnl_LettersMenuLayout);
+        Pnl_LettersMenu.setLayout(new java.awt.GridBagLayout());
 
         Lbl_Letters.setText("Choose your letters:");
         Lbl_Letters.setFocusable(false);
@@ -571,8 +569,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, heigth/5, 0);
         Pnl_MainMenu.add(Lbl_Title, gridBagConstraints);
-
-
+        
+        
         //Panel Letters Menu
         Lbl_Letters.setFont(new Font(font, Font.PLAIN, width / 40));
         Btn_Alphabet.setFont(new Font(font, Font.PLAIN, width / 40));
