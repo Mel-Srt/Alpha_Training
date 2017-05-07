@@ -73,7 +73,7 @@ public class VowelsPanel extends javax.swing.JPanel {
         U = new javax.swing.JButton();
         Y = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 242, 225));
+        setBackground(new java.awt.Color(255, 249, 242));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);

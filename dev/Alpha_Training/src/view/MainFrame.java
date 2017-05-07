@@ -158,7 +158,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_Global.setRequestFocusEnabled(false);
         Pnl_Global.setLayout(new java.awt.CardLayout());
 
-        Pnl_Score.setBackground(new java.awt.Color(255, 242, 225));
+        Pnl_Score.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_Score.setFocusable(false);
         java.awt.GridBagLayout Pnl_ScoreLayout = new java.awt.GridBagLayout();
         Pnl_ScoreLayout.rowHeights = new int[] {100, 100, 100, 100, 100};
@@ -191,10 +191,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Global.add(Pnl_Score, "card5");
 
+        Pnl_Game.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_Game.setMinimumSize(new java.awt.Dimension(600, 500));
         Pnl_Game.setLayout(new java.awt.BorderLayout());
 
-        Pnl_TopGame.setBackground(new java.awt.Color(255, 242, 225));
+        Pnl_TopGame.setBackground(new java.awt.Color(255, 249, 242));
         java.awt.GridBagLayout Pnl_TopGameLayout = new java.awt.GridBagLayout();
         Pnl_TopGameLayout.columnWidths = new int[] {0, 400};
         Pnl_TopGame.setLayout(Pnl_TopGameLayout);
@@ -225,10 +226,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Game.add(Pnl_TopGame, java.awt.BorderLayout.PAGE_START);
 
-        Pnl_BotGame.setBackground(new java.awt.Color(255, 242, 225));
+        Pnl_BotGame.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_BotGame.setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 242, 225));
+        jPanel1.setBackground(new java.awt.Color(255, 249, 242));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -258,7 +259,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridwidth = 3;
         Pnl_BotGame.add(Btn_ReturnMenu, gridBagConstraints);
 
-        jPanel2.setBackground(new java.awt.Color(255, 242, 225));
+        jPanel2.setBackground(new java.awt.Color(255, 249, 242));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -278,7 +279,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Game.add(Pnl_BotGame, java.awt.BorderLayout.PAGE_END);
 
-        Pnl_CenGame.setBackground(new java.awt.Color(255, 242, 225));
+        Pnl_CenGame.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_CenGame.setLayout(new java.awt.GridBagLayout());
 
         Pnl_KeyBoard.setLayout(new java.awt.CardLayout());
@@ -318,7 +319,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Global.add(Pnl_Game, "card3");
 
-        Pnl_LettersMenu.setBackground(new java.awt.Color(255, 242, 225));
+        Pnl_LettersMenu.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_LettersMenu.setFocusable(false);
         Pnl_LettersMenu.setPreferredSize(new java.awt.Dimension(900, 600));
         Pnl_LettersMenu.setLayout(new java.awt.GridBagLayout());
@@ -456,7 +457,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Global.add(Pnl_LettersMenu, "card4");
 
-        Pnl_MainMenu.setBackground(new java.awt.Color(255, 242, 225));
+        Pnl_MainMenu.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_MainMenu.setFocusable(false);
         Pnl_MainMenu.setPreferredSize(new java.awt.Dimension(900, 600));
         Pnl_MainMenu.setLayout(new java.awt.GridBagLayout());
