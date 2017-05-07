@@ -6,7 +6,6 @@
 package view;
 
 import controller.AlphabetGame;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -80,21 +79,21 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         });
     }
 
-    private void requestingFocusThread(JToggleButton button){
+    private void requestingFocusThread(JToggleButton button) {
         SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    button.requestFocus();
-                }
-            });
-    }
-    private void requestingFocusThread(JButton button){
-        SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    button.requestFocus();
-                }
-            });
+            public void run() {
+                button.requestFocus();
+            }
+        });
     }
 
+    private void requestingFocusThread(JButton button) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                button.requestFocus();
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,8 +126,6 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         alphabetPanel1 = new view.Panels.AlphabetPanel();
         consonnantsPanel1 = new view.Panels.ConsonnantsPanel();
         vowelsPanel1 = new view.Panels.VowelsPanel();
-        Lbl_Answer_LetterV = new javax.swing.JLabel();
-        Lbl_Answer_LetterF = new javax.swing.JLabel();
         Lbl_Correction = new javax.swing.JLabel();
         Pnl_LettersMenu = new javax.swing.JPanel();
         Lbl_Letters = new javax.swing.JLabel();
@@ -297,26 +294,17 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         Pnl_CenGame.add(Pnl_KeyBoard, gridBagConstraints);
 
-        Lbl_Answer_LetterV.setText("Press a letter");
+        Lbl_Correction.setText("Press a letter...");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 6;
-        Pnl_CenGame.add(Lbl_Answer_LetterV, gridBagConstraints);
-
-        Lbl_Answer_LetterF.setText("Your answer: ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        Pnl_CenGame.add(Lbl_Answer_LetterF, gridBagConstraints);
-
-        Lbl_Correction.setText(" ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 25, 10);
         Pnl_CenGame.add(Lbl_Correction, gridBagConstraints);
 
         Pnl_Game.add(Pnl_CenGame, java.awt.BorderLayout.CENTER);
@@ -466,6 +454,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_MainMenu.setPreferredSize(new java.awt.Dimension(900, 600));
         Pnl_MainMenu.setLayout(new java.awt.GridBagLayout());
 
+        Btn_Play.setFont(new Font(font, Font.PLAIN, 13));
         Btn_Play.setText("Play");
         Btn_Play.setSelected(true);
         Btn_Play.addActionListener(new java.awt.event.ActionListener() {
@@ -482,7 +471,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         Pnl_MainMenu.add(Btn_Play, gridBagConstraints);
 
         Btn_Options.setText("Options");
@@ -495,7 +484,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         Pnl_MainMenu.add(Btn_Options, gridBagConstraints);
 
         Btn_Exit.setText("Exit");
@@ -513,7 +502,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         Pnl_MainMenu.add(Btn_Exit, gridBagConstraints);
 
         Lbl_Title.setFont(new java.awt.Font("Emmett", 0, 48)); // NOI18N
@@ -567,10 +556,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, heigth/5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, heigth / 5, 0);
         Pnl_MainMenu.add(Lbl_Title, gridBagConstraints);
-        
-        
+
         //Panel Letters Menu
         Lbl_Letters.setFont(new Font(font, Font.PLAIN, width / 40));
         Btn_Alphabet.setFont(new Font(font, Font.PLAIN, width / 40));
@@ -588,11 +576,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_ScoreVar.setFont(new Font(font, Font.PLAIN, width / 30));
         Lbl_TimerFixed.setFont(new Font(font, Font.PLAIN, width / 40));
         Lbl_TimerVar.setFont(new Font(font, Font.PLAIN, width / 30));
-        Lbl_Answer_LetterF.setFont(new Font(font, Font.PLAIN, width / 30));
-        Lbl_Answer_LetterV.setFont(new Font(font, Font.PLAIN, width / 30));
         Lbl_Correction.setFont(new Font(font, Font.PLAIN, width / 25));
         Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 2)));
-
+        Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 3)+50));
+        
         //Panel SCore
         Btn_QuitScore.setFont(new Font(font, Font.PLAIN, width / 40));
         Lbl_FinalScoreFix.setFont(new Font(font, Font.PLAIN, width / 30));
@@ -658,10 +645,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         alphabetGame.start();
         changePanel(Pnl_Game);
         if (isTrainingMode) {
-            Lbl_ScoreFixed.setVisible(false);
-            Lbl_ScoreVar.setVisible(false);
-            Lbl_TimerFixed.setVisible(false);
-            Lbl_TimerVar.setVisible(false);
+            Lbl_ScoreFixed.setText(" ");
+            Lbl_ScoreVar.setText(" ");
+            Lbl_TimerFixed.setText(" ");
+            Lbl_TimerVar.setText(" ");
         } else {
             Lbl_ScoreFixed.setVisible(true);
             Lbl_ScoreVar.setVisible(true);
@@ -712,7 +699,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_QuitScoreActionPerformed
 
     //Navigation by Keyboard
-    
+
     private void Btn_PlayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_PlayKeyPressed
         //Down Arrow:
         if (evt.getKeyCode() == 40) {
@@ -860,8 +847,6 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton Btn_ReturnMenu;
     private javax.swing.JButton Btn_Training;
     private javax.swing.JToggleButton Btn_Vowels;
-    private javax.swing.JLabel Lbl_Answer_LetterF;
-    private javax.swing.JLabel Lbl_Answer_LetterV;
     private javax.swing.JLabel Lbl_Correction;
     private javax.swing.JLabel Lbl_Credits;
     private javax.swing.JLabel Lbl_FinalScoreFix;
@@ -909,9 +894,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         changePanel(Pnl_Score);
     }
 
-    
     public void updateCorrection(boolean rightOrFalse, char letter) {
-        if (rightOrFalse) this.Lbl_Correction.setText(letter + "  Correct!");
-        else this.Lbl_Correction.setText(letter + "  False!");
+        if (rightOrFalse) {
+            this.Lbl_Correction.setText(letter + "  Correct!");
+        } else {
+            this.Lbl_Correction.setText(letter + "  False!");
+        }
     }
 }
