@@ -1,5 +1,6 @@
 package controller;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -185,11 +186,10 @@ public class AlphabetGame {
     }
 
     public void pickNewLetter() {
-        if(selectedLetter == null){
+        if (selectedLetter == null) {
             selectedLetter = this.randomLetter();
-        }
-        else{
-            while(previousLetter == selectedLetter){
+        } else {
+            while (previousLetter == selectedLetter) {
                 selectedLetter = this.randomLetter();
             }
         }
@@ -207,7 +207,7 @@ public class AlphabetGame {
     public void sendAnswer(char answer) {
 
         answer = Character.toUpperCase(answer);
-        
+
         //Check if the answer is right or false
         if (selectedLetter != null) {
             if (answer == selectedLetter.getName()) {
@@ -229,7 +229,7 @@ public class AlphabetGame {
                 this.dataGame.notifyCorrection(false, answer);
                 Thread threadSound = new Thread(new PlayLetter(new LetterAlphabet(answer)));
                 if (!dataGame.isTrainingMode()) {
-                    dataGame.decrementScore(0.50f);
+                    dataGame.decrementScore(1);
                 }
                 threadSound.start();
                 System.out.println("False");
@@ -259,8 +259,7 @@ public class AlphabetGame {
         float result = (float) difference / 1000;
 
         float score = 0.5f + (1 / result);
-
-        System.out.println(result + " -> " + score);
+        score = score * 2;
         dataGame.incrementScore(score);
     }
 }
