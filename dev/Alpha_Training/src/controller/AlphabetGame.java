@@ -24,6 +24,7 @@ public class AlphabetGame {
     long startTime; //this variable serves to measure the time before the user gives the good answer
 
     LetterAlphabet selectedLetter; // The current Letter which the user has to find
+    LetterAlphabet previousLetter; //To avoid the same letter twice in a row
 
     public AlphabetGame(DataGame dataGame) {
         this.letters = new ArrayList<LetterAlphabet>();
@@ -184,7 +185,15 @@ public class AlphabetGame {
     }
 
     public void pickNewLetter() {
-        selectedLetter = this.randomLetter();
+        if(selectedLetter == null){
+            selectedLetter = this.randomLetter();
+        }
+        else{
+            while(previousLetter == selectedLetter){
+                selectedLetter = this.randomLetter();
+            }
+        }
+        previousLetter = selectedLetter;
         Thread threadSound = new Thread(new PlayLetter(selectedLetter));
         threadSound.start();
 
@@ -198,9 +207,11 @@ public class AlphabetGame {
     public void sendAnswer(char answer) {
 
         answer = Character.toUpperCase(answer);
-
+        
+        //Check if the answer is right or false
         if (selectedLetter != null) {
             if (answer == selectedLetter.getName()) {
+                this.dataGame.notifyCorrection(true, answer);
                 if (!dataGame.isTrainingMode()) {
                     calculateScore();
                 }
@@ -215,6 +226,7 @@ public class AlphabetGame {
                 pickNewLetter();
 
             } else if (answer != selectedLetter.getName()) {
+                this.dataGame.notifyCorrection(false, answer);
                 Thread threadSound = new Thread(new PlayLetter(new LetterAlphabet(answer)));
                 if (!dataGame.isTrainingMode()) {
                     dataGame.decrementScore(0.50f);

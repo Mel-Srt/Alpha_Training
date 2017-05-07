@@ -96,13 +96,18 @@ public class DataGame implements Observable {
         for (Observer obs : listObserver) {
             obs.updateScore(str);
         }
-
     }
 
     @Override
     public void notifyEndGame(String str) {
         for (Observer obs : listObserver) {
             obs.updateEndGame(str);
+        }
+    }
+
+    public void notifyCorrection(boolean rightOrFalse, char letter) {
+        for (Observer obs : listObserver) {
+            obs.updateCorrection(rightOrFalse, letter);
         }
     }
 }
