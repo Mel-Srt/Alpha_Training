@@ -24,6 +24,7 @@ public class AlphabetGame {
     long startTime; //this variable serves to measure the time before the user gives the good answer
 
     LetterAlphabet selectedLetter; // The current Letter which the user has to find
+    LetterAlphabet previousLetter; //To avoid the same letter twice in a row
 
     public AlphabetGame(DataGame dataGame) {
         this.letters = new ArrayList<LetterAlphabet>();
@@ -184,7 +185,15 @@ public class AlphabetGame {
     }
 
     public void pickNewLetter() {
-        selectedLetter = this.randomLetter();
+        if(previousLetter == null){
+            selectedLetter = this.randomLetter();
+        }
+        else{
+            while(previousLetter == selectedLetter){
+                selectedLetter = this.randomLetter();
+            }
+        }
+        previousLetter = selectedLetter;
         Thread threadSound = new Thread(new PlayLetter(selectedLetter));
         threadSound.start();
 
