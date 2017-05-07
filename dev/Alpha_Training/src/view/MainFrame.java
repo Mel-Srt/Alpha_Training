@@ -144,6 +144,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_Credits = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Alpha Training");
         setFocusable(false);
         setMinimumSize(new java.awt.Dimension(600, 500));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -159,12 +160,14 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Score.setBackground(new java.awt.Color(255, 242, 225));
         Pnl_Score.setFocusable(false);
-        Pnl_Score.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout Pnl_ScoreLayout = new java.awt.GridBagLayout();
+        Pnl_ScoreLayout.rowHeights = new int[] {100, 100, 100, 100, 100};
+        Pnl_Score.setLayout(Pnl_ScoreLayout);
 
         Lbl_FinalScoreVar.setText("x");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         Pnl_Score.add(Lbl_FinalScoreVar, gridBagConstraints);
 
         Lbl_FinalScoreFix.setText("Your score:");
@@ -183,7 +186,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         Pnl_Score.add(Btn_QuitScore, gridBagConstraints);
 
         Pnl_Global.add(Pnl_Score, "card5");
