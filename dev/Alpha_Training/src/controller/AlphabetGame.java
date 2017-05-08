@@ -66,6 +66,9 @@ public class AlphabetGame {
             System.out.println("SCORE : " + dataGame.getScore());
             dataGame.notifyEndGame(Float.toString(dataGame.getScore()));
         }
+        else{
+            dataGame.notifyEndGame("0");
+        }
     }
 
     // Mode: 1
