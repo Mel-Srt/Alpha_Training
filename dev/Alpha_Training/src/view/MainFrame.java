@@ -6,6 +6,7 @@
 package view;
 
 import controller.AlphabetGame;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -20,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import observer.Observer;
 
 /**
@@ -173,7 +175,16 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_FinalScoreFix.setText("Your score:");
         Pnl_Score.add(Lbl_FinalScoreFix, new java.awt.GridBagConstraints());
 
+        Btn_QuitScore.setBackground(new java.awt.Color(240,240,240));
         Btn_QuitScore.setText("Return Menu");
+        Btn_QuitScore.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusLost(evt);
+            }
+        });
         Btn_QuitScore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_QuitScoreActionPerformed(evt);
@@ -332,7 +343,16 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Lbl_Letters, gridBagConstraints);
 
+        Btn_Alphabet.setBackground(new java.awt.Color(240,240,240));
         Btn_Alphabet.setText("Alphabet");
+        Btn_Alphabet.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusLost(evt);
+            }
+        });
         Btn_Alphabet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_AlphabetActionPerformed(evt);
@@ -350,8 +370,17 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Btn_Alphabet, gridBagConstraints);
 
+        Btn_Vowels.setBackground(new java.awt.Color(240,240,240));
         Btn_Vowels.setText("Vowels");
         Btn_Vowels.setRequestFocusEnabled(false);
+        Btn_Vowels.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusLost(evt);
+            }
+        });
         Btn_Vowels.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_VowelsActionPerformed(evt);
@@ -369,8 +398,17 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Btn_Vowels, gridBagConstraints);
 
+        Btn_Consonnants.setBackground(new java.awt.Color(240,240,240));
         Btn_Consonnants.setText("Consonnants");
         Btn_Consonnants.setRequestFocusEnabled(false);
+        Btn_Consonnants.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusLost(evt);
+            }
+        });
         Btn_Consonnants.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_ConsonnantsActionPerformed(evt);
@@ -396,9 +434,18 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Lbl_Mode, gridBagConstraints);
 
+        Btn_Training.setBackground(new java.awt.Color(240,240,240));
         Btn_Training.setText("Training");
         Btn_Training.setEnabled(false);
         Btn_Training.setRequestFocusEnabled(false);
+        Btn_Training.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusLost(evt);
+            }
+        });
         Btn_Training.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_TrainingActionPerformed(evt);
@@ -416,9 +463,18 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Btn_Training, gridBagConstraints);
 
+        Btn_Chrono.setBackground(new java.awt.Color(240,240,240));
         Btn_Chrono.setText("Chrono 30'");
         Btn_Chrono.setEnabled(false);
         Btn_Chrono.setRequestFocusEnabled(false);
+        Btn_Chrono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusLost(evt);
+            }
+        });
         Btn_Chrono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_ChronoActionPerformed(evt);
@@ -436,8 +492,17 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_LettersMenu.add(Btn_Chrono, gridBagConstraints);
 
+        Btn_Cancel_Letters.setBackground(new java.awt.Color(240,240,240));
         Btn_Cancel_Letters.setText("Cancel");
         Btn_Cancel_Letters.setSelected(true);
+        Btn_Cancel_Letters.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusLost(evt);
+            }
+        });
         Btn_Cancel_Letters.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_Cancel_LettersActionPerformed(evt);
@@ -462,9 +527,18 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_MainMenu.setPreferredSize(new java.awt.Dimension(900, 600));
         Pnl_MainMenu.setLayout(new java.awt.GridBagLayout());
 
+        Btn_Play.setBackground(new java.awt.Color(240,240,240));
         Btn_Play.setFont(new Font(font, Font.PLAIN, 13));
         Btn_Play.setText("Play");
         Btn_Play.setSelected(true);
+        Btn_Play.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusLost(evt);
+            }
+        });
         Btn_Play.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_PlayActionPerformed(evt);
@@ -482,7 +556,16 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         Pnl_MainMenu.add(Btn_Play, gridBagConstraints);
 
+        Btn_Options.setBackground(new java.awt.Color(240,240,240));
         Btn_Options.setText("Options");
+        Btn_Options.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusLost(evt);
+            }
+        });
         Btn_Options.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_OptionsActionPerformed(evt);
@@ -495,7 +578,16 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         Pnl_MainMenu.add(Btn_Options, gridBagConstraints);
 
+        Btn_Exit.setBackground(new java.awt.Color(240,240,240));
         Btn_Exit.setText("Exit");
+        Btn_Exit.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_PlayFocusLost(evt);
+            }
+        });
         Btn_Exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_ExitActionPerformed(evt);
@@ -586,8 +678,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_TimerVar.setFont(new Font(font, Font.PLAIN, width / 30));
         Lbl_Correction.setFont(new Font(font, Font.PLAIN, width / 25));
         Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 2)));
-        Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 3)+50));
-        
+        Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 3) + 50));
+
         //Panel SCore
         Btn_QuitScore.setFont(new Font(font, Font.PLAIN, width / 40));
         Lbl_FinalScoreFix.setFont(new Font(font, Font.PLAIN, width / 30));
@@ -614,6 +706,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             Btn_Consonnants.setSelected(false);
             Btn_Training.setEnabled(true);
             Btn_Chrono.setEnabled(true);
+            UIManager.put("ToggleButton.select", new java.awt.Color(153, 204, 255));
+            SwingUtilities.updateComponentTreeUI(Btn_Alphabet);
         } else {
             Btn_Training.setEnabled(false);
             Btn_Chrono.setEnabled(false);
@@ -628,6 +722,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             Btn_Consonnants.setSelected(false);
             Btn_Training.setEnabled(true);
             Btn_Chrono.setEnabled(true);
+
+            UIManager.put("ToggleButton.select", new java.awt.Color(153, 204, 255));
+            SwingUtilities.updateComponentTreeUI(Btn_Vowels);
         } else {
             Btn_Training.setEnabled(false);
             Btn_Chrono.setEnabled(false);
@@ -642,6 +739,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             Btn_Vowels.setSelected(false);
             Btn_Training.setEnabled(true);
             Btn_Chrono.setEnabled(true);
+            UIManager.put("ToggleButton.select", new java.awt.Color(153, 204, 255));
+            SwingUtilities.updateComponentTreeUI(Btn_Consonnants);
+
         } else {
             Btn_Training.setEnabled(false);
             Btn_Chrono.setEnabled(false);
@@ -794,6 +894,18 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         if (evt.getKeyCode() == 38) {
             Btn_Vowels.requestFocus();
         }
+        //Left Arrow:
+        if (evt.getKeyCode() == 37) {
+            if (Btn_Training.isEnabled()) {
+                Btn_Training.requestFocus();
+            }
+        }
+        //Right Arrow:
+        if (evt.getKeyCode() == 39) {
+            if (Btn_Chrono.isEnabled()) {
+                Btn_Chrono.requestFocus();
+            }
+        }
     }//GEN-LAST:event_Btn_Cancel_LettersKeyPressed
 
     private void Btn_TrainingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_TrainingKeyPressed
@@ -837,9 +949,39 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_QuitScoreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_QuitScoreKeyPressed
         //Enter
         if (evt.getKeyCode() == 10) {
-            Btn_QuitScore.requestFocus();
+            Btn_QuitScore.doClick();
         }
     }//GEN-LAST:event_Btn_QuitScoreKeyPressed
+
+    private void Btn_PlayFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_PlayFocusGained
+        evt.getComponent().setBackground(new java.awt.Color(153, 204, 255));
+        if (evt.getComponent() == Btn_Alphabet && Btn_Alphabet.isSelected()) {
+            UIManager.put("ToggleButton.select", new java.awt.Color(153, 204, 255));
+            SwingUtilities.updateComponentTreeUI(Btn_Alphabet);
+        } else if (evt.getComponent() == Btn_Vowels && Btn_Vowels.isSelected()) {
+            UIManager.put("ToggleButton.select", new java.awt.Color(153, 204, 255));
+            SwingUtilities.updateComponentTreeUI(Btn_Vowels);
+        } else if (evt.getComponent() == Btn_Consonnants && Btn_Consonnants.isSelected()) {
+            UIManager.put("ToggleButton.select", new java.awt.Color(153, 204, 255));
+            SwingUtilities.updateComponentTreeUI(Btn_Consonnants);
+        }
+    }//GEN-LAST:event_Btn_PlayFocusGained
+
+    private void Btn_PlayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_PlayFocusLost
+        // TODO add your handling code here:
+        evt.getComponent().setBackground(new java.awt.Color(240, 240, 240));
+
+        if (evt.getComponent() == Btn_Alphabet && Btn_Alphabet.isSelected()) {
+            UIManager.put("ToggleButton.select", new java.awt.Color(240, 255, 253));
+            SwingUtilities.updateComponentTreeUI(Btn_Alphabet);
+        } else if (evt.getComponent() == Btn_Vowels && Btn_Vowels.isSelected()) {
+            UIManager.put("ToggleButton.select", new java.awt.Color(240, 255, 253));
+            SwingUtilities.updateComponentTreeUI(Btn_Vowels);
+        } else if (evt.getComponent() == Btn_Consonnants && Btn_Consonnants.isSelected()) {
+            UIManager.put("ToggleButton.select", new java.awt.Color(240, 255, 253));
+            SwingUtilities.updateComponentTreeUI(Btn_Consonnants);
+        }
+    }//GEN-LAST:event_Btn_PlayFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -899,6 +1041,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     @Override
     public void updateEndGame(String score) {
         Lbl_FinalScoreVar.setText(score);
+        Lbl_Correction.setText("Press a letter...");
         changePanel(Pnl_Score);
     }
 
