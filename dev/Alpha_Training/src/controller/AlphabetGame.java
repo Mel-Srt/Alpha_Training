@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import model.DataGame;
 import model.LetterAlphabet;
+import model.ScoreFile;
 import sound.SoundGame;
 
 import view.MainFrame;
@@ -64,7 +65,9 @@ public class AlphabetGame {
         if (!dataGame.isTrainingMode()) {
             timer.cancel();
             System.out.println("SCORE : " + dataGame.getScore());
-            dataGame.notifyEndGame(Float.toString(dataGame.getScore()));
+            String score_string = Float.toString(dataGame.getScore());
+            dataGame.notifyEndGame(score_string);
+            ScoreFile.getInstance().newScore(dataGame.getGameType(), score_string);
         }
         else{
             dataGame.notifyEndGame("0");
