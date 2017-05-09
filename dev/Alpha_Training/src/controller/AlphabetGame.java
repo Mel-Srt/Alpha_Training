@@ -67,7 +67,7 @@ public class AlphabetGame {
             System.out.println("SCORE : " + dataGame.getScore());
             String score_string = Float.toString(dataGame.getScore());
             dataGame.notifyEndGame(score_string);
-            ScoreFile.getInstance().newScore(dataGame.getGameType(), score_string);
+            ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string);
         }
         else{
             dataGame.notifyEndGame("0");

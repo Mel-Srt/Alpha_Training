@@ -906,6 +906,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_Chrono.requestFocus();
             }
         }
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_Cancel_Letters.doClick();
+        }
     }//GEN-LAST:event_Btn_Cancel_LettersKeyPressed
 
     private void Btn_TrainingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_TrainingKeyPressed
