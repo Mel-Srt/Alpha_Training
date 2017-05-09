@@ -6,7 +6,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +27,7 @@ public class ScoreFile {
         return instance;
     }
 
-    //New Score
+    //Save a new Score in a file 
     public void addNewScore(int gameType, String score) {
         //        1 -> Alphabet
         //        2 -> Vowels
@@ -54,7 +58,7 @@ public class ScoreFile {
                     + "-" + now.get(Calendar.YEAR) + " "
                     + now.get(Calendar.HOUR_OF_DAY) + ":"
                     + now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND)
-                    + ";" + score + '\n');
+                    + ";" + score + ";" + '\n');
             out.close();
         } catch (IOException ex) {
             Logger.getLogger(ScoreFile.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,20 +81,73 @@ public class ScoreFile {
                 pathFile = "";
                 break;
         }
+        List<ScoreLine> scoreLines = new ArrayList<ScoreLine>();
         try (BufferedReader br = new BufferedReader(new FileReader(pathFile))) {
 
             String sCurrentLine;
-
             while ((sCurrentLine = br.readLine()) != null) {
                 String[] parts = sCurrentLine.split(";");
-                String sDate= parts[0]; 
-                String sScore = parts[1]; 
+                String sDate = parts[0];
+                String sScore = parts[1];
                 System.out.println("Date: " + sDate + " Score: " + sScore);
+                ScoreLine aScoreLine = new ScoreLine(sDate, Float.parseFloat(sScore));
+                scoreLines.add(aScoreLine);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Collections.sort(scoreLines);
+
+        // Print the Array List
+        System.out.println("SORT : ");
+        for (ScoreLine object : scoreLines){
+            System.out.println("Date: " + object.getDate() + " Score: " + object.getScore());
+        }
     }
 
+    /**
+     * ****** Bucket sort (tri casier) *****
+     */
+    public static void triCasier(int[] tableau, int longueurDuTableau) {
+        int longueur = longueurDuTableau;
+
+        //On parcourt le tableau afin d'en récupérer les valeurs minimales et maximales
+        int mini = tableau[0];
+        int maxi = tableau[0];
+
+        for (int i = 1; i < longueur; i++) {
+            if (mini > tableau[i]) {
+                mini = tableau[i];
+            }
+            if (maxi < tableau[i]) {
+                maxi = tableau[i];
+            }
+        }
+
+        //On construit un tableau contenant le nombre d'entiers maxi-mini+1
+        int tmpLong = maxi - mini + 1;
+        int[] tmpTableau = new int[tmpLong];
+
+        //on initilise le tableau à 0
+        for (int i = 0; i < tmpLong; i++) {
+            tmpTableau[i] = 0;
+        }
+
+        //Puis on incrémente le compteur correspondant à chaque entier trouvé
+        for (int i = 0; i < longueur; i++) {
+            tmpTableau[tableau[i] - mini]++;
+        }
+
+        //Enfin, on reconstitue le tableau initial classé
+        int compt = 0;
+        for (int i = 0; i < tmpLong; i++) {
+            while (tmpTableau[i] > 0) {
+                tableau[compt] = mini + i;
+                tmpTableau[i]--;
+                compt++;
+            }
+        }
+    }
 }
