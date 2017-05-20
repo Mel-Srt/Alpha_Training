@@ -53,7 +53,7 @@ public class DataGame implements Observable {
     }
 
     public void decrementScore(float increment) {
-        this.score = score - increment;
+        this.score = round(score - increment,2);
         this.notifyObserverScore(Float.toString(this.score));
     }
     
