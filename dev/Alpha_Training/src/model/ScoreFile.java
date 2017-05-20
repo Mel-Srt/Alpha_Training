@@ -54,7 +54,7 @@ public class ScoreFile {
             // get instance of Calendar class
             Calendar now = Calendar.getInstance();
 
-            out.write(now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1)
+            out.write("Mel;" + now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1)
                     + "-" + now.get(Calendar.YEAR) + " "
                     + now.get(Calendar.HOUR_OF_DAY) + ":"
                     + now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND)
@@ -65,7 +65,7 @@ public class ScoreFile {
         }
     }
 
-    public void readFile(int gameType) {
+    public List<ScoreLine> readFile(int gameType) {
         String pathFile;
         switch (gameType) {
             case 1:
@@ -87,10 +87,10 @@ public class ScoreFile {
             String sCurrentLine;
             while ((sCurrentLine = br.readLine()) != null) {
                 String[] parts = sCurrentLine.split(";");
-                String sDate = parts[0];
-                String sScore = parts[1];
-                System.out.println("Date: " + sDate + " Score: " + sScore);
-                ScoreLine aScoreLine = new ScoreLine(sDate, Float.parseFloat(sScore));
+                String sPseudo = parts[0];
+                String sDate = parts[1];
+                String sScore = parts[2];
+                ScoreLine aScoreLine = new ScoreLine(sDate, sPseudo, Float.parseFloat(sScore));
                 scoreLines.add(aScoreLine);
             }
 
@@ -99,12 +99,7 @@ public class ScoreFile {
         }
 
         Collections.sort(scoreLines);
-
-        // Print the Array List
-        System.out.println("SORT : ");
-        for (ScoreLine object : scoreLines){
-            System.out.println("Date: " + object.getDate() + " Score: " + object.getScore());
-        }
+        return scoreLines;
     }
 
     /**

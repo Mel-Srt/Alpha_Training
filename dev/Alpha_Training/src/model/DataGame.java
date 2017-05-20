@@ -2,6 +2,7 @@ package model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import observer.Observable;
 import observer.Observer;
@@ -105,10 +106,9 @@ public class DataGame implements Observable {
         }
     }
 
-    @Override
-    public void notifyEndGame(String str) {
+    public void notifyEndGame(String score, List<ScoreLine> scoreLines) {
         for (Observer obs : listObserver) {
-            obs.updateEndGame(str);
+            obs.updateEndGame(score, scoreLines);
         }
     }
 

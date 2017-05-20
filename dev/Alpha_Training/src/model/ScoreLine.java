@@ -3,13 +3,22 @@ package model;
 public class ScoreLine implements Comparable<ScoreLine> {
 
     private String date;
+    private String pseudo;
     private float score;
 
-    public ScoreLine(String date, float score) {
+    public ScoreLine(String date, String pseudo, float score) {
         this.date = date;
         this.score = score;
+        this.pseudo = pseudo;
+    }
+    
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
     }
 
+    public String getPseudo() {
+        return pseudo;
+    }
     /**
      * @return the date
      */

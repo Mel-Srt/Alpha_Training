@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import model.DataGame;
 import model.LetterAlphabet;
 import model.ScoreFile;
+import model.ScoreLine;
 import sound.SoundGame;
 
 import view.MainFrame;
@@ -28,6 +29,8 @@ public class AlphabetGame {
     LetterAlphabet selectedLetter; // The current Letter which the user has to find
     LetterAlphabet previousLetter; //To avoid the same letter twice in a row
 
+    List<ScoreLine> scoreLines; //Will contain all the lines for the score printing at the end of the game
+    
     public AlphabetGame(DataGame dataGame) {
         this.letters = new ArrayList<LetterAlphabet>();
         this.dataGame = dataGame;
@@ -66,11 +69,13 @@ public class AlphabetGame {
             timer.cancel();
             System.out.println("SCORE : " + dataGame.getScore());
             String score_string = Float.toString(dataGame.getScore());
-            dataGame.notifyEndGame(score_string);
             ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string);
+            scoreLines = ScoreFile.getInstance().readFile(dataGame.getGameType());
+            dataGame.notifyEndGame(score_string, scoreLines);
+            
         }
         else{
-            dataGame.notifyEndGame("0");
+            dataGame.notifyEndGame("0", scoreLines);
         }
     }
 

@@ -12,8 +12,6 @@ import view.MainFrame;
 public class Main {
 
     public static void main(String[] args) {
-        ScoreFile.getInstance().readFile(1);
-        
         //Model:
         DataGame dataGame = new DataGame();
 
