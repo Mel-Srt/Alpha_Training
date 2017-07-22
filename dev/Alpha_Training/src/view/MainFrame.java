@@ -1066,7 +1066,6 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     public void updateEndGame(ScoreLine currentScore, List<ScoreLine> scoreLines) {
 
-        
         Lbl_Correction.setText("Press a letter...");
 
         if (currentScore != null) {
@@ -1075,7 +1074,12 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
             System.out.println("count : " + Pnl_ListScores.getComponentCount());
             Pnl_ListScores.removeAll();
-
+            
+            
+            //Create name of columns of the grid
+            JLabel Lbl_position = new javax.swing.JLabel();
+            Lbl_position.setText("Position");
+            Pnl_ListScores.add(Lbl_position);
             JLabel Lbl_sPseudo = new javax.swing.JLabel();
             Lbl_sPseudo.setText("Pseudo");
             Pnl_ListScores.add(Lbl_sPseudo);
@@ -1085,28 +1089,34 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             JLabel Lbl_sScore = new javax.swing.JLabel();
             Lbl_sScore.setText("Score");
             Pnl_ListScores.add(Lbl_sScore);
-
+            
+            //Fill the grid
             int nbScoreLines = scoreLines.size();
             for (int i = 0; i < 10; i++) {
+                JLabel Lbl_pos = new javax.swing.JLabel();
                 JLabel Lbl_sn = new javax.swing.JLabel();
                 JLabel Lbl_sd = new javax.swing.JLabel();
                 JLabel Lbl_ss = new javax.swing.JLabel();
 
                 if (i < nbScoreLines) {
+                    Lbl_pos.setText(Integer.toString(i+1));
                     Lbl_sn.setText(scoreLines.get(i).getPseudo());
                     Lbl_sd.setText(scoreLines.get(i).getDate());
                     Lbl_ss.setText(Float.toString(scoreLines.get(i).getScore()));
 
                     if (Objects.equals(scoreLines.get(i).getDate(), currentScore.getDate())) {
+                        Lbl_pos.setForeground(Color.red);
                         Lbl_sn.setForeground(Color.red);
                         Lbl_sd.setForeground(Color.red);
                         Lbl_ss.setForeground(Color.red);
                     }
                 } else {
+                    Lbl_pos.setText(Integer.toString(i+1));
                     Lbl_sn.setText(" ");
                     Lbl_sd.setText(" ");
                     Lbl_ss.setText(" ");
                 }
+                Pnl_ListScores.add(Lbl_pos);
                 Pnl_ListScores.add(Lbl_sn);
                 Pnl_ListScores.add(Lbl_sd);
                 Pnl_ListScores.add(Lbl_ss);
