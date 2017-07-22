@@ -700,11 +700,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Btn_QuitScore.setFont(new Font(font, Font.PLAIN, width / 40));
         Lbl_FinalScoreFix.setFont(new Font(font, Font.PLAIN, width / 30));
         Lbl_FinalScoreVar.setFont(new Font(font, Font.PLAIN, width / 30));
-        
-        for(Component cp : Pnl_ListScores.getComponents()){
+
+        for (Component cp : Pnl_ListScores.getComponents()) {
             cp.setFont(new Font(font, Font.PLAIN, width / 40));
         }
-        
+
     }//GEN-LAST:event_formComponentResized
 
     private void Btn_ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ExitActionPerformed
@@ -1064,61 +1064,62 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_ScoreVar.setText(string);
     }
 
-    public void updateEndGame(String score, List<ScoreLine> scoreLines) {
-        Lbl_FinalScoreVar.setText(score);
-   
-        Lbl_Correction.setText("Press a letter...");
-        this.scorelines = scoreLines;
-        
-        System.out.println("count : " + Pnl_ListScores.getComponentCount());
-        Pnl_ListScores.removeAll();
-        
-        JLabel Lbl_sPseudo = new javax.swing.JLabel();
-        Lbl_sPseudo.setText("Pseudo");
-        Pnl_ListScores.add(Lbl_sPseudo);
-        JLabel Lbl_sDate = new javax.swing.JLabel();
-        Lbl_sDate.setText("Date");
-        Pnl_ListScores.add(Lbl_sDate);
-        JLabel Lbl_sScore = new javax.swing.JLabel();
-        Lbl_sScore.setText("Score");
-        Pnl_ListScores.add(Lbl_sScore);
-        
-        int nbScoreLines = scoreLines.size();
-        for (int i = 0; i < 10; i++) {
-            JLabel Lbl_sn = new javax.swing.JLabel();
-            JLabel Lbl_sd = new javax.swing.JLabel();
-            JLabel Lbl_ss = new javax.swing.JLabel();
+    public void updateEndGame(ScoreLine currentScore, List<ScoreLine> scoreLines) {
 
-            if (i < nbScoreLines){         
-                Lbl_sn.setText(scoreLines.get(i).getPseudo());
-                Lbl_sd.setText(scoreLines.get(i).getDate());
-                Lbl_ss.setText(Float.toString(scoreLines.get(i).getScore())); 
- 
-                if (Objects.equals(Float.toString(scoreLines.get(i).getScore()), score)){
-                    Lbl_sn.setForeground(Color.red);
-                    Lbl_sd.setForeground(Color.red);
-                    Lbl_ss.setForeground(Color.red);
-                }   
-            }
-            else{
-                Lbl_sn.setText(" ");
-                Lbl_sd.setText(" ");
-                Lbl_ss.setText(" ");
-            }
-            Pnl_ListScores.add(Lbl_sn);
-            Pnl_ListScores.add(Lbl_sd);
-            Pnl_ListScores.add(Lbl_ss);
-            
-            
-        }
         
+        Lbl_Correction.setText("Press a letter...");
+
+        if (currentScore != null) {
+            Lbl_FinalScoreVar.setText(Float.toString(currentScore.getScore()));
+            this.scorelines = scoreLines;
+
+            System.out.println("count : " + Pnl_ListScores.getComponentCount());
+            Pnl_ListScores.removeAll();
+
+            JLabel Lbl_sPseudo = new javax.swing.JLabel();
+            Lbl_sPseudo.setText("Pseudo");
+            Pnl_ListScores.add(Lbl_sPseudo);
+            JLabel Lbl_sDate = new javax.swing.JLabel();
+            Lbl_sDate.setText("Date");
+            Pnl_ListScores.add(Lbl_sDate);
+            JLabel Lbl_sScore = new javax.swing.JLabel();
+            Lbl_sScore.setText("Score");
+            Pnl_ListScores.add(Lbl_sScore);
+
+            int nbScoreLines = scoreLines.size();
+            for (int i = 0; i < 10; i++) {
+                JLabel Lbl_sn = new javax.swing.JLabel();
+                JLabel Lbl_sd = new javax.swing.JLabel();
+                JLabel Lbl_ss = new javax.swing.JLabel();
+
+                if (i < nbScoreLines) {
+                    Lbl_sn.setText(scoreLines.get(i).getPseudo());
+                    Lbl_sd.setText(scoreLines.get(i).getDate());
+                    Lbl_ss.setText(Float.toString(scoreLines.get(i).getScore()));
+
+                    if (Objects.equals(scoreLines.get(i).getDate(), currentScore.getDate())) {
+                        Lbl_sn.setForeground(Color.red);
+                        Lbl_sd.setForeground(Color.red);
+                        Lbl_ss.setForeground(Color.red);
+                    }
+                } else {
+                    Lbl_sn.setText(" ");
+                    Lbl_sd.setText(" ");
+                    Lbl_ss.setText(" ");
+                }
+                Pnl_ListScores.add(Lbl_sn);
+                Pnl_ListScores.add(Lbl_sd);
+                Pnl_ListScores.add(Lbl_ss);
+            }
+        }
         int width = this.getWidth();
-        for(Component cp : Pnl_ListScores.getComponents()){
+        for (Component cp : Pnl_ListScores.getComponents()) {
             cp.setFont(new Font(font, Font.PLAIN, width / 40));
         }
         Pnl_ListScores.revalidate();
         Pnl_ListScores.repaint();
         changePanel(Pnl_Score);
+
     }
 
     public void updateCorrection(boolean rightOrFalse, char letter) {

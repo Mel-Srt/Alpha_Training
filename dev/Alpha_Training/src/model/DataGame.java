@@ -11,12 +11,14 @@ public class DataGame implements Observable {
 
     private ArrayList<Observer> listObserver = new ArrayList<Observer>();
     private boolean trainingMode;
+    private String pseudo;
     String answer;
     int gameType;
     float score;
     
-    public DataGame(){
+    public DataGame(String pseudo){
         this.score=0;
+        this.pseudo = pseudo;
     }
 
     public int getGameType() {
@@ -36,6 +38,20 @@ public class DataGame implements Observable {
         } else {
             gameType = 1;
         }
+    }
+    
+        /**
+     * @return the pseudo
+     */
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    /**
+     * @param pseudo the pseudo to set
+     */
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
     }
 
     public float getScore() {
@@ -106,9 +122,9 @@ public class DataGame implements Observable {
         }
     }
 
-    public void notifyEndGame(String score, List<ScoreLine> scoreLines) {
+    public void notifyEndGame(ScoreLine currentScore, List<ScoreLine> scoreLines) {
         for (Observer obs : listObserver) {
-            obs.updateEndGame(score, scoreLines);
+            obs.updateEndGame(currentScore, scoreLines);
         }
     }
 

@@ -12,8 +12,11 @@ import view.MainFrame;
 public class Main {
 
     public static void main(String[] args) {
+
+        String pseudo = "Melanie";
+        
         //Model:
-        DataGame dataGame = new DataGame();
+        DataGame dataGame = new DataGame(pseudo);
 
         //Controller:
         AlphabetGame alphabetGame = new AlphabetGame(dataGame);

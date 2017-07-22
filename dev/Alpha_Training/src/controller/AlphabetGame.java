@@ -69,13 +69,14 @@ public class AlphabetGame {
             timer.cancel();
             System.out.println("SCORE : " + dataGame.getScore());
             String score_string = Float.toString(dataGame.getScore());
-            ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string);
+            ScoreLine currentScoreLine = ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string, dataGame.getPseudo());
             scoreLines = ScoreFile.getInstance().readFile(dataGame.getGameType());
-            dataGame.notifyEndGame(score_string, scoreLines);
+            dataGame.notifyEndGame(currentScoreLine, scoreLines);
             
         }
         else{
-            dataGame.notifyEndGame("0", scoreLines);
+            ScoreLine emptyScore = null;
+            dataGame.notifyEndGame(emptyScore, scoreLines);
         }
     }
 

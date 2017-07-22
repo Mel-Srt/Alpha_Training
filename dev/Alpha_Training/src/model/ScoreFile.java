@@ -27,8 +27,8 @@ public class ScoreFile {
         return instance;
     }
 
-    //Save a new Score in a file 
-    public void addNewScore(int gameType, String score) {
+    //Save a new Score in a file, return the new ScoreLine added
+    public ScoreLine addNewScore(int gameType, String score, String pseudo) {
         //        1 -> Alphabet
         //        2 -> Vowels
         //        3 -> Consonnants
@@ -49,12 +49,11 @@ public class ScoreFile {
                 break;
         }
         BufferedWriter out;
+        Calendar now = Calendar.getInstance();
         try {
             out = new BufferedWriter(new FileWriter(pathFile, true));
             // get instance of Calendar class
-            Calendar now = Calendar.getInstance();
-
-            out.write("Mel;" + now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1)
+            out.write(pseudo + ";" + now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1)
                     + "-" + now.get(Calendar.YEAR) + " "
                     + now.get(Calendar.HOUR_OF_DAY) + ":"
                     + now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND)
@@ -63,6 +62,12 @@ public class ScoreFile {
         } catch (IOException ex) {
             Logger.getLogger(ScoreFile.class.getName()).log(Level.SEVERE, null, ex);
         }
+        String sDate = now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1)
+                    + "-" + now.get(Calendar.YEAR) + " "
+                    + now.get(Calendar.HOUR_OF_DAY) + ":"
+                    + now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND);
+        ScoreLine aScoreLine = new ScoreLine(sDate, pseudo, Float.parseFloat(score));
+        return aScoreLine;
     }
 
     public List<ScoreLine> readFile(int gameType) {

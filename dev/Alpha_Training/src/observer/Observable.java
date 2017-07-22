@@ -10,5 +10,5 @@ public interface Observable {
 	public void notifyObserverScore(String str);
         public void notifyCorrection(boolean rightOrFalse, char letter);
 	public void notifyObserverTime(String str);
-        public void notifyEndGame(String str, List<ScoreLine> scoreLines);
+        public void notifyEndGame(ScoreLine currentScore, List<ScoreLine> scoreLines);
 }
