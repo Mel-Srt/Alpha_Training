@@ -16,7 +16,7 @@ public class ScoreLine implements Comparable<ScoreLine> {
         this.score = score;
         this.pseudo = pseudo;
 
-        DecimalFormat df = new DecimalFormat("#0.00"); // Set your desired format here.
+        DecimalFormat df = new DecimalFormat("#00.00"); // Set your desired format here.
         this.scoreFormat = df.format(score);
     }
 

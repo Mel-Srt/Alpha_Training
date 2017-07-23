@@ -99,12 +99,34 @@ public class ScoreFile {
                 ScoreLine aScoreLine = new ScoreLine(sDate, sPseudo, Float.parseFloat(sScore));
                 scoreLines.add(aScoreLine);
             }
+            br.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         Collections.sort(scoreLines);
+
+        //After the sort, write only the 10 top score
+        BufferedWriter out;
+        int nbScoreLines = scoreLines.size();
+        int limit = 10;
+        if (nbScoreLines < 10) {
+            limit = nbScoreLines;
+        }
+        try {
+            out = new BufferedWriter(new FileWriter(pathFile, false));
+            out.write("");
+            out = new BufferedWriter(new FileWriter(pathFile, true));
+            for (int i = 0; i < limit; i++) {
+                System.out.println((scoreLines.get(i).getPseudo()+ ";" + scoreLines.get(i).getDate() + ";" + scoreLines.get(i).getScore() + ";"));
+                out.write(scoreLines.get(i).getPseudo()+ ";" + scoreLines.get(i).getDate() + ";" + scoreLines.get(i).getScore() + ";" + '\n'); 
+            }
+            out.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ScoreFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return scoreLines;
     }
 
