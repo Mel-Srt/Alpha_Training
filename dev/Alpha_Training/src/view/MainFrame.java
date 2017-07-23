@@ -1064,12 +1064,19 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_ScoreVar.setText(string);
     }
 
+    /**
+     *
+     * @param currentScore
+     * @param scoreLines
+     */
+    @Override
     public void updateEndGame(ScoreLine currentScore, List<ScoreLine> scoreLines) {
 
         Lbl_Correction.setText("Press a letter...");
 
         if (currentScore != null) {
-            Lbl_FinalScoreVar.setText(Float.toString(currentScore.getScore()));
+            Lbl_FinalScoreVar.setText(currentScore.getScoreFormat());
+            Lbl_FinalScoreVar.setForeground(Color.red);
             this.scorelines = scoreLines;
 
             System.out.println("count : " + Pnl_ListScores.getComponentCount());
@@ -1102,7 +1109,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                     Lbl_pos.setText(Integer.toString(i+1));
                     Lbl_sn.setText(scoreLines.get(i).getPseudo());
                     Lbl_sd.setText(scoreLines.get(i).getDate());
-                    Lbl_ss.setText(Float.toString(scoreLines.get(i).getScore()));
+                    Lbl_ss.setText(scoreLines.get(i).getScoreFormat());
 
                     if (Objects.equals(scoreLines.get(i).getDate(), currentScore.getDate())) {
                         Lbl_pos.setForeground(Color.red);
@@ -1124,7 +1131,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         }
         int width = this.getWidth();
         for (Component cp : Pnl_ListScores.getComponents()) {
-            cp.setFont(new Font(font, Font.PLAIN, width / 40));
+            cp.setFont(new Font(font, Font.PLAIN, width / 45));
         }
         Pnl_ListScores.revalidate();
         Pnl_ListScores.repaint();

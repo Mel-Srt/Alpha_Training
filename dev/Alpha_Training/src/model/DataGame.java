@@ -73,6 +73,7 @@ public class DataGame implements Observable {
         this.notifyObserverScore(Float.toString(this.score));
     }
     
+    //d = number to round, decimalPlace = number of character after the coma
     public static float round(float d, int decimalPlace) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
