@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -50,22 +51,22 @@ public class ScoreFile {
         }
         BufferedWriter out;
         Calendar now = Calendar.getInstance();
+        DecimalFormat df = new DecimalFormat("#00"); // Set your desired format here.
+        String sDate = df.format(Float.valueOf(now.get(Calendar.MONTH) + 1)) + "-"
+                + df.format(Float.valueOf(now.get(Calendar.DATE) + "")) + "-"
+                + df.format(Float.valueOf(now.get(Calendar.YEAR) + "")) + " "
+                + df.format(Float.valueOf(now.get(Calendar.HOUR_OF_DAY) + "")) + ":"
+                + df.format(Float.valueOf(now.get(Calendar.MINUTE) + "")) + ":"
+                + df.format(Float.valueOf(now.get(Calendar.SECOND) + ""));
         try {
             out = new BufferedWriter(new FileWriter(pathFile, true));
             // get instance of Calendar class
-            out.write(pseudo + ";" + now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1)
-                    + "-" + now.get(Calendar.YEAR) + " "
-                    + now.get(Calendar.HOUR_OF_DAY) + ":"
-                    + now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND)
-                    + ";" + score + ";" + '\n');
+            out.write(pseudo + ";" + sDate + ";" + score + ";" + '\n');
             out.close();
         } catch (IOException ex) {
             Logger.getLogger(ScoreFile.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String sDate = now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1)
-                    + "-" + now.get(Calendar.YEAR) + " "
-                    + now.get(Calendar.HOUR_OF_DAY) + ":"
-                    + now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND);
+
         ScoreLine aScoreLine = new ScoreLine(sDate, pseudo, Float.parseFloat(score));
         return aScoreLine;
     }

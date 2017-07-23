@@ -5,7 +5,7 @@ import controller.AlphabetGame;
 public class Main {
 
     public static void main(String[] args) {
-        
+
         String pseudo = "Melanie";
 
         //Model:
