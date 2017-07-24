@@ -635,7 +635,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Lbl_Title.setFont(new java.awt.Font("Emmett", 0, 48)); // NOI18N
         Lbl_Title.setForeground(new java.awt.Color(0, 51, 102));
-        Lbl_Title.setText("Alpha Training v0.5");
+        Lbl_Title.setText("Alpha Training v0.6");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
