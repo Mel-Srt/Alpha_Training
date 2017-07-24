@@ -66,15 +66,17 @@ public class AlphabetGame {
     public void stop(boolean returnAction) {
         selectedLetter = null;
         if (!dataGame.isTrainingMode()) {
-            timer.cancel();
-            System.out.println("SCORE : " + dataGame.getScore());
-            String score_string = Float.toString(dataGame.getScore());
-            ScoreLine currentScoreLine = ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string, dataGame.getPseudo());
-            scoreLines = ScoreFile.getInstance().readFile(dataGame.getGameType());
-            dataGame.notifyEndGame(currentScoreLine, scoreLines);
 
+            if (!returnAction) { //The game end normally
+                timer.cancel();
+                System.out.println("SCORE : " + dataGame.getScore());
+                String score_string = Float.toString(dataGame.getScore());
+                ScoreLine currentScoreLine = ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string, dataGame.getPseudo());
+                scoreLines = ScoreFile.getInstance().readFile(dataGame.getGameType());
+                dataGame.notifyEndGame(currentScoreLine, scoreLines);
+            }
             //The game is cancelled by the user
-            if (returnAction) {
+            else {
                 timer.cancel();
                 ScoreLine emptyScore = null;
                 dataGame.notifyEndGame(emptyScore, scoreLines);
