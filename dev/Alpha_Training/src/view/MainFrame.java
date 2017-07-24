@@ -791,6 +791,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             Lbl_TimerFixed.setText(" ");
             Lbl_TimerVar.setText(" ");
         } else {
+            Lbl_ScoreFixed.setText("Score:");
+            Lbl_TimerFixed.setText("Timer:");
             Lbl_ScoreFixed.setVisible(true);
             Lbl_ScoreVar.setVisible(true);
             Lbl_TimerFixed.setVisible(true);
@@ -1085,7 +1087,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     public void updateEndGame(ScoreLine currentScore, List<ScoreLine> scoreLines) {
 
         Lbl_Correction.setText("Press a letter...");
-
+        Pnl_ListScores.removeAll();
         if (currentScore != null) {
             Lbl_FinalScoreVar.setText(currentScore.getScoreFormat());
             Lbl_FinalScoreVar.setForeground(Color.red);
