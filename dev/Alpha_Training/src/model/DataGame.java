@@ -11,14 +11,14 @@ public class DataGame implements Observable {
 
     private ArrayList<Observer> listObserver = new ArrayList<Observer>();
     private boolean trainingMode;
-    private String pseudo;
+    private String nickname;
     String answer;
     int gameType;
     float score;
     
-    public DataGame(String pseudo){
+    public DataGame(){
         this.score=0;
-        this.pseudo = pseudo;
+        this.nickname = "Unknown";
     }
 
     public int getGameType() {
@@ -41,17 +41,21 @@ public class DataGame implements Observable {
     }
     
         /**
-     * @return the pseudo
+     * @return the nickname
      */
-    public String getPseudo() {
-        return pseudo;
+    public String getNickname() {
+        return nickname;
     }
 
     /**
-     * @param pseudo the pseudo to set
+     * @param nickname the nickname to set
      */
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public void setNickname(String nickname) {
+        if(nickname.equals("")) this.nickname = "Unknown";
+        else{
+            this.nickname= nickname.replace(';',','); 
+        }
+        System.out.println(this.nickname);
     }
 
     public float getScore() {
