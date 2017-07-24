@@ -1,2 +1,0 @@
-controller.AlphabetGame
-controller.PlayLetter
