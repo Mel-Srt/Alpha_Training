@@ -11,16 +11,22 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
+import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
@@ -45,7 +51,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     public MainFrame(AlphabetGame alphabetGame) {
 
         this.alphabetGame = alphabetGame;
+
         initComponents();
+        setIcon();
+        
+
         changePanel(Pnl_MainMenu);
         keyboardBind(Btn_Exit, KeyEvent.VK_ESCAPE);
         this.setVisible(true);
@@ -1083,37 +1093,34 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
             System.out.println("count : " + Pnl_ListScores.getComponentCount());
             Pnl_ListScores.removeAll();
-            
-            
+
             //Create name of columns of the grid
-            JLabel Lbl_position = new javax.swing.JLabel("",SwingConstants.CENTER);
+            JLabel Lbl_position = new javax.swing.JLabel("", SwingConstants.CENTER);
             Lbl_position.setText("Position");
             Pnl_ListScores.add(Lbl_position);
-            JLabel Lbl_sPseudo = new javax.swing.JLabel("",SwingConstants.CENTER);
+            JLabel Lbl_sPseudo = new javax.swing.JLabel("", SwingConstants.CENTER);
             Lbl_sPseudo.setText("Pseudo");
             Pnl_ListScores.add(Lbl_sPseudo);
-            JLabel Lbl_sDate = new javax.swing.JLabel("",SwingConstants.CENTER);
+            JLabel Lbl_sDate = new javax.swing.JLabel("", SwingConstants.CENTER);
             Lbl_sDate.setText("Date");
             Pnl_ListScores.add(Lbl_sDate);
-            JLabel Lbl_sScore = new javax.swing.JLabel("",SwingConstants.CENTER);
+            JLabel Lbl_sScore = new javax.swing.JLabel("", SwingConstants.CENTER);
             Lbl_sScore.setText("Score");
             Pnl_ListScores.add(Lbl_sScore);
-            
+
             //Fill the grid
             int nbScoreLines = scoreLines.size();
             for (int i = 0; i < 10; i++) {
-                JLabel Lbl_pos = new javax.swing.JLabel("",SwingConstants.CENTER);
-                JLabel Lbl_sn = new javax.swing.JLabel("",SwingConstants.CENTER);
-                JLabel Lbl_sd = new javax.swing.JLabel("",SwingConstants.CENTER);
-                JLabel Lbl_ss = new javax.swing.JLabel("",SwingConstants.CENTER);
+                JLabel Lbl_pos = new javax.swing.JLabel("", SwingConstants.CENTER);
+                JLabel Lbl_sn = new javax.swing.JLabel("", SwingConstants.CENTER);
+                JLabel Lbl_sd = new javax.swing.JLabel("", SwingConstants.CENTER);
+                JLabel Lbl_ss = new javax.swing.JLabel("", SwingConstants.CENTER);
 
                 if (i < nbScoreLines) {
-                    Lbl_pos.setText(Integer.toString(i+1));
+                    Lbl_pos.setText(Integer.toString(i + 1));
                     Lbl_sn.setText(scoreLines.get(i).getPseudo());
                     Lbl_sd.setText(scoreLines.get(i).getDate());
                     Lbl_ss.setText(scoreLines.get(i).getScoreFormat());
-                    
-                    
 
                     if (Objects.equals(scoreLines.get(i).getDate(), currentScore.getDate())) {
                         Lbl_pos.setForeground(Color.red);
@@ -1122,7 +1129,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                         Lbl_ss.setForeground(Color.red);
                     }
                 } else {
-                    Lbl_pos.setText(Integer.toString(i+1));
+                    Lbl_pos.setText(Integer.toString(i + 1));
                     Lbl_sn.setText(" ");
                     Lbl_sd.setText(" ");
                     Lbl_ss.setText(" ");
@@ -1149,5 +1156,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         } else {
             this.Lbl_Correction.setText(letter + "  False!");
         }
+    }
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("english.png")));
     }
 }
