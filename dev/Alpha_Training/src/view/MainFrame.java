@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import model.ScoreLine;
@@ -38,7 +39,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private AlphabetGame alphabetGame;
     private String font = "EMMETT";
-
+    final int FONT_SIZE_SCORES_BOARD = 50;
     private List<ScoreLine> scorelines;
 
     public MainFrame(AlphabetGame alphabetGame) {
@@ -177,7 +178,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 30, 0);
         Pnl_Score.add(Lbl_FinalScoreVar, gridBagConstraints);
 
         Lbl_FinalScoreFix.setText("Your score:");
@@ -206,10 +207,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
         Pnl_Score.add(Btn_QuitScore, gridBagConstraints);
 
         Pnl_ListScores.setBackground(new java.awt.Color(255, 249, 242));
-        Pnl_ListScores.setLayout(new java.awt.GridLayout(11, 3, 20, 5));
+        Pnl_ListScores.setLayout(new java.awt.GridLayout(11, 4, 20, 5));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -696,13 +698,13 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 2)));
         Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 3) + 50));
 
-        //Panel SCore
+        //Panel Score
         Btn_QuitScore.setFont(new Font(font, Font.PLAIN, width / 40));
         Lbl_FinalScoreFix.setFont(new Font(font, Font.PLAIN, width / 30));
         Lbl_FinalScoreVar.setFont(new Font(font, Font.PLAIN, width / 30));
 
         for (Component cp : Pnl_ListScores.getComponents()) {
-            cp.setFont(new Font(font, Font.PLAIN, width / 40));
+            cp.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_SCORES_BOARD));
         }
 
     }//GEN-LAST:event_formComponentResized
@@ -1084,32 +1086,34 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             
             
             //Create name of columns of the grid
-            JLabel Lbl_position = new javax.swing.JLabel();
+            JLabel Lbl_position = new javax.swing.JLabel("",SwingConstants.CENTER);
             Lbl_position.setText("Position");
             Pnl_ListScores.add(Lbl_position);
-            JLabel Lbl_sPseudo = new javax.swing.JLabel();
+            JLabel Lbl_sPseudo = new javax.swing.JLabel("",SwingConstants.CENTER);
             Lbl_sPseudo.setText("Pseudo");
             Pnl_ListScores.add(Lbl_sPseudo);
-            JLabel Lbl_sDate = new javax.swing.JLabel();
+            JLabel Lbl_sDate = new javax.swing.JLabel("",SwingConstants.CENTER);
             Lbl_sDate.setText("Date");
             Pnl_ListScores.add(Lbl_sDate);
-            JLabel Lbl_sScore = new javax.swing.JLabel();
+            JLabel Lbl_sScore = new javax.swing.JLabel("",SwingConstants.CENTER);
             Lbl_sScore.setText("Score");
             Pnl_ListScores.add(Lbl_sScore);
             
             //Fill the grid
             int nbScoreLines = scoreLines.size();
             for (int i = 0; i < 10; i++) {
-                JLabel Lbl_pos = new javax.swing.JLabel();
-                JLabel Lbl_sn = new javax.swing.JLabel();
-                JLabel Lbl_sd = new javax.swing.JLabel();
-                JLabel Lbl_ss = new javax.swing.JLabel();
+                JLabel Lbl_pos = new javax.swing.JLabel("",SwingConstants.CENTER);
+                JLabel Lbl_sn = new javax.swing.JLabel("",SwingConstants.CENTER);
+                JLabel Lbl_sd = new javax.swing.JLabel("",SwingConstants.CENTER);
+                JLabel Lbl_ss = new javax.swing.JLabel("",SwingConstants.CENTER);
 
                 if (i < nbScoreLines) {
                     Lbl_pos.setText(Integer.toString(i+1));
                     Lbl_sn.setText(scoreLines.get(i).getPseudo());
                     Lbl_sd.setText(scoreLines.get(i).getDate());
                     Lbl_ss.setText(scoreLines.get(i).getScoreFormat());
+                    
+                    
 
                     if (Objects.equals(scoreLines.get(i).getDate(), currentScore.getDate())) {
                         Lbl_pos.setForeground(Color.red);
@@ -1131,7 +1135,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         }
         int width = this.getWidth();
         for (Component cp : Pnl_ListScores.getComponents()) {
-            cp.setFont(new Font(font, Font.PLAIN, width / 45));
+            cp.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_SCORES_BOARD));
         }
         Pnl_ListScores.revalidate();
         Pnl_ListScores.repaint();
