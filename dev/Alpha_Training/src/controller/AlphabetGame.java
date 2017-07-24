@@ -62,10 +62,10 @@ public class AlphabetGame {
         this.play();
     }
 
-    //When the users clics on "return menu" or the game ends
-    public void stop() {
+    //When the users clics on "return menu" (true) or the game ends (false)
+    public void stop(boolean returnAction) {
         selectedLetter = null;
-        if (!dataGame.isTrainingMode()) {
+        if (!dataGame.isTrainingMode() && !returnAction) {
             timer.cancel();
             System.out.println("SCORE : " + dataGame.getScore());
             String score_string = Float.toString(dataGame.getScore());
@@ -183,7 +183,7 @@ public class AlphabetGame {
                         pickNewLetter();
                     } else if (secondsPassed == 0) {
                         dataGame.notifyObserverTime("STOP");
-                        stop();
+                        stop(false);
                     } else {
                         dataGame.notifyObserverTime(Integer.toString(secondsPassed));
                     }

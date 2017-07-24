@@ -68,7 +68,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             keyboardBind(Btn_Cancel_Letters, KeyEvent.VK_ESCAPE);
             requestingFocusThread(Btn_Alphabet);
         }
-        if (namePanel == Pnl_Game) {
+        if (namePanel == Pnl_Game_Letters) {
             keyboardBind(Btn_ReturnMenu, KeyEvent.VK_ESCAPE);
             keyboardBind(Btn_PlayLetter, KeyEvent.VK_SPACE);
         }
@@ -122,7 +122,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_FinalScoreFix = new javax.swing.JLabel();
         Btn_QuitScore = new javax.swing.JButton();
         Pnl_ListScores = new javax.swing.JPanel();
-        Pnl_Game = new javax.swing.JPanel();
+        Pnl_Game_Letters = new javax.swing.JPanel();
         Pnl_TopGame = new javax.swing.JPanel();
         Lbl_TimerFixed = new javax.swing.JLabel();
         Lbl_TimerVar = new javax.swing.JLabel();
@@ -220,9 +220,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Global.add(Pnl_Score, "card5");
 
-        Pnl_Game.setBackground(new java.awt.Color(255, 249, 242));
-        Pnl_Game.setMinimumSize(new java.awt.Dimension(600, 500));
-        Pnl_Game.setLayout(new java.awt.BorderLayout());
+        Pnl_Game_Letters.setBackground(new java.awt.Color(255, 249, 242));
+        Pnl_Game_Letters.setMinimumSize(new java.awt.Dimension(600, 500));
+        Pnl_Game_Letters.setLayout(new java.awt.BorderLayout());
 
         Pnl_TopGame.setBackground(new java.awt.Color(255, 249, 242));
         java.awt.GridBagLayout Pnl_TopGameLayout = new java.awt.GridBagLayout();
@@ -253,7 +253,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridy = 1;
         Pnl_TopGame.add(Lbl_ScoreVar, gridBagConstraints);
 
-        Pnl_Game.add(Pnl_TopGame, java.awt.BorderLayout.PAGE_START);
+        Pnl_Game_Letters.add(Pnl_TopGame, java.awt.BorderLayout.PAGE_START);
 
         Pnl_BotGame.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_BotGame.setLayout(new java.awt.GridBagLayout());
@@ -306,7 +306,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridy = 1;
         Pnl_BotGame.add(jPanel2, gridBagConstraints);
 
-        Pnl_Game.add(Pnl_BotGame, java.awt.BorderLayout.PAGE_END);
+        Pnl_Game_Letters.add(Pnl_BotGame, java.awt.BorderLayout.PAGE_END);
 
         Pnl_CenGame.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_CenGame.setLayout(new java.awt.GridBagLayout());
@@ -344,9 +344,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
         Pnl_CenGame.add(Btn_PlayLetter, gridBagConstraints);
 
-        Pnl_Game.add(Pnl_CenGame, java.awt.BorderLayout.CENTER);
+        Pnl_Game_Letters.add(Pnl_CenGame, java.awt.BorderLayout.CENTER);
 
-        Pnl_Global.add(Pnl_Game, "card3");
+        Pnl_Global.add(Pnl_Game_Letters, "card3");
 
         Pnl_LettersMenu.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_LettersMenu.setFocusable(false);
@@ -774,7 +774,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void loadGameFrame(boolean isTrainingMode) {
         alphabetGame.getDataGame().setTrainingMode(isTrainingMode);
         alphabetGame.start();
-        changePanel(Pnl_Game);
+        changePanel(Pnl_Game_Letters);
         if (isTrainingMode) {
             Lbl_ScoreFixed.setText(" ");
             Lbl_ScoreVar.setText(" ");
@@ -817,7 +817,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_ChronoActionPerformed
 
     private void Btn_ReturnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReturnMenuActionPerformed
-        alphabetGame.stop();
+        alphabetGame.stop(true);
         changePanel(Pnl_MainMenu);
     }//GEN-LAST:event_Btn_ReturnMenuActionPerformed
 
@@ -1037,7 +1037,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel Lbl_Title;
     private javax.swing.JPanel Pnl_BotGame;
     private javax.swing.JPanel Pnl_CenGame;
-    private javax.swing.JPanel Pnl_Game;
+    private javax.swing.JPanel Pnl_Game_Letters;
     private javax.swing.JPanel Pnl_Global;
     private javax.swing.JPanel Pnl_KeyBoard;
     private javax.swing.JPanel Pnl_LettersMenu;
