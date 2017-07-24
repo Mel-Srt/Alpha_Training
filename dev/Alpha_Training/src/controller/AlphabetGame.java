@@ -30,7 +30,7 @@ public class AlphabetGame {
     LetterAlphabet previousLetter; //To avoid the same letter twice in a row
 
     List<ScoreLine> scoreLines; //Will contain all the lines for the score printing at the end of the game
-    
+
     public AlphabetGame(DataGame dataGame) {
         this.letters = new ArrayList<LetterAlphabet>();
         this.dataGame = dataGame;
@@ -65,16 +65,22 @@ public class AlphabetGame {
     //When the users clics on "return menu" (true) or the game ends (false)
     public void stop(boolean returnAction) {
         selectedLetter = null;
-        if (!dataGame.isTrainingMode() && !returnAction) {
+        if (!dataGame.isTrainingMode()) {
             timer.cancel();
             System.out.println("SCORE : " + dataGame.getScore());
             String score_string = Float.toString(dataGame.getScore());
             ScoreLine currentScoreLine = ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string, dataGame.getPseudo());
             scoreLines = ScoreFile.getInstance().readFile(dataGame.getGameType());
             dataGame.notifyEndGame(currentScoreLine, scoreLines);
-            
-        }
-        else{
+
+            //The game is cancelled by the user
+            if (returnAction) {
+                timer.cancel();
+                ScoreLine emptyScore = null;
+                dataGame.notifyEndGame(emptyScore, scoreLines);
+            }
+
+        } else {
             ScoreLine emptyScore = null;
             dataGame.notifyEndGame(emptyScore, scoreLines);
         }
