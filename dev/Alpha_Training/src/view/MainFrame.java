@@ -7,21 +7,34 @@ package view;
 
 import controller.AlphabetGame;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
+import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import model.ScoreLine;
 import observer.Observer;
 
 /**
@@ -32,11 +45,17 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private AlphabetGame alphabetGame;
     private String font = "EMMETT";
+    final int FONT_SIZE_SCORES_BOARD = 50;
+    private List<ScoreLine> scorelines;
 
     public MainFrame(AlphabetGame alphabetGame) {
 
         this.alphabetGame = alphabetGame;
+
         initComponents();
+        setIcon();
+        
+
         changePanel(Pnl_MainMenu);
         keyboardBind(Btn_Exit, KeyEvent.VK_ESCAPE);
         this.setVisible(true);
@@ -59,7 +78,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             keyboardBind(Btn_Cancel_Letters, KeyEvent.VK_ESCAPE);
             requestingFocusThread(Btn_Alphabet);
         }
-        if (namePanel == Pnl_Game) {
+        if (namePanel == Pnl_Game_Letters) {
             keyboardBind(Btn_ReturnMenu, KeyEvent.VK_ESCAPE);
             keyboardBind(Btn_PlayLetter, KeyEvent.VK_SPACE);
         }
@@ -112,7 +131,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_FinalScoreVar = new javax.swing.JLabel();
         Lbl_FinalScoreFix = new javax.swing.JLabel();
         Btn_QuitScore = new javax.swing.JButton();
-        Pnl_Game = new javax.swing.JPanel();
+        Pnl_ListScores = new javax.swing.JPanel();
+        Pnl_Game_Letters = new javax.swing.JPanel();
         Pnl_TopGame = new javax.swing.JPanel();
         Lbl_TimerFixed = new javax.swing.JLabel();
         Lbl_TimerVar = new javax.swing.JLabel();
@@ -162,14 +182,13 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Score.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_Score.setFocusable(false);
-        java.awt.GridBagLayout Pnl_ScoreLayout = new java.awt.GridBagLayout();
-        Pnl_ScoreLayout.rowHeights = new int[] {100, 100, 100, 100, 100};
-        Pnl_Score.setLayout(Pnl_ScoreLayout);
+        Pnl_Score.setLayout(new java.awt.GridBagLayout());
 
         Lbl_FinalScoreVar.setText("x");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 30, 0);
         Pnl_Score.add(Lbl_FinalScoreVar, gridBagConstraints);
 
         Lbl_FinalScoreFix.setText("Your score:");
@@ -198,13 +217,22 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
         Pnl_Score.add(Btn_QuitScore, gridBagConstraints);
+
+        Pnl_ListScores.setBackground(new java.awt.Color(255, 249, 242));
+        Pnl_ListScores.setLayout(new java.awt.GridLayout(11, 4, 20, 5));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        Pnl_Score.add(Pnl_ListScores, gridBagConstraints);
 
         Pnl_Global.add(Pnl_Score, "card5");
 
-        Pnl_Game.setBackground(new java.awt.Color(255, 249, 242));
-        Pnl_Game.setMinimumSize(new java.awt.Dimension(600, 500));
-        Pnl_Game.setLayout(new java.awt.BorderLayout());
+        Pnl_Game_Letters.setBackground(new java.awt.Color(255, 249, 242));
+        Pnl_Game_Letters.setMinimumSize(new java.awt.Dimension(600, 500));
+        Pnl_Game_Letters.setLayout(new java.awt.BorderLayout());
 
         Pnl_TopGame.setBackground(new java.awt.Color(255, 249, 242));
         java.awt.GridBagLayout Pnl_TopGameLayout = new java.awt.GridBagLayout();
@@ -235,7 +263,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridy = 1;
         Pnl_TopGame.add(Lbl_ScoreVar, gridBagConstraints);
 
-        Pnl_Game.add(Pnl_TopGame, java.awt.BorderLayout.PAGE_START);
+        Pnl_Game_Letters.add(Pnl_TopGame, java.awt.BorderLayout.PAGE_START);
 
         Pnl_BotGame.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_BotGame.setLayout(new java.awt.GridBagLayout());
@@ -288,7 +316,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridy = 1;
         Pnl_BotGame.add(jPanel2, gridBagConstraints);
 
-        Pnl_Game.add(Pnl_BotGame, java.awt.BorderLayout.PAGE_END);
+        Pnl_Game_Letters.add(Pnl_BotGame, java.awt.BorderLayout.PAGE_END);
 
         Pnl_CenGame.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_CenGame.setLayout(new java.awt.GridBagLayout());
@@ -326,9 +354,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
         Pnl_CenGame.add(Btn_PlayLetter, gridBagConstraints);
 
-        Pnl_Game.add(Pnl_CenGame, java.awt.BorderLayout.CENTER);
+        Pnl_Game_Letters.add(Pnl_CenGame, java.awt.BorderLayout.CENTER);
 
-        Pnl_Global.add(Pnl_Game, "card3");
+        Pnl_Global.add(Pnl_Game_Letters, "card3");
 
         Pnl_LettersMenu.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_LettersMenu.setFocusable(false);
@@ -680,10 +708,15 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 2)));
         Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 3) + 50));
 
-        //Panel SCore
+        //Panel Score
         Btn_QuitScore.setFont(new Font(font, Font.PLAIN, width / 40));
         Lbl_FinalScoreFix.setFont(new Font(font, Font.PLAIN, width / 30));
         Lbl_FinalScoreVar.setFont(new Font(font, Font.PLAIN, width / 30));
+
+        for (Component cp : Pnl_ListScores.getComponents()) {
+            cp.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_SCORES_BOARD));
+        }
+
     }//GEN-LAST:event_formComponentResized
 
     private void Btn_ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ExitActionPerformed
@@ -751,7 +784,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void loadGameFrame(boolean isTrainingMode) {
         alphabetGame.getDataGame().setTrainingMode(isTrainingMode);
         alphabetGame.start();
-        changePanel(Pnl_Game);
+        changePanel(Pnl_Game_Letters);
         if (isTrainingMode) {
             Lbl_ScoreFixed.setText(" ");
             Lbl_ScoreVar.setText(" ");
@@ -794,7 +827,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_ChronoActionPerformed
 
     private void Btn_ReturnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReturnMenuActionPerformed
-        alphabetGame.stop();
+        alphabetGame.stop(true);
         changePanel(Pnl_MainMenu);
     }//GEN-LAST:event_Btn_ReturnMenuActionPerformed
 
@@ -906,6 +939,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_Chrono.requestFocus();
             }
         }
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_Cancel_Letters.doClick();
+        }
     }//GEN-LAST:event_Btn_Cancel_LettersKeyPressed
 
     private void Btn_TrainingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_TrainingKeyPressed
@@ -1010,10 +1047,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel Lbl_Title;
     private javax.swing.JPanel Pnl_BotGame;
     private javax.swing.JPanel Pnl_CenGame;
-    private javax.swing.JPanel Pnl_Game;
+    private javax.swing.JPanel Pnl_Game_Letters;
     private javax.swing.JPanel Pnl_Global;
     private javax.swing.JPanel Pnl_KeyBoard;
     private javax.swing.JPanel Pnl_LettersMenu;
+    private javax.swing.JPanel Pnl_ListScores;
     private javax.swing.JPanel Pnl_MainMenu;
     private javax.swing.JPanel Pnl_Score;
     private javax.swing.JPanel Pnl_TopGame;
@@ -1038,11 +1076,78 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_ScoreVar.setText(string);
     }
 
+    /**
+     *
+     * @param currentScore
+     * @param scoreLines
+     */
     @Override
-    public void updateEndGame(String score) {
-        Lbl_FinalScoreVar.setText(score);
+    public void updateEndGame(ScoreLine currentScore, List<ScoreLine> scoreLines) {
+
         Lbl_Correction.setText("Press a letter...");
+
+        if (currentScore != null) {
+            Lbl_FinalScoreVar.setText(currentScore.getScoreFormat());
+            Lbl_FinalScoreVar.setForeground(Color.red);
+            this.scorelines = scoreLines;
+
+            System.out.println("count : " + Pnl_ListScores.getComponentCount());
+            Pnl_ListScores.removeAll();
+
+            //Create name of columns of the grid
+            JLabel Lbl_position = new javax.swing.JLabel("", SwingConstants.CENTER);
+            Lbl_position.setText("Position");
+            Pnl_ListScores.add(Lbl_position);
+            JLabel Lbl_sPseudo = new javax.swing.JLabel("", SwingConstants.CENTER);
+            Lbl_sPseudo.setText("Pseudo");
+            Pnl_ListScores.add(Lbl_sPseudo);
+            JLabel Lbl_sDate = new javax.swing.JLabel("", SwingConstants.CENTER);
+            Lbl_sDate.setText("Date");
+            Pnl_ListScores.add(Lbl_sDate);
+            JLabel Lbl_sScore = new javax.swing.JLabel("", SwingConstants.CENTER);
+            Lbl_sScore.setText("Score");
+            Pnl_ListScores.add(Lbl_sScore);
+
+            //Fill the grid
+            int nbScoreLines = scoreLines.size();
+            for (int i = 0; i < 10; i++) {
+                JLabel Lbl_pos = new javax.swing.JLabel("", SwingConstants.CENTER);
+                JLabel Lbl_sn = new javax.swing.JLabel("", SwingConstants.CENTER);
+                JLabel Lbl_sd = new javax.swing.JLabel("", SwingConstants.CENTER);
+                JLabel Lbl_ss = new javax.swing.JLabel("", SwingConstants.CENTER);
+
+                if (i < nbScoreLines) {
+                    Lbl_pos.setText(Integer.toString(i + 1));
+                    Lbl_sn.setText(scoreLines.get(i).getPseudo());
+                    Lbl_sd.setText(scoreLines.get(i).getDate());
+                    Lbl_ss.setText(scoreLines.get(i).getScoreFormat());
+
+                    if (Objects.equals(scoreLines.get(i).getDate(), currentScore.getDate())) {
+                        Lbl_pos.setForeground(Color.red);
+                        Lbl_sn.setForeground(Color.red);
+                        Lbl_sd.setForeground(Color.red);
+                        Lbl_ss.setForeground(Color.red);
+                    }
+                } else {
+                    Lbl_pos.setText(Integer.toString(i + 1));
+                    Lbl_sn.setText(" ");
+                    Lbl_sd.setText(" ");
+                    Lbl_ss.setText(" ");
+                }
+                Pnl_ListScores.add(Lbl_pos);
+                Pnl_ListScores.add(Lbl_sn);
+                Pnl_ListScores.add(Lbl_sd);
+                Pnl_ListScores.add(Lbl_ss);
+            }
+        }
+        int width = this.getWidth();
+        for (Component cp : Pnl_ListScores.getComponents()) {
+            cp.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_SCORES_BOARD));
+        }
+        Pnl_ListScores.revalidate();
+        Pnl_ListScores.repaint();
         changePanel(Pnl_Score);
+
     }
 
     public void updateCorrection(boolean rightOrFalse, char letter) {
@@ -1051,5 +1156,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         } else {
             this.Lbl_Correction.setText(letter + "  False!");
         }
+    }
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("english.png")));
     }
 }

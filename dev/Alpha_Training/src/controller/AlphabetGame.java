@@ -11,6 +11,8 @@ import java.util.concurrent.TimeUnit;
 
 import model.DataGame;
 import model.LetterAlphabet;
+import model.ScoreFile;
+import model.ScoreLine;
 import sound.SoundGame;
 
 import view.MainFrame;
@@ -26,6 +28,8 @@ public class AlphabetGame {
 
     LetterAlphabet selectedLetter; // The current Letter which the user has to find
     LetterAlphabet previousLetter; //To avoid the same letter twice in a row
+
+    List<ScoreLine> scoreLines; //Will contain all the lines for the score printing at the end of the game
 
     public AlphabetGame(DataGame dataGame) {
         this.letters = new ArrayList<LetterAlphabet>();
@@ -58,16 +62,27 @@ public class AlphabetGame {
         this.play();
     }
 
-    //When the users clics on "return menu" or the game ends
-    public void stop() {
+    //When the users clics on "return menu" (true) or the game ends (false)
+    public void stop(boolean returnAction) {
         selectedLetter = null;
         if (!dataGame.isTrainingMode()) {
             timer.cancel();
             System.out.println("SCORE : " + dataGame.getScore());
-            dataGame.notifyEndGame(Float.toString(dataGame.getScore()));
-        }
-        else{
-            dataGame.notifyEndGame("0");
+            String score_string = Float.toString(dataGame.getScore());
+            ScoreLine currentScoreLine = ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string, dataGame.getPseudo());
+            scoreLines = ScoreFile.getInstance().readFile(dataGame.getGameType());
+            dataGame.notifyEndGame(currentScoreLine, scoreLines);
+
+            //The game is cancelled by the user
+            if (returnAction) {
+                timer.cancel();
+                ScoreLine emptyScore = null;
+                dataGame.notifyEndGame(emptyScore, scoreLines);
+            }
+
+        } else {
+            ScoreLine emptyScore = null;
+            dataGame.notifyEndGame(emptyScore, scoreLines);
         }
     }
 
@@ -174,7 +189,7 @@ public class AlphabetGame {
                         pickNewLetter();
                     } else if (secondsPassed == 0) {
                         dataGame.notifyObserverTime("STOP");
-                        stop();
+                        stop(false);
                     } else {
                         dataGame.notifyObserverTime(Integer.toString(secondsPassed));
                     }

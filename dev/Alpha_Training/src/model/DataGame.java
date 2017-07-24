@@ -2,6 +2,7 @@ package model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import observer.Observable;
 import observer.Observer;
@@ -10,12 +11,14 @@ public class DataGame implements Observable {
 
     private ArrayList<Observer> listObserver = new ArrayList<Observer>();
     private boolean trainingMode;
+    private String pseudo;
     String answer;
     int gameType;
     float score;
     
-    public DataGame(){
+    public DataGame(String pseudo){
         this.score=0;
+        this.pseudo = pseudo;
     }
 
     public int getGameType() {
@@ -36,6 +39,20 @@ public class DataGame implements Observable {
             gameType = 1;
         }
     }
+    
+        /**
+     * @return the pseudo
+     */
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    /**
+     * @param pseudo the pseudo to set
+     */
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
 
     public float getScore() {
         return score;
@@ -52,10 +69,11 @@ public class DataGame implements Observable {
     }
 
     public void decrementScore(float increment) {
-        this.score = score - increment;
+        this.score = round(score - increment,2);
         this.notifyObserverScore(Float.toString(this.score));
     }
     
+    //d = number to round, decimalPlace = number of character after the coma
     public static float round(float d, int decimalPlace) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
@@ -105,10 +123,9 @@ public class DataGame implements Observable {
         }
     }
 
-    @Override
-    public void notifyEndGame(String str) {
+    public void notifyEndGame(ScoreLine currentScore, List<ScoreLine> scoreLines) {
         for (Observer obs : listObserver) {
-            obs.updateEndGame(str);
+            obs.updateEndGame(currentScore, scoreLines);
         }
     }
 
