@@ -281,16 +281,4 @@ public class AlphabetGame {
     }
 }
 
-class PlayLetter implements Runnable {
 
-    LetterAlphabet letterAlphabet;
-
-    public PlayLetter(LetterAlphabet letter) {
-        this.letterAlphabet = letter;
-    }
-
-    public void run() {
-        letterAlphabet.playSound();
-    }
-
-}

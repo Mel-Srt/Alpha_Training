@@ -6,6 +6,7 @@
 package view;
 
 import controller.AlphabetGame;
+import controller.WordsGame;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -43,6 +44,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private DataGame dataGame;
     private AlphabetGame alphabetGame;
+    private WordsGame wordsGame;
     private String font = "EMMETT";
     final int FONT_SIZE_TITLE = 10;
     final int FONT_SIZE_MENU = 40;
@@ -1372,6 +1374,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private void Btn_WordsGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_WordsGameActionPerformed
         // TODO add your handling code here:
+        this.wordsGame = new WordsGame();
     }//GEN-LAST:event_Btn_WordsGameActionPerformed
 
     private void Btn_WordsGameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_WordsGameKeyPressed
