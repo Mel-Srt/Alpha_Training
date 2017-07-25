@@ -6,11 +6,8 @@ public class Main {
 
     public static void main(String[] args) {
         
-
-        String pseudo = "Melanie";
-
         //Model:
-        DataGame dataGame = new DataGame(pseudo);
+        DataGame dataGame = new DataGame();
 
         //Controller:
         AlphabetGame alphabetGame = new AlphabetGame(dataGame);

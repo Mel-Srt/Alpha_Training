@@ -71,7 +71,7 @@ public class AlphabetGame {
                 timer.cancel();
                 System.out.println("SCORE : " + dataGame.getScore());
                 String score_string = Float.toString(dataGame.getScore());
-                ScoreLine currentScoreLine = ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string, dataGame.getPseudo());
+                ScoreLine currentScoreLine = ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string, dataGame.getNickname());
                 scoreLines = ScoreFile.getInstance().readFile(dataGame.getGameType());
                 dataGame.notifyEndGame(currentScoreLine, scoreLines);
             }
