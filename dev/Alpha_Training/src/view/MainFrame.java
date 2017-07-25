@@ -11,15 +11,10 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import static java.awt.event.KeyEvent.VK_TAB;
-import java.io.File;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.swing.AbstractAction;
@@ -36,6 +31,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import model.DataGame;
 import model.ScoreLine;
 import observer.Observer;
 
@@ -45,6 +41,7 @@ import observer.Observer;
  */
 public class MainFrame extends javax.swing.JFrame implements Observer {
 
+    private DataGame dataGame;
     private AlphabetGame alphabetGame;
     private String font = "EMMETT";
     final int FONT_SIZE_TITLE = 10;
@@ -52,10 +49,12 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     final int FONT_SIZE_SCORES_BOARD = 50;
     private List<ScoreLine> scorelines;
 
-    public MainFrame(AlphabetGame alphabetGame) {
+    public MainFrame(DataGame dataGame) {
 
-        this.alphabetGame = alphabetGame;
-
+        this.dataGame = dataGame;
+        this.dataGame.addObserver(this);
+        
+        
         initComponents();
         setIcon();
 
@@ -92,7 +91,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         if (namePanel == Pnl_MainMenu) {
             keyboardBind(Btn_Exit, KeyEvent.VK_ESCAPE);
             requestingFocusThread(Btn_Play);
-            Lbl_HelloName.setText("Hello " + this.alphabetGame.getDataGame().getNickname() + "! What do you want to do?");
+            Lbl_HelloName.setText("Hello " + this.dataGame.getNickname() + "! What do you want to do?");
         }
         if (namePanel == Pnl_LettersMenu) {
             keyboardBind(Btn_Cancel_Letters, KeyEvent.VK_ESCAPE);
@@ -711,14 +710,14 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Lbl_Title.setFont(new java.awt.Font("Emmett", 0, 48)); // NOI18N
         Lbl_Title.setForeground(new java.awt.Color(0, 51, 102));
-        Lbl_Title.setText("Alpha Training v0.6");
+        Lbl_Title.setText("Alpha Training");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 100, 0);
         Pnl_MainMenu.add(Lbl_Title, gridBagConstraints);
 
-        Lbl_Credits.setText("Credits: Mel-Srt");
+        Lbl_Credits.setText("v0.6 - Credits: Mel-Srt");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 14;
@@ -865,7 +864,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_AlphabetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AlphabetActionPerformed
 
         if (Btn_Alphabet.isSelected()) {
-            this.alphabetGame.getDataGame().setGameType("Standard A-Z");
+            this.dataGame.setGameType("Standard A-Z");
             Btn_Vowels.setSelected(false);
             Btn_Consonnants.setSelected(false);
             Btn_Training.setEnabled(true);
@@ -881,7 +880,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_VowelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_VowelsActionPerformed
         
         if (Btn_Vowels.isSelected()) {  
-            this.alphabetGame.getDataGame().setGameType("Vowels");
+            this.dataGame.setGameType("Vowels");
             Btn_Alphabet.setSelected(false);
             Btn_Consonnants.setSelected(false);
             Btn_Training.setEnabled(true);
@@ -898,7 +897,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_ConsonnantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ConsonnantsActionPerformed
         // TODO add your handling code here:
         if (Btn_Consonnants.isSelected()) {
-            this.alphabetGame.getDataGame().setGameType("Consonnants");
+            this.dataGame.setGameType("Consonnants");
             Btn_Alphabet.setSelected(false);
             Btn_Vowels.setSelected(false);
             Btn_Training.setEnabled(true);
@@ -913,7 +912,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_ConsonnantsActionPerformed
 
     private void loadGameFrame(boolean isTrainingMode) {
-        alphabetGame.getDataGame().setTrainingMode(isTrainingMode);
+        this.alphabetGame = new AlphabetGame(this.dataGame);
+        this.dataGame.setTrainingMode(isTrainingMode);
         alphabetGame.start();
         changePanel(Pnl_Game_Letters);
         if (isTrainingMode) {
@@ -929,7 +929,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             Lbl_TimerFixed.setVisible(true);
             Lbl_TimerVar.setVisible(true);
         }
-        changeKeyBoard(alphabetGame.getDataGame().getGameType());
+        changeKeyBoard(this.dataGame.getGameType());
     }
 
     private void changeKeyBoard(int mode) {
@@ -1154,7 +1154,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_PlayFocusLost
 
     private void Btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_LoginActionPerformed
-        this.alphabetGame.getDataGame().setNickname(Txt_Login.getText());
+        this.dataGame.setNickname(Txt_Login.getText());
         changePanel(Pnl_MainMenu);
     }//GEN-LAST:event_Btn_LoginActionPerformed
 

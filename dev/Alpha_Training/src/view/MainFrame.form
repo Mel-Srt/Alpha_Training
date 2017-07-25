@@ -898,7 +898,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="33" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Alpha Training v0.6"/>
+                <Property name="text" type="java.lang.String" value="Alpha Training"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -908,7 +908,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="Lbl_Credits">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Credits: Mel-Srt"/>
+                <Property name="text" type="java.lang.String" value="v0.6 - Credits: Mel-Srt"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
