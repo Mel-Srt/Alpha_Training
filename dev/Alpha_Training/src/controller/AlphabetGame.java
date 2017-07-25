@@ -36,14 +36,11 @@ public class AlphabetGame {
         this.dataGame = dataGame;
     }
 
-    public void createFrame() {
-        frame = new MainFrame(this);
-    }
-
+ 
     //Initilize the game
     public void start() {
         dataGame.setScore(0);
-        dataGame.addObserver(frame);
+        
         letters = new ArrayList<LetterAlphabet>();
         int gameType = dataGame.getGameType();
         switch (gameType) {

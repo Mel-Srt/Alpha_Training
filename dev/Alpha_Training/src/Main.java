@@ -1,19 +1,8 @@
-
 import model.DataGame;
-import controller.AlphabetGame;
-
+import view.MainFrame;
 public class Main {
-
     public static void main(String[] args) {
-        
-        //Model:
         DataGame dataGame = new DataGame();
-
-        //Controller:
-        AlphabetGame alphabetGame = new AlphabetGame(dataGame);
-
-        //View:		
-        alphabetGame.createFrame();
+        MainFrame frame = new MainFrame(dataGame);   
     }
-
 }
