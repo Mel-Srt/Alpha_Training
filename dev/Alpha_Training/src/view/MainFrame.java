@@ -53,8 +53,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         this.dataGame = dataGame;
         this.dataGame.addObserver(this);
-        
-        
+
         initComponents();
         setIcon();
 
@@ -87,6 +86,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         if (namePanel == Pnl_Login) {
             requestingFocusThread(Txt_Login);
             keyboardBind(Btn_Login, KeyEvent.VK_SPACE);
+        }
+        if (namePanel == Pnl_ChooseGame) {
+            requestingFocusThread(Btn_LettersGame);
+            keyboardBind(Btn_ReturnMain, KeyEvent.VK_ESCAPE);
         }
         if (namePanel == Pnl_MainMenu) {
             keyboardBind(Btn_Exit, KeyEvent.VK_ESCAPE);
@@ -197,6 +200,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_LoginFix = new javax.swing.JLabel();
         Txt_Login = new javax.swing.JTextField();
         Btn_Login = new javax.swing.JButton();
+        Pnl_ChooseGame = new javax.swing.JPanel();
+        Btn_LettersGame = new javax.swing.JButton();
+        Btn_WordsGame = new javax.swing.JButton();
+        Btn_ReturnMain = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Alpha Training");
@@ -755,7 +762,16 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         Pnl_Login.add(Txt_Login, gridBagConstraints);
 
+        Btn_Login.setBackground(new java.awt.Color(240,240,240));
         Btn_Login.setText("Confirm");
+        Btn_Login.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_LoginFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_LoginFocusLost(evt);
+            }
+        });
         Btn_Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_LoginActionPerformed(evt);
@@ -773,6 +789,96 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_Login.add(Btn_Login, gridBagConstraints);
 
         Pnl_Global.add(Pnl_Login, "card6");
+
+        Pnl_ChooseGame.setBackground(new java.awt.Color(255, 249, 242));
+        Pnl_ChooseGame.setFocusable(false);
+        Pnl_ChooseGame.setPreferredSize(new java.awt.Dimension(900, 600));
+        Pnl_ChooseGame.setLayout(new java.awt.GridBagLayout());
+
+        Btn_LettersGame.setBackground(new java.awt.Color(240,240,240));
+        Btn_LettersGame.setFont(new Font(font, Font.PLAIN, 13));
+        Btn_LettersGame.setText("Letters Game");
+        Btn_LettersGame.setSelected(true);
+        Btn_LettersGame.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_LettersGameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_LettersGameFocusLost(evt);
+            }
+        });
+        Btn_LettersGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_LettersGameActionPerformed(evt);
+            }
+        });
+        Btn_LettersGame.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_LettersGameKeyPressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        Pnl_ChooseGame.add(Btn_LettersGame, gridBagConstraints);
+
+        Btn_WordsGame.setBackground(new java.awt.Color(240,240,240));
+        Btn_WordsGame.setText("Words Game");
+        Btn_WordsGame.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_WordsGameBtn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_WordsGameBtn_PlayFocusLost(evt);
+            }
+        });
+        Btn_WordsGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_WordsGameActionPerformed(evt);
+            }
+        });
+        Btn_WordsGame.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_WordsGameKeyPressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        Pnl_ChooseGame.add(Btn_WordsGame, gridBagConstraints);
+
+        Btn_ReturnMain.setBackground(new java.awt.Color(240,240,240));
+        Btn_ReturnMain.setText("Return");
+        Btn_ReturnMain.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_ReturnMainBtn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_ReturnMainBtn_PlayFocusLost(evt);
+            }
+        });
+        Btn_ReturnMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ReturnMainActionPerformed(evt);
+            }
+        });
+        Btn_ReturnMain.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_ReturnMainKeyPressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        Pnl_ChooseGame.add(Btn_ReturnMain, gridBagConstraints);
+
+        Pnl_Global.add(Pnl_ChooseGame, "card4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -817,6 +923,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, heigth / 5, 0);
         Pnl_MainMenu.add(Lbl_Title, gridBagConstraints);
 
+        //Panel Choose Game (Letters or Words)
+        Btn_LettersGame.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
+        Btn_WordsGame.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
+        Btn_ReturnMain.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
+
         //Panel Letters Menu
         Lbl_Letters.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
         Btn_Alphabet.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
@@ -854,11 +965,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_ExitActionPerformed
 
     private void Btn_PlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_PlayActionPerformed
-        changePanel(Pnl_LettersMenu);
+        changePanel(Pnl_ChooseGame);
     }//GEN-LAST:event_Btn_PlayActionPerformed
 
     private void Btn_Cancel_LettersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Cancel_LettersActionPerformed
-        changePanel(Pnl_MainMenu);
+        changePanel(Pnl_ChooseGame);
     }//GEN-LAST:event_Btn_Cancel_LettersActionPerformed
 
     private void Btn_AlphabetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AlphabetActionPerformed
@@ -878,8 +989,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_AlphabetActionPerformed
 
     private void Btn_VowelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_VowelsActionPerformed
-        
-        if (Btn_Vowels.isSelected()) {  
+
+        if (Btn_Vowels.isSelected()) {
             this.dataGame.setGameType("Vowels");
             Btn_Alphabet.setSelected(false);
             Btn_Consonnants.setSelected(false);
@@ -1214,7 +1325,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private void Btn_VowelsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_VowelsMouseClicked
         // TODO add your handling code here:
-          Btn_Vowels.requestFocus();
+        Btn_Vowels.requestFocus();
     }//GEN-LAST:event_Btn_VowelsMouseClicked
 
     private void Btn_ConsonnantsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ConsonnantsMouseClicked
@@ -1227,6 +1338,100 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Btn_Alphabet.requestFocus();
     }//GEN-LAST:event_Btn_AlphabetMouseClicked
 
+    private void Btn_LettersGameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_LettersGameFocusGained
+        // TODO add your handling code here:
+        evt.getComponent().setBackground(new java.awt.Color(153, 204, 255));
+    }//GEN-LAST:event_Btn_LettersGameFocusGained
+
+    private void Btn_LettersGameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_LettersGameFocusLost
+        // TODO add your handling code here:
+        evt.getComponent().setBackground(new java.awt.Color(240, 240, 240));
+    }//GEN-LAST:event_Btn_LettersGameFocusLost
+
+    private void Btn_LettersGameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_LettersGameKeyPressed
+        // TODO add your handling code here:
+        //Down arrow
+        if (evt.getKeyCode() == 40) {
+            Btn_WordsGame.requestFocus();
+        }
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_LettersGame.doClick();
+        }
+    }//GEN-LAST:event_Btn_LettersGameKeyPressed
+
+    private void Btn_WordsGameBtn_PlayFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_WordsGameBtn_PlayFocusGained
+        // TODO add your handling code here:
+        evt.getComponent().setBackground(new java.awt.Color(153, 204, 255));
+    }//GEN-LAST:event_Btn_WordsGameBtn_PlayFocusGained
+
+    private void Btn_WordsGameBtn_PlayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_WordsGameBtn_PlayFocusLost
+        // TODO add your handling code here:
+        evt.getComponent().setBackground(new java.awt.Color(240, 240, 240));
+    }//GEN-LAST:event_Btn_WordsGameBtn_PlayFocusLost
+
+    private void Btn_WordsGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_WordsGameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_WordsGameActionPerformed
+
+    private void Btn_WordsGameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_WordsGameKeyPressed
+
+        // Top Arrow
+        if (evt.getKeyCode() == 38) {
+            Btn_LettersGame.requestFocus();
+        }
+        //Down arrow
+        if (evt.getKeyCode() == 40) {
+            Btn_ReturnMain.requestFocus();
+        }
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_WordsGame.doClick();
+        }
+    }//GEN-LAST:event_Btn_WordsGameKeyPressed
+
+    private void Btn_ReturnMainBtn_PlayFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_ReturnMainBtn_PlayFocusGained
+        // TODO add your handling code here:
+        evt.getComponent().setBackground(new java.awt.Color(153, 204, 255));
+    }//GEN-LAST:event_Btn_ReturnMainBtn_PlayFocusGained
+
+    private void Btn_ReturnMainBtn_PlayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_ReturnMainBtn_PlayFocusLost
+        // TODO add your handling code here:
+        evt.getComponent().setBackground(new java.awt.Color(240, 240, 240));
+    }//GEN-LAST:event_Btn_ReturnMainBtn_PlayFocusLost
+
+    private void Btn_ReturnMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReturnMainActionPerformed
+        // TODO add your handling code here:
+        changePanel(Pnl_MainMenu);
+    }//GEN-LAST:event_Btn_ReturnMainActionPerformed
+
+    private void Btn_ReturnMainKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_ReturnMainKeyPressed
+        // TODO add your handling code here:
+        // Top Arrow
+        if (evt.getKeyCode() == 38) {
+            Btn_WordsGame.requestFocus();
+        }
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_ReturnMain.doClick();
+        }
+    }//GEN-LAST:event_Btn_ReturnMainKeyPressed
+
+    private void Btn_LettersGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_LettersGameActionPerformed
+        // TODO add your handling code here:
+        changePanel(Pnl_LettersMenu);
+    }//GEN-LAST:event_Btn_LettersGameActionPerformed
+
+    private void Btn_LoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_LoginFocusGained
+        // TODO add your handling code here:
+        evt.getComponent().setBackground(new java.awt.Color(153, 204, 255));
+    }//GEN-LAST:event_Btn_LoginFocusGained
+
+    private void Btn_LoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_LoginFocusLost
+        // TODO add your handling code here:
+        evt.getComponent().setBackground(new java.awt.Color(240, 240, 240));
+    }//GEN-LAST:event_Btn_LoginFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Btn_Alphabet;
@@ -1235,14 +1440,17 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton Btn_Chrono;
     private javax.swing.JToggleButton Btn_Consonnants;
     private javax.swing.JButton Btn_Exit;
+    private javax.swing.JButton Btn_LettersGame;
     private javax.swing.JButton Btn_Login;
     private javax.swing.JButton Btn_Options;
     private javax.swing.JButton Btn_Play;
     private javax.swing.JButton Btn_PlayLetter;
     private javax.swing.JButton Btn_QuitScore;
+    private javax.swing.JButton Btn_ReturnMain;
     private javax.swing.JButton Btn_ReturnMenu;
     private javax.swing.JButton Btn_Training;
     private javax.swing.JToggleButton Btn_Vowels;
+    private javax.swing.JButton Btn_WordsGame;
     private javax.swing.JLabel Lbl_Correction;
     private javax.swing.JLabel Lbl_Credits;
     private javax.swing.JLabel Lbl_FinalScoreFix;
@@ -1258,6 +1466,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel Lbl_Title;
     private javax.swing.JPanel Pnl_BotGame;
     private javax.swing.JPanel Pnl_CenGame;
+    private javax.swing.JPanel Pnl_ChooseGame;
     private javax.swing.JPanel Pnl_Game_Letters;
     private javax.swing.JPanel Pnl_Global;
     private javax.swing.JPanel Pnl_KeyBoard;
