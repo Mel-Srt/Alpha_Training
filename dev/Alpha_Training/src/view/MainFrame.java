@@ -415,6 +415,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_PlayFocusLost(evt);
             }
         });
+        Btn_Alphabet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_AlphabetMouseClicked(evt);
+            }
+        });
         Btn_Alphabet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_AlphabetActionPerformed(evt);
@@ -443,6 +448,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_PlayFocusLost(evt);
             }
         });
+        Btn_Vowels.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_VowelsMouseClicked(evt);
+            }
+        });
         Btn_Vowels.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_VowelsActionPerformed(evt);
@@ -469,6 +479,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 Btn_PlayFocusLost(evt);
+            }
+        });
+        Btn_Consonnants.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_ConsonnantsMouseClicked(evt);
             }
         });
         Btn_Consonnants.addActionListener(new java.awt.event.ActionListener() {
@@ -864,8 +879,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_AlphabetActionPerformed
 
     private void Btn_VowelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_VowelsActionPerformed
-
-        if (Btn_Vowels.isSelected()) {
+        
+        if (Btn_Vowels.isSelected()) {  
             this.alphabetGame.getDataGame().setGameType("Vowels");
             Btn_Alphabet.setSelected(false);
             Btn_Consonnants.setSelected(false);
@@ -1196,6 +1211,21 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             Btn_ChangeNickname.doClick();
         }
     }//GEN-LAST:event_Btn_ChangeNicknameKeyPressed
+
+    private void Btn_VowelsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_VowelsMouseClicked
+        // TODO add your handling code here:
+          Btn_Vowels.requestFocus();
+    }//GEN-LAST:event_Btn_VowelsMouseClicked
+
+    private void Btn_ConsonnantsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ConsonnantsMouseClicked
+        // TODO add your handling code here:
+        Btn_Consonnants.requestFocus();
+    }//GEN-LAST:event_Btn_ConsonnantsMouseClicked
+
+    private void Btn_AlphabetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_AlphabetMouseClicked
+        // TODO add your handling code here:
+        Btn_Alphabet.requestFocus();
+    }//GEN-LAST:event_Btn_AlphabetMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
