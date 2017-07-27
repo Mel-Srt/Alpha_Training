@@ -42,13 +42,24 @@ public class WordsGame {
             }
         }
         previousWord = selectedWord;
-        playWord(selectedWord);
+        playWord();
 
     }
-    
-    public void playWord(String word){
-        Word aWord = new Word(selectedWord);
-        Thread threadSound = new Thread(new PlayWord(aWord));
-        threadSound.start();
+
+    public void sendAnswer(String answer) {
+        if (answer.equals(selectedWord)) {
+            System.out.println("right");
+            pickNewWord();
+        } else {
+            System.out.println("false");
+        }
+    }
+
+    public void playWord() {
+        if (selectedWord != null) {
+            Word aWord = new Word(selectedWord);
+            Thread threadSound = new Thread(new PlayWord(aWord));
+            threadSound.start();
+        }
     }
 }

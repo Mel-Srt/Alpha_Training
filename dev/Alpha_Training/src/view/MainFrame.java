@@ -1078,10 +1078,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_TimerVar.setFont(new Font(font, Font.PLAIN, width / 30));
         Lbl_Correction.setFont(new Font(font, Font.PLAIN, width / 25));
         if (this.dataGame.getGameType() == 4) { //Words Game
-            Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 2)));
+            //Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 2)));
             Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 3) + 50));
         } else {
-            Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 100, (heigth / 3)));
+            //Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 100, (heigth / 3)));
             Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 4) + 50));
         }
 
@@ -1164,21 +1164,22 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         if (this.dataGame.getGameType() != 4) {
             this.alphabetGame = new AlphabetGame(this.dataGame);
             alphabetGame.start();
-            if (isTrainingMode) {
-                Lbl_ScoreFixed.setText(" ");
-                Lbl_ScoreVar.setText(" ");
-                Lbl_TimerFixed.setText(" ");
-                Lbl_TimerVar.setText(" ");
-            } else {
-                Lbl_ScoreFixed.setText("Score:");
-                Lbl_TimerFixed.setText("Timer:");
-                Lbl_ScoreFixed.setVisible(true);
-                Lbl_ScoreVar.setVisible(true);
-                Lbl_TimerFixed.setVisible(true);
-                Lbl_TimerVar.setVisible(true);
-            }
+        } else {
+            this.wordsGame = new WordsGame();
         }
-
+        if (isTrainingMode) {
+            Lbl_ScoreFixed.setText(" ");
+            Lbl_ScoreVar.setText(" ");
+            Lbl_TimerFixed.setText(" ");
+            Lbl_TimerVar.setText(" ");
+        } else {
+            Lbl_ScoreFixed.setText("Score:");
+            Lbl_TimerFixed.setText("Timer:");
+            Lbl_ScoreFixed.setVisible(true);
+            Lbl_ScoreVar.setVisible(true);
+            Lbl_TimerFixed.setVisible(true);
+            Lbl_TimerVar.setVisible(true);
+        }
         changeKeyBoard(this.dataGame.getGameType());
     }
 
@@ -1198,6 +1199,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             case 4:
                 wordsPanel.setWordsGame(this.wordsGame);
                 Pnl_KeyBoard.add(wordsPanel);
+                wordsPanel.requestingFocusThreadTxt();
                 break;
             default:
                 alphabetPanel.setAlphabetGame(alphabetGame);
@@ -1223,7 +1225,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_ReturnMenuActionPerformed
 
     private void Btn_PlayLetterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_PlayLetterActionPerformed
-        alphabetGame.playLetter();
+        if(this.dataGame.getGameType() == 4){
+            this.wordsGame.playWord();
+        }
+        else alphabetGame.playLetter();
     }//GEN-LAST:event_Btn_PlayLetterActionPerformed
 
     private void Btn_QuitScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_QuitScoreActionPerformed
@@ -1596,7 +1601,6 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private void Btn_TrainingWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_TrainingWActionPerformed
         loadGameFrame(true);
-        this.wordsGame = new WordsGame();
     }//GEN-LAST:event_Btn_TrainingWActionPerformed
 
     private void Btn_TrainingWKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_TrainingWKeyPressed

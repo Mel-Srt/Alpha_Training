@@ -14,6 +14,8 @@ public class LetterAlphabet extends Character {
 
 	public void playSound() {
 		try {
+                        Thread.sleep(200);
+                        
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(this.sound));
 			clip.start();

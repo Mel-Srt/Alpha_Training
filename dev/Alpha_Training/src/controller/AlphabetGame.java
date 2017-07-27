@@ -20,6 +20,7 @@ import view.MainFrame;
 public class AlphabetGame {
 
     List<LetterAlphabet> letters;
+    boolean begining;
     DataGame dataGame;
     MainFrame frame;
     Timer timer;
@@ -34,13 +35,13 @@ public class AlphabetGame {
     public AlphabetGame(DataGame dataGame) {
         this.letters = new ArrayList<LetterAlphabet>();
         this.dataGame = dataGame;
+        this.begining = true;
     }
 
- 
     //Initilize the game
     public void start() {
         dataGame.setScore(0);
-        
+
         letters = new ArrayList<LetterAlphabet>();
         int gameType = dataGame.getGameType();
         switch (gameType) {
@@ -71,8 +72,7 @@ public class AlphabetGame {
                 ScoreLine currentScoreLine = ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string, dataGame.getNickname());
                 scoreLines = ScoreFile.getInstance().readFile(dataGame.getGameType());
                 dataGame.notifyEndGame(currentScoreLine, scoreLines);
-            }
-            //The game is cancelled by the user
+            } //The game is cancelled by the user
             else {
                 timer.cancel();
                 ScoreLine emptyScore = null;
@@ -211,6 +211,15 @@ public class AlphabetGame {
             }
         }
         previousLetter = selectedLetter;
+        if (this.begining) {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            this.begining = false;
+        }
         Thread threadSound = new Thread(new PlayLetter(selectedLetter));
         threadSound.start();
 
@@ -231,14 +240,6 @@ public class AlphabetGame {
                 this.dataGame.notifyCorrection(true, answer);
                 if (!dataGame.isTrainingMode()) {
                     calculateScore();
-                }
-                Thread rightSound = new Thread(new SoundGame(true));
-                rightSound.start();
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 }
                 pickNewLetter();
 
@@ -280,5 +281,3 @@ public class AlphabetGame {
         dataGame.incrementScore(score);
     }
 }
-
-

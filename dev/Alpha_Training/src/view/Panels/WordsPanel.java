@@ -9,6 +9,7 @@ import controller.WordsGame;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
@@ -16,6 +17,7 @@ import javax.swing.InputMap;
 import javax.swing.JButton;
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -26,8 +28,8 @@ public class WordsPanel extends javax.swing.JPanel {
     private WordsGame wG;
     private String myFont = "ARIAL BLACK";
 
-    public void setAlphabetGame(WordsGame wG) {
-        this.setWordsGame(wG);
+    public void setWordsGame(WordsGame wG) {
+        this.wG = wG;
         this.resizeButtonFont();
     }
     /**
@@ -35,6 +37,21 @@ public class WordsPanel extends javax.swing.JPanel {
      */
     public WordsPanel() {
         initComponents();
+        
+        Txt_Word.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                if (Txt_Word.getText().length() >= 20) 
+                {
+                    e.consume();
+                }
+                if (e.getKeyChar() == ' ') {
+                    e.consume();
+                    wG.playWord();
+                }
+            }
+        });
+        keyboardBind(Btn_WordSubmit, KeyEvent.VK_ENTER);
+        keyboardBind(Btn_Backspace, KeyEvent.VK_BACK_SPACE);
         
         //Bind keyboard letter to button letter
         keyboardBind(A, KeyEvent.VK_A);
@@ -63,8 +80,15 @@ public class WordsPanel extends javax.swing.JPanel {
         keyboardBind(X, KeyEvent.VK_X);
         keyboardBind(Y, KeyEvent.VK_Y);
         keyboardBind(Z, KeyEvent.VK_Z);
+        
     }
-    
+    public void requestingFocusThreadTxt() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                Txt_Word.requestFocus();
+            }
+        });
+    }
     private void keyboardBind(JButton letterButton, int virtualKey) {
         InputMap im = letterButton.getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = letterButton.getActionMap();
@@ -117,7 +141,7 @@ public class WordsPanel extends javax.swing.JPanel {
         Btn_WordSubmit = new javax.swing.JButton();
         Btn_Backspace = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(204, 255, 255));
+        setBackground(new java.awt.Color(255, 249, 242));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
@@ -475,6 +499,11 @@ public class WordsPanel extends javax.swing.JPanel {
         add(Txt_Word, gridBagConstraints);
 
         Btn_WordSubmit.setText("Submit");
+        Btn_WordSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_WordSubmitActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 1;
@@ -497,8 +526,7 @@ public class WordsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BActionPerformed
-        char letter = evt.getActionCommand().toString().charAt(0);
-        //wG.sendAnswer(letter);
+        Txt_Word.requestFocus();
     }//GEN-LAST:event_BActionPerformed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
@@ -508,10 +536,16 @@ public class WordsPanel extends javax.swing.JPanel {
 
     private void Btn_BackspaceBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_BackspaceBActionPerformed
         // TODO add your handling code here:
+        Txt_Word.requestFocus();
     }//GEN-LAST:event_Btn_BackspaceBActionPerformed
+
+    private void Btn_WordSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_WordSubmitActionPerformed
+        // TODO add your handling code here:
+        this.wG.sendAnswer(Txt_Word.getText());
+    }//GEN-LAST:event_Btn_WordSubmitActionPerformed
     private void resizeButtonFont() {
         int width = this.getWidth();
-        Txt_Word.setFont(new Font(myFont, Font.PLAIN, width / FONT_SIZE_ELEMENT));
+        Txt_Word.setFont(new Font(myFont, Font.PLAIN, width / (FONT_SIZE_ELEMENT-10)));
         Btn_WordSubmit.setFont(new Font(myFont, Font.PLAIN, width / FONT_SIZE_ELEMENT)); 
         A.setFont(new Font(myFont, Font.PLAIN, width / FONT_SIZE_ELEMENT));
         B.setFont(new Font(myFont, Font.PLAIN, width / FONT_SIZE_ELEMENT));
@@ -548,12 +582,7 @@ public class WordsPanel extends javax.swing.JPanel {
         return wG;
     }
 
-    /**
-     * @param wG the wG to set
-     */
-    public void setWordsGame(WordsGame wG) {
-        this.wG = wG;
-    }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton A;
