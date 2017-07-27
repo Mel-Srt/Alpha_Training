@@ -106,9 +106,14 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             keyboardBind(Btn_Cancel_Words, KeyEvent.VK_ESCAPE);
             requestingFocusThread(Btn_TrainingW);
         }
-        if (namePanel == Pnl_Game_Letters) {
+        if (namePanel == Pnl_Game) {
             keyboardBind(Btn_ReturnMenu, KeyEvent.VK_ESCAPE);
-            keyboardBind(Btn_PlayLetter, KeyEvent.VK_SPACE);
+            if (this.dataGame.getGameType() == 4) {
+                Lbl_Correction.setText("Enter a word");
+            } else { //Alphabet Word
+                Lbl_Correction.setText("Press a letter");
+                keyboardBind(Btn_PlayLetter, KeyEvent.VK_SPACE);
+            }
         }
         if (namePanel == Pnl_Score) {
             keyboardBind(Btn_QuitScore, KeyEvent.VK_ESCAPE);
@@ -151,14 +156,15 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             }
         });
     }
-    
-    private void Btn_ChangeColorDefault(java.awt.event.FocusEvent evt){
+
+    private void Btn_ChangeColorDefault(java.awt.event.FocusEvent evt) {
         evt.getComponent().setBackground(new java.awt.Color(240, 240, 240));
     }
-    private void Btn_ChangeColorFocus(java.awt.event.FocusEvent evt){
+
+    private void Btn_ChangeColorFocus(java.awt.event.FocusEvent evt) {
         evt.getComponent().setBackground(new java.awt.Color(153, 204, 255));
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -175,7 +181,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_FinalScoreFix = new javax.swing.JLabel();
         Btn_QuitScore = new javax.swing.JButton();
         Pnl_ListScores = new javax.swing.JPanel();
-        Pnl_Game_Letters = new javax.swing.JPanel();
+        Pnl_Game = new javax.swing.JPanel();
         Pnl_TopGame = new javax.swing.JPanel();
         Lbl_TimerFixed = new javax.swing.JLabel();
         Lbl_TimerVar = new javax.swing.JLabel();
@@ -187,9 +193,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         jPanel2 = new javax.swing.JPanel();
         Pnl_CenGame = new javax.swing.JPanel();
         Pnl_KeyBoard = new javax.swing.JPanel();
-        alphabetPanel1 = new view.Panels.AlphabetPanel();
-        consonnantsPanel1 = new view.Panels.ConsonnantsPanel();
-        vowelsPanel1 = new view.Panels.VowelsPanel();
+        alphabetPanel = new view.Panels.AlphabetPanel();
+        consonnantsPanel = new view.Panels.ConsonnantsPanel();
+        vowelsPanel = new view.Panels.VowelsPanel();
+        wordsPanel = new view.Panels.WordsPanel();
         Lbl_Correction = new javax.swing.JLabel();
         Btn_PlayLetter = new javax.swing.JButton();
         Pnl_LettersMenu = new javax.swing.JPanel();
@@ -288,9 +295,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Global.add(Pnl_Score, "card5");
 
-        Pnl_Game_Letters.setBackground(new java.awt.Color(255, 249, 242));
-        Pnl_Game_Letters.setMinimumSize(new java.awt.Dimension(600, 500));
-        Pnl_Game_Letters.setLayout(new java.awt.BorderLayout());
+        Pnl_Game.setBackground(new java.awt.Color(255, 249, 242));
+        Pnl_Game.setMinimumSize(new java.awt.Dimension(600, 500));
+        Pnl_Game.setLayout(new java.awt.BorderLayout());
 
         Pnl_TopGame.setBackground(new java.awt.Color(255, 249, 242));
         java.awt.GridBagLayout Pnl_TopGameLayout = new java.awt.GridBagLayout();
@@ -321,7 +328,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridy = 1;
         Pnl_TopGame.add(Lbl_ScoreVar, gridBagConstraints);
 
-        Pnl_Game_Letters.add(Pnl_TopGame, java.awt.BorderLayout.PAGE_START);
+        Pnl_Game.add(Pnl_TopGame, java.awt.BorderLayout.PAGE_START);
 
         Pnl_BotGame.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_BotGame.setLayout(new java.awt.GridBagLayout());
@@ -374,17 +381,18 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.gridy = 1;
         Pnl_BotGame.add(jPanel2, gridBagConstraints);
 
-        Pnl_Game_Letters.add(Pnl_BotGame, java.awt.BorderLayout.PAGE_END);
+        Pnl_Game.add(Pnl_BotGame, java.awt.BorderLayout.PAGE_END);
 
         Pnl_CenGame.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_CenGame.setLayout(new java.awt.GridBagLayout());
 
         Pnl_KeyBoard.setLayout(new java.awt.CardLayout());
-        Pnl_KeyBoard.add(alphabetPanel1, "card2");
-        Pnl_KeyBoard.add(consonnantsPanel1, "card3");
+        Pnl_KeyBoard.add(alphabetPanel, "card2");
+        Pnl_KeyBoard.add(consonnantsPanel, "card3");
 
-        vowelsPanel1.setToolTipText("");
-        Pnl_KeyBoard.add(vowelsPanel1, "card4");
+        vowelsPanel.setToolTipText("");
+        Pnl_KeyBoard.add(vowelsPanel, "card4");
+        Pnl_KeyBoard.add(wordsPanel, "card5");
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -412,9 +420,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
         Pnl_CenGame.add(Btn_PlayLetter, gridBagConstraints);
 
-        Pnl_Game_Letters.add(Pnl_CenGame, java.awt.BorderLayout.CENTER);
+        Pnl_Game.add(Pnl_CenGame, java.awt.BorderLayout.CENTER);
 
-        Pnl_Global.add(Pnl_Game_Letters, "card3");
+        Pnl_Global.add(Pnl_Game, "card3");
 
         Pnl_LettersMenu.setBackground(new java.awt.Color(255, 249, 242));
         Pnl_LettersMenu.setFocusable(false);
@@ -1060,7 +1068,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Btn_TrainingW.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
         Btn_ChronoW.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
         Btn_Cancel_Words.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
-        
+
         //Panel Game
         Btn_ReturnMenu.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
         Btn_PlayLetter.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
@@ -1069,8 +1077,13 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_TimerFixed.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
         Lbl_TimerVar.setFont(new Font(font, Font.PLAIN, width / 30));
         Lbl_Correction.setFont(new Font(font, Font.PLAIN, width / 25));
-        Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 2)));
-        Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 3) + 50));
+        if (this.dataGame.getGameType() == 4) { //Words Game
+            Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 2)));
+            Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 3) + 50));
+        } else {
+            Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 100, (heigth / 3)));
+            Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 4) + 50));
+        }
 
         //Panel Score
         Btn_QuitScore.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
@@ -1146,23 +1159,26 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_ConsonnantsActionPerformed
 
     private void loadGameFrame(boolean isTrainingMode) {
-        this.alphabetGame = new AlphabetGame(this.dataGame);
         this.dataGame.setTrainingMode(isTrainingMode);
-        alphabetGame.start();
-        changePanel(Pnl_Game_Letters);
-        if (isTrainingMode) {
-            Lbl_ScoreFixed.setText(" ");
-            Lbl_ScoreVar.setText(" ");
-            Lbl_TimerFixed.setText(" ");
-            Lbl_TimerVar.setText(" ");
-        } else {
-            Lbl_ScoreFixed.setText("Score:");
-            Lbl_TimerFixed.setText("Timer:");
-            Lbl_ScoreFixed.setVisible(true);
-            Lbl_ScoreVar.setVisible(true);
-            Lbl_TimerFixed.setVisible(true);
-            Lbl_TimerVar.setVisible(true);
+        changePanel(Pnl_Game);
+        if (this.dataGame.getGameType() != 4) {
+            this.alphabetGame = new AlphabetGame(this.dataGame);
+            alphabetGame.start();
+            if (isTrainingMode) {
+                Lbl_ScoreFixed.setText(" ");
+                Lbl_ScoreVar.setText(" ");
+                Lbl_TimerFixed.setText(" ");
+                Lbl_TimerVar.setText(" ");
+            } else {
+                Lbl_ScoreFixed.setText("Score:");
+                Lbl_TimerFixed.setText("Timer:");
+                Lbl_ScoreFixed.setVisible(true);
+                Lbl_ScoreVar.setVisible(true);
+                Lbl_TimerFixed.setVisible(true);
+                Lbl_TimerVar.setVisible(true);
+            }
         }
+
         changeKeyBoard(this.dataGame.getGameType());
     }
 
@@ -1172,16 +1188,20 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_KeyBoard.revalidate();
         switch (mode) {
             case 2:
-                vowelsPanel1.setAlphabetGame(alphabetGame);
-                Pnl_KeyBoard.add(vowelsPanel1);
+                vowelsPanel.setAlphabetGame(alphabetGame);
+                Pnl_KeyBoard.add(vowelsPanel);
                 break;
             case 3:
-                consonnantsPanel1.setAlphabetGame(alphabetGame);
-                Pnl_KeyBoard.add(consonnantsPanel1);
+                consonnantsPanel.setAlphabetGame(alphabetGame);
+                Pnl_KeyBoard.add(consonnantsPanel);
+                break;
+            case 4:
+                wordsPanel.setWordsGame(this.wordsGame);
+                Pnl_KeyBoard.add(wordsPanel);
                 break;
             default:
-                alphabetPanel1.setAlphabetGame(alphabetGame);
-                Pnl_KeyBoard.add(alphabetPanel1);
+                alphabetPanel.setAlphabetGame(alphabetGame);
+                Pnl_KeyBoard.add(alphabetPanel);
                 break;
         }
     }
@@ -1194,8 +1214,12 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_ChronoActionPerformed
 
     private void Btn_ReturnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReturnMenuActionPerformed
-        alphabetGame.stop(true);
-        changePanel(Pnl_MainMenu);
+        if (this.dataGame.getGameType() == 4) {
+            changePanel(Pnl_WordsMenu);
+        } else {
+            alphabetGame.stop(true);
+            changePanel(Pnl_LettersMenu);
+        }
     }//GEN-LAST:event_Btn_ReturnMenuActionPerformed
 
     private void Btn_PlayLetterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_PlayLetterActionPerformed
@@ -1498,6 +1522,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private void Btn_WordsGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_WordsGameActionPerformed
         // TODO add your handling code here:
+        this.dataGame.setGameType("Words");
         changePanel(Pnl_WordsMenu);
     }//GEN-LAST:event_Btn_WordsGameActionPerformed
 
@@ -1570,7 +1595,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_TrainingWBtn_PlayFocusLost
 
     private void Btn_TrainingWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_TrainingWActionPerformed
-        // TODO add your handling code here:
+        loadGameFrame(true);
         this.wordsGame = new WordsGame();
     }//GEN-LAST:event_Btn_TrainingWActionPerformed
 
@@ -1602,6 +1627,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private void Btn_ChronoWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ChronoWActionPerformed
         // TODO add your handling code here:
+        loadGameFrame(false);
     }//GEN-LAST:event_Btn_ChronoWActionPerformed
 
     private void Btn_ChronoWKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_ChronoWKeyPressed
@@ -1686,7 +1712,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JPanel Pnl_BotGame;
     private javax.swing.JPanel Pnl_CenGame;
     private javax.swing.JPanel Pnl_ChooseGame;
-    private javax.swing.JPanel Pnl_Game_Letters;
+    private javax.swing.JPanel Pnl_Game;
     private javax.swing.JPanel Pnl_Global;
     private javax.swing.JPanel Pnl_KeyBoard;
     private javax.swing.JPanel Pnl_LettersMenu;
@@ -1697,11 +1723,12 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JPanel Pnl_TopGame;
     private javax.swing.JPanel Pnl_WordsMenu;
     private javax.swing.JTextField Txt_Login;
-    private view.Panels.AlphabetPanel alphabetPanel1;
-    private view.Panels.ConsonnantsPanel consonnantsPanel1;
+    private view.Panels.AlphabetPanel alphabetPanel;
+    private view.Panels.ConsonnantsPanel consonnantsPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private view.Panels.VowelsPanel vowelsPanel1;
+    private view.Panels.VowelsPanel vowelsPanel;
+    private view.Panels.WordsPanel wordsPanel;
     // End of variables declaration//GEN-END:variables
 
     @Override

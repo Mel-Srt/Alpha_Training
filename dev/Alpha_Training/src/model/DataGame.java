@@ -12,12 +12,12 @@ public class DataGame implements Observable {
     private ArrayList<Observer> listObserver = new ArrayList<Observer>();
     private boolean trainingMode;
     private String nickname;
-    String answer;
-    int gameType;
-    float score;
-    
-    public DataGame(){
-        this.score=0;
+    private String answer;
+    private int gameType; // Alphabet, Vowels or Consonnants
+    private float score;
+
+    public DataGame() {
+        this.score = 0;
         this.nickname = "Unknown";
     }
 
@@ -35,12 +35,14 @@ public class DataGame implements Observable {
             gameType = 2;
         } else if (type.equals("Consonnants")) {
             gameType = 3;
+        } else if (type.equals("Words")) {
+            gameType = 4;
         } else {
             gameType = 1;
         }
     }
-    
-        /**
+
+    /**
      * @return the nickname
      */
     public String getNickname() {
@@ -51,9 +53,10 @@ public class DataGame implements Observable {
      * @param nickname the nickname to set
      */
     public void setNickname(String nickname) {
-        if(nickname.equals("")) this.nickname = "Unknown";
-        else{
-            this.nickname= nickname.replace(';',','); 
+        if (nickname.equals("")) {
+            this.nickname = "Unknown";
+        } else {
+            this.nickname = nickname.replace(';', ',');
         }
         System.out.println(this.nickname);
     }
@@ -68,15 +71,15 @@ public class DataGame implements Observable {
     }
 
     public void incrementScore(float increment) {
-        this.score = round(score + increment,2);
+        this.score = round(score + increment, 2);
         this.notifyObserverScore(Float.toString(this.score));
     }
 
     public void decrementScore(float increment) {
-        this.score = round(score - increment,2);
+        this.score = round(score - increment, 2);
         this.notifyObserverScore(Float.toString(this.score));
     }
-    
+
     //d = number to round, decimalPlace = number of character after the coma
     public static float round(float d, int decimalPlace) {
         BigDecimal bd = new BigDecimal(Float.toString(d));

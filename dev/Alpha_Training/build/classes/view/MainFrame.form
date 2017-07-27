@@ -127,7 +127,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="Pnl_Game_Letters">
+        <Container class="javax.swing.JPanel" name="Pnl_Game">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f2" green="f9" red="ff" type="rgb"/>
@@ -574,27 +574,34 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
                   <SubComponents>
-                    <Component class="view.Panels.AlphabetPanel" name="alphabetPanel1">
+                    <Component class="view.Panels.AlphabetPanel" name="alphabetPanel">
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                           <CardConstraints cardName="card2"/>
                         </Constraint>
                       </Constraints>
                     </Component>
-                    <Component class="view.Panels.ConsonnantsPanel" name="consonnantsPanel1">
+                    <Component class="view.Panels.ConsonnantsPanel" name="consonnantsPanel">
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                           <CardConstraints cardName="card3"/>
                         </Constraint>
                       </Constraints>
                     </Component>
-                    <Component class="view.Panels.VowelsPanel" name="vowelsPanel1">
+                    <Component class="view.Panels.VowelsPanel" name="vowelsPanel">
                       <Properties>
                         <Property name="toolTipText" type="java.lang.String" value=""/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                           <CardConstraints cardName="card4"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="view.Panels.WordsPanel" name="wordsPanel">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                          <CardConstraints cardName="card5"/>
                         </Constraint>
                       </Constraints>
                     </Component>

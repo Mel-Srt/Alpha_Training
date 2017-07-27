@@ -111,7 +111,7 @@ public class AlphabetPanel extends javax.swing.JPanel {
         Y = new javax.swing.JButton();
         Z = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 249, 242));
+        setBackground(new java.awt.Color(204, 255, 255));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
