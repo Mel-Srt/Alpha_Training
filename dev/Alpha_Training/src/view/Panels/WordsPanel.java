@@ -541,7 +541,7 @@ public class WordsPanel extends javax.swing.JPanel {
 
     private void Btn_WordSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_WordSubmitActionPerformed
         // TODO add your handling code here:
-        this.wG.sendAnswer(Txt_Word.getText());
+        if(this.wG.sendAnswer(Txt_Word.getText())) this.Txt_Word.setText("");
     }//GEN-LAST:event_Btn_WordSubmitActionPerformed
     private void resizeButtonFont() {
         int width = this.getWidth();

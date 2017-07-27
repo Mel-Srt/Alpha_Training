@@ -37,7 +37,7 @@ public class Word {
                 Clip clip = AudioSystem.getClip();
                 clip.open(AudioSystem.getAudioInputStream(sounds[i]));
                 clip.start();
-                Thread.sleep(clip.getMicrosecondLength() / 900);
+                Thread.sleep(clip.getMicrosecondLength() / 500);
             }
             
         } catch (Exception e) {

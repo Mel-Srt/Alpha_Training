@@ -46,12 +46,13 @@ public class WordsGame {
 
     }
 
-    public void sendAnswer(String answer) {
+    public boolean sendAnswer(String answer) {
         if (answer.equals(selectedWord)) {
-            System.out.println("right");
             pickNewWord();
+            return true;
         } else {
             System.out.println("false");
+            return false;
         }
     }
 
