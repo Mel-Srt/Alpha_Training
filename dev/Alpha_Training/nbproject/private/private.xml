@@ -5,10 +5,10 @@
         <group>
             <file>file:/D:/Workspace/Java/Alpha_Training/dev/Alpha_Training/src/view/MainFrame.java</file>
             <file>file:/D:/Workspace/Java/Alpha_Training/dev/Alpha_Training/src/controller/AlphabetGame.java</file>
-            <file>file:/D:/Workspace/Java/Alpha_Training/dev/Alpha_Training/src/model/WordsLoader.java</file>
             <file>file:/D:/Workspace/Java/Alpha_Training/dev/Alpha_Training/src/controller/WordsGame.java</file>
-            <file>file:/D:/Workspace/Java/Alpha_Training/dev/Alpha_Training/src/model/ScoreFile.java</file>
             <file>file:/D:/Workspace/Java/Alpha_Training/dev/Alpha_Training/src/Main.java</file>
+            <file>file:/D:/Workspace/Java/Alpha_Training/dev/Alpha_Training/src/model/Word.java</file>
+            <file>file:/D:/Workspace/Java/Alpha_Training/dev/Alpha_Training/src/controller/PlayLetter.java</file>
         </group>
     </open-files>
 </project-private>

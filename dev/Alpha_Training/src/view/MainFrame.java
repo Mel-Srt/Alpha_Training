@@ -102,6 +102,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             keyboardBind(Btn_Cancel_Letters, KeyEvent.VK_ESCAPE);
             requestingFocusThread(Btn_Alphabet);
         }
+        if (namePanel == Pnl_WordsMenu) {
+            keyboardBind(Btn_Cancel_Words, KeyEvent.VK_ESCAPE);
+            requestingFocusThread(Btn_TrainingW);
+        }
         if (namePanel == Pnl_Game_Letters) {
             keyboardBind(Btn_ReturnMenu, KeyEvent.VK_ESCAPE);
             keyboardBind(Btn_PlayLetter, KeyEvent.VK_SPACE);
@@ -147,7 +151,14 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             }
         });
     }
-
+    
+    private void Btn_ChangeColorDefault(java.awt.event.FocusEvent evt){
+        evt.getComponent().setBackground(new java.awt.Color(240, 240, 240));
+    }
+    private void Btn_ChangeColorFocus(java.awt.event.FocusEvent evt){
+        evt.getComponent().setBackground(new java.awt.Color(153, 204, 255));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -206,6 +217,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Btn_LettersGame = new javax.swing.JButton();
         Btn_WordsGame = new javax.swing.JButton();
         Btn_ReturnMain = new javax.swing.JButton();
+        Pnl_WordsMenu = new javax.swing.JPanel();
+        Lbl_ModeW = new javax.swing.JLabel();
+        Btn_TrainingW = new javax.swing.JButton();
+        Btn_ChronoW = new javax.swing.JButton();
+        Btn_Cancel_Words = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Alpha Training");
@@ -882,6 +898,105 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Pnl_Global.add(Pnl_ChooseGame, "card4");
 
+        Pnl_WordsMenu.setBackground(new java.awt.Color(255, 249, 242));
+        Pnl_WordsMenu.setFocusable(false);
+        Pnl_WordsMenu.setPreferredSize(new java.awt.Dimension(900, 600));
+        Pnl_WordsMenu.setLayout(new java.awt.GridBagLayout());
+
+        Lbl_ModeW.setText("Mode:");
+        Lbl_ModeW.setFocusable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        Pnl_WordsMenu.add(Lbl_ModeW, gridBagConstraints);
+
+        Btn_TrainingW.setBackground(new java.awt.Color(240,240,240));
+        Btn_TrainingW.setText("Training");
+        Btn_TrainingW.setRequestFocusEnabled(false);
+        Btn_TrainingW.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_TrainingWBtn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_TrainingWBtn_PlayFocusLost(evt);
+            }
+        });
+        Btn_TrainingW.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_TrainingWActionPerformed(evt);
+            }
+        });
+        Btn_TrainingW.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_TrainingWKeyPressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        Pnl_WordsMenu.add(Btn_TrainingW, gridBagConstraints);
+
+        Btn_ChronoW.setBackground(new java.awt.Color(240,240,240));
+        Btn_ChronoW.setText("Chrono 60'");
+        Btn_ChronoW.setRequestFocusEnabled(false);
+        Btn_ChronoW.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_ChronoWBtn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_ChronoWBtn_PlayFocusLost(evt);
+            }
+        });
+        Btn_ChronoW.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_ChronoWActionPerformed(evt);
+            }
+        });
+        Btn_ChronoW.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_ChronoWKeyPressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        Pnl_WordsMenu.add(Btn_ChronoW, gridBagConstraints);
+
+        Btn_Cancel_Words.setBackground(new java.awt.Color(240,240,240));
+        Btn_Cancel_Words.setText("Cancel");
+        Btn_Cancel_Words.setSelected(true);
+        Btn_Cancel_Words.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_Cancel_WordsBtn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_Cancel_WordsBtn_PlayFocusLost(evt);
+            }
+        });
+        Btn_Cancel_Words.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Cancel_WordsActionPerformed(evt);
+            }
+        });
+        Btn_Cancel_Words.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_Cancel_WordsKeyPressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
+        Pnl_WordsMenu.add(Btn_Cancel_Words, gridBagConstraints);
+
+        Pnl_Global.add(Pnl_WordsMenu, "card4");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -940,6 +1055,12 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Btn_Chrono.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
         Btn_Cancel_Letters.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
 
+        //Panel Words Menu
+        Lbl_ModeW.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
+        Btn_TrainingW.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
+        Btn_ChronoW.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
+        Btn_Cancel_Words.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
+        
         //Panel Game
         Btn_ReturnMenu.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
         Btn_PlayLetter.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
@@ -1328,16 +1449,19 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_VowelsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_VowelsMouseClicked
         // TODO add your handling code here:
         Btn_Vowels.requestFocus();
+        Btn_Vowels.doClick();
     }//GEN-LAST:event_Btn_VowelsMouseClicked
 
     private void Btn_ConsonnantsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ConsonnantsMouseClicked
         // TODO add your handling code here:
         Btn_Consonnants.requestFocus();
+        Btn_Consonnants.doClick();
     }//GEN-LAST:event_Btn_ConsonnantsMouseClicked
 
     private void Btn_AlphabetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_AlphabetMouseClicked
         // TODO add your handling code here:
         Btn_Alphabet.requestFocus();
+        Btn_Alphabet.doClick();
     }//GEN-LAST:event_Btn_AlphabetMouseClicked
 
     private void Btn_LettersGameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_LettersGameFocusGained
@@ -1374,7 +1498,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private void Btn_WordsGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_WordsGameActionPerformed
         // TODO add your handling code here:
-        this.wordsGame = new WordsGame();
+        changePanel(Pnl_WordsMenu);
     }//GEN-LAST:event_Btn_WordsGameActionPerformed
 
     private void Btn_WordsGameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_WordsGameKeyPressed
@@ -1435,12 +1559,102 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         evt.getComponent().setBackground(new java.awt.Color(240, 240, 240));
     }//GEN-LAST:event_Btn_LoginFocusLost
 
+    private void Btn_TrainingWBtn_PlayFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_TrainingWBtn_PlayFocusGained
+        // TODO add your handling code here:
+        Btn_ChangeColorFocus(evt);
+    }//GEN-LAST:event_Btn_TrainingWBtn_PlayFocusGained
+
+    private void Btn_TrainingWBtn_PlayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_TrainingWBtn_PlayFocusLost
+        // TODO add your handling code here:
+        Btn_ChangeColorDefault(evt);
+    }//GEN-LAST:event_Btn_TrainingWBtn_PlayFocusLost
+
+    private void Btn_TrainingWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_TrainingWActionPerformed
+        // TODO add your handling code here:
+        this.wordsGame = new WordsGame();
+    }//GEN-LAST:event_Btn_TrainingWActionPerformed
+
+    private void Btn_TrainingWKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_TrainingWKeyPressed
+        // TODO add your handling code here:
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_TrainingW.doClick();
+        }
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_Cancel_Words.requestFocus();
+        }
+        //Right Arrow
+        if (evt.getKeyCode() == 39) {
+            Btn_ChronoW.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_TrainingWKeyPressed
+
+    private void Btn_ChronoWBtn_PlayFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_ChronoWBtn_PlayFocusGained
+        // TODO add your handling code here:
+        Btn_ChangeColorFocus(evt);
+    }//GEN-LAST:event_Btn_ChronoWBtn_PlayFocusGained
+
+    private void Btn_ChronoWBtn_PlayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_ChronoWBtn_PlayFocusLost
+        // TODO add your handling code here:
+        Btn_ChangeColorDefault(evt);
+    }//GEN-LAST:event_Btn_ChronoWBtn_PlayFocusLost
+
+    private void Btn_ChronoWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ChronoWActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_ChronoWActionPerformed
+
+    private void Btn_ChronoWKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_ChronoWKeyPressed
+        // TODO add your handling code here:
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_ChronoW.doClick();
+        }
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_Cancel_Words.requestFocus();
+        }
+        //Left Arrow
+        if (evt.getKeyCode() == 37) {
+            Btn_TrainingW.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_ChronoWKeyPressed
+
+    private void Btn_Cancel_WordsBtn_PlayFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_Cancel_WordsBtn_PlayFocusGained
+        // TODO add your handling code here:
+        Btn_ChangeColorFocus(evt);
+    }//GEN-LAST:event_Btn_Cancel_WordsBtn_PlayFocusGained
+
+    private void Btn_Cancel_WordsBtn_PlayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_Cancel_WordsBtn_PlayFocusLost
+        // TODO add your handling code here:
+        Btn_ChangeColorDefault(evt);
+    }//GEN-LAST:event_Btn_Cancel_WordsBtn_PlayFocusLost
+
+    private void Btn_Cancel_WordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Cancel_WordsActionPerformed
+        // TODO add your handling code here:
+        changePanel(Pnl_ChooseGame);
+    }//GEN-LAST:event_Btn_Cancel_WordsActionPerformed
+
+    private void Btn_Cancel_WordsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_Cancel_WordsKeyPressed
+        // TODO add your handling code here:
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_Cancel_Words.doClick();
+        }
+        //Up Arrow:
+        if (evt.getKeyCode() == 38) {
+            Btn_TrainingW.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_Cancel_WordsKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Btn_Alphabet;
     private javax.swing.JButton Btn_Cancel_Letters;
+    private javax.swing.JButton Btn_Cancel_Words;
     private javax.swing.JButton Btn_ChangeNickname;
     private javax.swing.JButton Btn_Chrono;
+    private javax.swing.JButton Btn_ChronoW;
     private javax.swing.JToggleButton Btn_Consonnants;
     private javax.swing.JButton Btn_Exit;
     private javax.swing.JButton Btn_LettersGame;
@@ -1452,6 +1666,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton Btn_ReturnMain;
     private javax.swing.JButton Btn_ReturnMenu;
     private javax.swing.JButton Btn_Training;
+    private javax.swing.JButton Btn_TrainingW;
     private javax.swing.JToggleButton Btn_Vowels;
     private javax.swing.JButton Btn_WordsGame;
     private javax.swing.JLabel Lbl_Correction;
@@ -1462,6 +1677,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel Lbl_Letters;
     private javax.swing.JLabel Lbl_LoginFix;
     private javax.swing.JLabel Lbl_Mode;
+    private javax.swing.JLabel Lbl_ModeW;
     private javax.swing.JLabel Lbl_ScoreFixed;
     private javax.swing.JLabel Lbl_ScoreVar;
     private javax.swing.JLabel Lbl_TimerFixed;
@@ -1479,6 +1695,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JPanel Pnl_MainMenu;
     private javax.swing.JPanel Pnl_Score;
     private javax.swing.JPanel Pnl_TopGame;
+    private javax.swing.JPanel Pnl_WordsMenu;
     private javax.swing.JTextField Txt_Login;
     private view.Panels.AlphabetPanel alphabetPanel1;
     private view.Panels.ConsonnantsPanel consonnantsPanel1;
