@@ -141,4 +141,11 @@ public class DataGame implements Observable {
             obs.updateCorrection(rightOrFalse, letter);
         }
     }
+
+    @Override
+    public void notifyCorrectionWord(boolean rightOrFalse, String word) {
+        for (Observer obs : listObserver) {
+            obs.updateCorrectionWord(rightOrFalse, word);
+        }
+    }
 }

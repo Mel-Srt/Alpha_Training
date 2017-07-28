@@ -16,14 +16,14 @@ public class Word {
     File sounds[];
 
     public Word(String word) {
-        this.word = word;
+        this.word = word.toLowerCase();
 
-        System.out.println("mot choisi : " + word);
+        //System.out.println("mot choisi : " + word);
         
         lengthWord = word.length();
         this.sounds = new File[lengthWord];
         
-        System.out.println("Longueur du mot : " + lengthWord);
+        //System.out.println("Longueur du mot : " + lengthWord);
         
         for(int i = 0; i < lengthWord; i++){
             this.sounds[i] = new File("sounds/" + java.lang.Character.toUpperCase(word.charAt(i)) + ".WAV");

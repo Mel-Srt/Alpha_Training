@@ -743,14 +743,14 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         Lbl_Title.setFont(new java.awt.Font("Emmett", 0, 48)); // NOI18N
         Lbl_Title.setForeground(new java.awt.Color(0, 51, 102));
-        Lbl_Title.setText("Alpha Training");
+        Lbl_Title.setText("Alphabet Training");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 100, 0);
         Pnl_MainMenu.add(Lbl_Title, gridBagConstraints);
 
-        Lbl_Credits.setText("v0.6 - Credits: Mel-Srt");
+        Lbl_Credits.setText("v0.7 - Credits: Mel-Srt");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 14;
@@ -1163,9 +1163,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         changePanel(Pnl_Game);
         if (this.dataGame.getGameType() != 4) {
             this.alphabetGame = new AlphabetGame(this.dataGame);
-            alphabetGame.start();
+            this.alphabetGame.start();
         } else {
-            this.wordsGame = new WordsGame();
+            this.wordsGame = new WordsGame(this.dataGame);
+            this.wordsGame.start();
         }
         if (isTrainingMode) {
             Lbl_ScoreFixed.setText(" ");
@@ -1217,9 +1218,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private void Btn_ReturnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ReturnMenuActionPerformed
         if (this.dataGame.getGameType() == 4) {
+            this.wordsGame.stop(true);
             changePanel(Pnl_WordsMenu);
         } else {
-            alphabetGame.stop(true);
+            this.alphabetGame.stop(true);
             changePanel(Pnl_LettersMenu);
         }
     }//GEN-LAST:event_Btn_ReturnMenuActionPerformed
@@ -1833,5 +1835,14 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("english.png")));
+    }
+
+    @Override
+    public void updateCorrectionWord(boolean rightOrFalse, String word) {
+        if (rightOrFalse) {
+            this.Lbl_Correction.setText(word + " - Correct!");
+        } else {
+            this.Lbl_Correction.setText(word + " - False!");
+        }
     }
 }

@@ -17,20 +17,19 @@ import sound.SoundGame;
 
 import view.MainFrame;
 
-public class AlphabetGame {
+public class AlphabetGame implements Game{
 
-    List<LetterAlphabet> letters;
-    boolean begining;
-    DataGame dataGame;
-    MainFrame frame;
-    Timer timer;
-    int secondsPassed = 30;
-    long startTime; //this variable serves to measure the time before the user gives the good answer
+    private List<LetterAlphabet> letters;
+    private boolean begining; // If the game is started, there is a little pause before playing the first 
+    private DataGame dataGame;
+    private Timer timer;
+    private int secondsPassed = 30;
+    private long startTime; //this variable serves to measure the time before the user gives the good answer
 
-    LetterAlphabet selectedLetter; // The current Letter which the user has to find
-    LetterAlphabet previousLetter; //To avoid the same letter twice in a row
+    private LetterAlphabet selectedLetter; // The current Letter which the user has to find
+    private LetterAlphabet previousLetter; //To avoid the same letter twice in a row
 
-    List<ScoreLine> scoreLines; //Will contain all the lines for the score printing at the end of the game
+    private List<ScoreLine> scoreLines; //Will contain all the lines for the score printing at the end of the game
 
     public AlphabetGame(DataGame dataGame) {
         this.letters = new ArrayList<LetterAlphabet>();
@@ -60,13 +59,12 @@ public class AlphabetGame {
         this.play();
     }
 
-    //When the users clics on "return menu" (true) or the game ends (false)
     public void stop(boolean returnAction) {
         selectedLetter = null;
         if (!dataGame.isTrainingMode()) {
 
             if (!returnAction) { //The game end normally
-                timer.cancel();
+                this.timer.cancel();
                 System.out.println("SCORE : " + dataGame.getScore());
                 String score_string = Float.toString(dataGame.getScore());
                 ScoreLine currentScoreLine = ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string, dataGame.getNickname());
@@ -226,7 +224,6 @@ public class AlphabetGame {
         //If we measure the score, we will compare the startTime and the AnswerTime
         if (!dataGame.isTrainingMode()) {
             startTime = System.nanoTime();
-
         }
     }
 
@@ -261,14 +258,6 @@ public class AlphabetGame {
             Thread threadSound = new Thread(new PlayLetter(selectedLetter));
             threadSound.start();
         }
-    }
-
-    public DataGame getDataGame() {
-        return dataGame;
-    }
-
-    public void setDataGame(DataGame dataGame) {
-        this.dataGame = dataGame;
     }
 
     public void calculateScore() {

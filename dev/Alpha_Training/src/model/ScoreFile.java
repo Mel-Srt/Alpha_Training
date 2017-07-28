@@ -45,6 +45,9 @@ public class ScoreFile {
             case 3:
                 pathFile = "scores/L3.sc";
                 break;
+            case 4:
+                pathFile = "scores/L4.sc";
+                break;
             default:
                 pathFile = "";
                 break;
@@ -82,6 +85,9 @@ public class ScoreFile {
                 break;
             case 3:
                 pathFile = "scores/L3.sc";
+                break;
+            case 4:
+                pathFile = "scores/L4.sc";
                 break;
             default:
                 pathFile = "";
