@@ -5,6 +5,10 @@
  */
 package controller;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import model.Word;
 
 /**
@@ -20,6 +24,12 @@ public class PlayWord implements Runnable {
     }
 
     public void run() {
-        word.playSounds();
+        try {
+            word.playSounds();
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(PlayWord.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(PlayWord.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
