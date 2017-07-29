@@ -10,11 +10,12 @@ public class LetterAlphabet extends Character {
 	public LetterAlphabet(char name){
 		this.name = name;
 		this.sound = new File("sounds/" + name + ".WAV");
-
 	}
 
 	public void playSound() {
 		try {
+                        Thread.sleep(100);
+                        
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(this.sound));
 			clip.start();

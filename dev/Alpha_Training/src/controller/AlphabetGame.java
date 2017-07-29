@@ -17,30 +17,30 @@ import sound.SoundGame;
 
 import view.MainFrame;
 
-public class AlphabetGame {
+public class AlphabetGame implements Game{
 
-    List<LetterAlphabet> letters;
-    DataGame dataGame;
-    MainFrame frame;
-    Timer timer;
-    int secondsPassed = 30;
-    long startTime; //this variable serves to measure the time before the user gives the good answer
+    private List<LetterAlphabet> letters;
+    private boolean begining; // If the game is started, there is a little pause before playing the first letter
+    private DataGame dataGame;
+    private Timer timer;
+    private int secondsPassed = 30;
+    private long startTime; //this variable serves to measure the time before the user gives the good answer
 
-    LetterAlphabet selectedLetter; // The current Letter which the user has to find
-    LetterAlphabet previousLetter; //To avoid the same letter twice in a row
+    private LetterAlphabet selectedLetter; // The current Letter which the user has to find
+    private LetterAlphabet previousLetter; //To avoid the same letter twice in a row
 
-    List<ScoreLine> scoreLines; //Will contain all the lines for the score printing at the end of the game
+    private List<ScoreLine> scoreLines; //Will contain all the lines for the score printing at the end of the game
 
     public AlphabetGame(DataGame dataGame) {
         this.letters = new ArrayList<LetterAlphabet>();
         this.dataGame = dataGame;
+        this.begining = true;
     }
 
- 
     //Initilize the game
     public void start() {
         dataGame.setScore(0);
-        
+
         letters = new ArrayList<LetterAlphabet>();
         int gameType = dataGame.getGameType();
         switch (gameType) {
@@ -59,20 +59,18 @@ public class AlphabetGame {
         this.play();
     }
 
-    //When the users clics on "return menu" (true) or the game ends (false)
     public void stop(boolean returnAction) {
         selectedLetter = null;
         if (!dataGame.isTrainingMode()) {
 
             if (!returnAction) { //The game end normally
-                timer.cancel();
+                this.timer.cancel();
                 System.out.println("SCORE : " + dataGame.getScore());
                 String score_string = Float.toString(dataGame.getScore());
                 ScoreLine currentScoreLine = ScoreFile.getInstance().addNewScore(dataGame.getGameType(), score_string, dataGame.getNickname());
                 scoreLines = ScoreFile.getInstance().readFile(dataGame.getGameType());
                 dataGame.notifyEndGame(currentScoreLine, scoreLines);
-            }
-            //The game is cancelled by the user
+            } //The game is cancelled by the user
             else {
                 timer.cancel();
                 ScoreLine emptyScore = null;
@@ -211,13 +209,21 @@ public class AlphabetGame {
             }
         }
         previousLetter = selectedLetter;
+        if (this.begining) {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            this.begining = false;
+        }
         Thread threadSound = new Thread(new PlayLetter(selectedLetter));
         threadSound.start();
 
         //If we measure the score, we will compare the startTime and the AnswerTime
         if (!dataGame.isTrainingMode()) {
             startTime = System.nanoTime();
-
         }
     }
 
@@ -231,14 +237,6 @@ public class AlphabetGame {
                 this.dataGame.notifyCorrection(true, answer);
                 if (!dataGame.isTrainingMode()) {
                     calculateScore();
-                }
-                Thread rightSound = new Thread(new SoundGame(true));
-                rightSound.start();
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 }
                 pickNewLetter();
 
@@ -262,14 +260,6 @@ public class AlphabetGame {
         }
     }
 
-    public DataGame getDataGame() {
-        return dataGame;
-    }
-
-    public void setDataGame(DataGame dataGame) {
-        this.dataGame = dataGame;
-    }
-
     public void calculateScore() {
         long difference = System.nanoTime() - startTime;
         difference = TimeUnit.NANOSECONDS.toMillis(difference);
@@ -279,18 +269,4 @@ public class AlphabetGame {
         score = score * 2;
         dataGame.incrementScore(score);
     }
-}
-
-class PlayLetter implements Runnable {
-
-    LetterAlphabet letterAlphabet;
-
-    public PlayLetter(LetterAlphabet letter) {
-        this.letterAlphabet = letter;
-    }
-
-    public void run() {
-        letterAlphabet.playSound();
-    }
-
 }
