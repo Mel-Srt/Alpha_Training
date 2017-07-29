@@ -7,13 +7,14 @@ Practice with the training mode or test yourself with the Chrono 30' mode.
   * Alphabet
   * Vowels
   * Consonnants
+* Words game type:
+  * around 3000 words
 * Game mode:
   * Training
   * Chrono
-* Scoreboard
+* Scoreboard at the end of the game
 
 ## Upcoming features
-* Words game type
 * Number game type
 * Other languages
 
