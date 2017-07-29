@@ -30,6 +30,7 @@ public class WordsGame implements Game{
     private long startTime; //this variable serves to measure the time before the user gives the good answer
     private int secondsPassed = 60;
     private List<ScoreLine> scoreLines; //Will contain all the lines for the score printing at the end of the game
+    private Thread threadSound; //We can stop this thread with the method interrupt();
 
     public WordsGame(DataGame dataGame) {
         wordsList = WordsLoader.getInstance().readFile();
@@ -44,6 +45,7 @@ public class WordsGame implements Game{
     
     //When the users clics on "return menu" (true) or the game ends (false)
     public void stop(boolean returnAction) {
+        if(threadSound != null)threadSound.interrupt();
         selectedWord = null;
         if (!dataGame.isTrainingMode()) {
             if (!returnAction) { //The game end normally
@@ -153,8 +155,9 @@ public class WordsGame implements Game{
 
     public void playWord() {
         if (selectedWord != null) {
+            if(threadSound != null)threadSound.interrupt();
             Word aWord = new Word(selectedWord);
-            Thread threadSound = new Thread(new PlayWord(aWord));
+            threadSound = new Thread(new PlayWord(aWord));
             threadSound.start();
         }
     }

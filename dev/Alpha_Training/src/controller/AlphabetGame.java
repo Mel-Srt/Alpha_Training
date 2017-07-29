@@ -20,7 +20,7 @@ import view.MainFrame;
 public class AlphabetGame implements Game{
 
     private List<LetterAlphabet> letters;
-    private boolean begining; // If the game is started, there is a little pause before playing the first 
+    private boolean begining; // If the game is started, there is a little pause before playing the first letter
     private DataGame dataGame;
     private Timer timer;
     private int secondsPassed = 30;
