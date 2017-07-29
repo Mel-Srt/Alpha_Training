@@ -10,9 +10,9 @@ Practice with the training mode or test yourself with the Chrono 30' mode.
 * Game mode:
   * Training
   * Chrono
+* Scoreboard
 
 ## Upcoming features
-* Scoreboard
 * Words game type
 * Number game type
 * Other languages
