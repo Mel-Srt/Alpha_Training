@@ -30,6 +30,7 @@ public class WordsPanel extends javax.swing.JPanel {
 
     public void setWordsGame(WordsGame wG) {
         this.wG = wG;
+        this.Txt_Word.setText("");
         this.resizeButtonFont();
     }
     /**
