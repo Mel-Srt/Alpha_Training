@@ -15,6 +15,7 @@ public class DataGame implements Observable {
     private String answer;
     private int gameType; // Alphabet, Vowels or Consonnants
     private float score;
+    private int wordLengthMax;
 
     public DataGame() {
         this.score = 0;
@@ -101,6 +102,21 @@ public class DataGame implements Observable {
 
     public void setTrainingMode(boolean trainingMode) {
         this.trainingMode = trainingMode;
+    }
+    
+    
+    /**
+     * @return the wordLengthMax
+     */
+    public int getWordLengthMax() {
+        return wordLengthMax;
+    }
+
+    /**
+     * @param wordLengthMax the wordLengthMax to set
+     */
+    public void setWordLengthMax(int wordLengthMax) {
+        this.wordLengthMax = wordLengthMax;
     }
 
     public void addObserver(Observer obs) {
