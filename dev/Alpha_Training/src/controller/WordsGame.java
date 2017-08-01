@@ -33,8 +33,8 @@ public class WordsGame implements Game{
     private Thread threadSound; //We can stop this thread with the method interrupt();
 
     public WordsGame(DataGame dataGame) {
-        wordsList = WordsLoader.getInstance().readFile();
         this.dataGame = dataGame;
+        wordsList = WordsLoader.getInstance().readFile(this.dataGame.getWordLengthMax()); 
     }
 
     //Initilize the game

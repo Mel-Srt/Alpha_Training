@@ -45,6 +45,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private DataGame dataGame;
     private AlphabetGame alphabetGame;
     private WordsGame wordsGame;
+    final int SHORT_WORDS = 5; //number of letters for the short_words mode
+    final int MEDIUM_WORDS = 8;
+    final int EVERY_WORD = 12;
     private String font = "EMMETT";
     final int FONT_SIZE_TITLE = 10;
     final int FONT_SIZE_MENU = 40;
@@ -1487,31 +1490,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
     private void Btn_PlayFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_PlayFocusGained
         evt.getComponent().setBackground(new java.awt.Color(153, 204, 255));
-        if (evt.getComponent() == Btn_Alphabet && Btn_Alphabet.isSelected()) {
-            UIManager.put("ToggleButton.select", new java.awt.Color(153, 204, 255));
-            SwingUtilities.updateComponentTreeUI(Btn_Alphabet);
-        } else if (evt.getComponent() == Btn_Vowels && Btn_Vowels.isSelected()) {
-            UIManager.put("ToggleButton.select", new java.awt.Color(153, 204, 255));
-            SwingUtilities.updateComponentTreeUI(Btn_Vowels);
-        } else if (evt.getComponent() == Btn_Consonnants && Btn_Consonnants.isSelected()) {
-            UIManager.put("ToggleButton.select", new java.awt.Color(153, 204, 255));
-            SwingUtilities.updateComponentTreeUI(Btn_Consonnants);
-        }
     }//GEN-LAST:event_Btn_PlayFocusGained
 
     private void Btn_PlayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_PlayFocusLost
         // TODO add your handling code here:
         evt.getComponent().setBackground(new java.awt.Color(240, 240, 240));
-        if (evt.getComponent() == Btn_Alphabet && Btn_Alphabet.isSelected()) {
-            UIManager.put("ToggleButton.select", new java.awt.Color(240, 255, 253));
-            SwingUtilities.updateComponentTreeUI(Btn_Alphabet);
-        } else if (evt.getComponent() == Btn_Vowels && Btn_Vowels.isSelected()) {
-            UIManager.put("ToggleButton.select", new java.awt.Color(240, 255, 253));
-            SwingUtilities.updateComponentTreeUI(Btn_Vowels);
-        } else if (evt.getComponent() == Btn_Consonnants && Btn_Consonnants.isSelected()) {
-            UIManager.put("ToggleButton.select", new java.awt.Color(240, 255, 253));
-            SwingUtilities.updateComponentTreeUI(Btn_Consonnants);
-        }
     }//GEN-LAST:event_Btn_PlayFocusLost
 
     private void Btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_LoginActionPerformed
@@ -1797,7 +1780,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_ShortWordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ShortWordsActionPerformed
         // TODO add your handling code here:
         if (Btn_ShortWords.isSelected()) {
-            this.dataGame.setWordLengthMax(5);
+            this.dataGame.setWordLengthMax(SHORT_WORDS);
             Btn_MediumWords.setSelected(false);
             Btn_EveryWords.setSelected(false);
             Btn_TrainingW.setEnabled(true);
@@ -1838,7 +1821,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_MediumWordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_MediumWordsActionPerformed
        // TODO add your handling code here:
        if (Btn_MediumWords.isSelected()) {
-            this.dataGame.setWordLengthMax(8);
+            this.dataGame.setWordLengthMax(MEDIUM_WORDS);
             Btn_ShortWords.setSelected(false);
             Btn_EveryWords.setSelected(false);
             Btn_TrainingW.setEnabled(true);
@@ -1882,7 +1865,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_EveryWordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EveryWordsActionPerformed
         // TODO add your handling code here:
         if (Btn_EveryWords.isSelected()) {
-            this.dataGame.setWordLengthMax(5);
+            this.dataGame.setWordLengthMax(EVERY_WORD);
             Btn_MediumWords.setSelected(false);
             Btn_ShortWords.setSelected(false);
             Btn_TrainingW.setEnabled(true);
