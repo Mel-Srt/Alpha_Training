@@ -45,14 +45,16 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private DataGame dataGame;
     private AlphabetGame alphabetGame;
     private WordsGame wordsGame;
-    final int SHORT_WORDS = 5; //number of letters for the short_words mode
-    final int MEDIUM_WORDS = 8;
-    final int EVERY_WORD = 12;
+    private final int SHORT_WORDS = 5; //number of letters for the short_words mode
+    private final int MEDIUM_WORDS = 8;
+    private final int EVERY_WORD = 12;
     private String font = "EMMETT";
-    final int FONT_SIZE_TITLE = 10;
-    final int FONT_SIZE_MENU = 40;
-    final int FONT_SIZE_SCORES_BOARD = 50;
+    private final int FONT_SIZE_TITLE = 15;
+    private final int FONT_SIZE_MENU = 40;
+    private final int FONT_SIZE_SCORES_BOARD = 50;
     private List<ScoreLine> scorelines;
+    private boolean spellingSpeedChosen = false;
+    private boolean wordLengthChosen = false;
 
     public MainFrame(DataGame dataGame) {
 
@@ -106,8 +108,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             requestingFocusThread(Btn_Alphabet);
         }
         if (namePanel == Pnl_WordsMenu) {
-            keyboardBind(Btn_Cancel_Words, KeyEvent.VK_ESCAPE);    
-            requestingFocusThread(Btn_ShortWords);
+            keyboardBind(Btn_Cancel_Words, KeyEvent.VK_ESCAPE);
+            requestingFocusThread(Btn_SpellingSlow);
         }
         if (namePanel == Pnl_Game) {
             keyboardBind(Btn_ReturnMenu, KeyEvent.VK_ESCAPE);
@@ -167,17 +169,17 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_ChangeColorFocus(java.awt.event.FocusEvent evt) {
         evt.getComponent().setBackground(new java.awt.Color(153, 204, 255));
     }
-    
-    private void Btn_ChangeColorSelected(JToggleButton btn){
+
+    private void Btn_ChangeColorSelected(JToggleButton btn) {
         UIManager.put("ToggleButton.select", new java.awt.Color(240, 255, 253));
         SwingUtilities.updateComponentTreeUI(btn);
     }
-    
-    private void Btn_ChangeColorUnselected(JToggleButton btn){
+
+    private void Btn_ChangeColorUnselected(JToggleButton btn) {
         UIManager.put("ToggleButton.select", new java.awt.Color(240, 240, 240));
         SwingUtilities.updateComponentTreeUI(btn);
     }
-    
+
     private void loadGameFrame(boolean isTrainingMode) {
         this.dataGame.setTrainingMode(isTrainingMode);
         changePanel(Pnl_Game);
@@ -228,6 +230,19 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 break;
         }
     }
+
+    public void enableBtnTrainingChronoW() {
+        System.out.println("spellingSpeed : " + this.spellingSpeedChosen);
+        System.out.println("wordLength : " + this.wordLengthChosen);
+        if (this.spellingSpeedChosen && this.wordLengthChosen) {
+            Btn_TrainingW.setEnabled(true);
+            Btn_ChronoW.setEnabled(true);
+        } else {
+            Btn_TrainingW.setEnabled(false);
+            Btn_ChronoW.setEnabled(false);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -296,9 +311,13 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Btn_ShortWords = new javax.swing.JToggleButton();
         Btn_MediumWords = new javax.swing.JToggleButton();
         Btn_EveryWords = new javax.swing.JToggleButton();
+        Lbl_SpellingSpeed = new javax.swing.JLabel();
+        Btn_SpellingSlow = new javax.swing.JToggleButton();
+        Btn_SpellingMedium = new javax.swing.JToggleButton();
+        Btn_SpellingFast = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Alpha Training");
+        setTitle("Alphabet Training");
         setFocusable(false);
         setMinimumSize(new java.awt.Dimension(600, 500));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -371,17 +390,20 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Pnl_TopGameLayout.columnWidths = new int[] {0, 400};
         Pnl_TopGame.setLayout(Pnl_TopGameLayout);
 
+        Lbl_TimerFixed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Lbl_TimerFixed.setText("Timer:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         Pnl_TopGame.add(Lbl_TimerFixed, gridBagConstraints);
 
+        Lbl_TimerVar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Lbl_TimerVar.setText("0s");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         Pnl_TopGame.add(Lbl_TimerVar, gridBagConstraints);
 
+        Lbl_ScoreFixed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Lbl_ScoreFixed.setText("Score:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
@@ -389,6 +411,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         Pnl_TopGame.add(Lbl_ScoreFixed, gridBagConstraints);
 
+        Lbl_ScoreVar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Lbl_ScoreVar.setText("0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 10;
@@ -727,7 +750,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         Pnl_MainMenu.add(Btn_Play, gridBagConstraints);
@@ -803,21 +826,22 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 13;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         Pnl_MainMenu.add(Btn_Exit, gridBagConstraints);
 
         Lbl_Title.setFont(new java.awt.Font("Emmett", 0, 48)); // NOI18N
         Lbl_Title.setForeground(new java.awt.Color(0, 51, 102));
+        Lbl_Title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/logoAT150.png"))); // NOI18N
         Lbl_Title.setText("Alphabet Training");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 100, 0);
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         Pnl_MainMenu.add(Lbl_Title, gridBagConstraints);
 
-        Lbl_Credits.setText("v0.7 - Credits: Mel-Srt");
+        Lbl_Credits.setText("v1.0 - Credits: Mel-Srt");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 14;
@@ -829,7 +853,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Lbl_HelloName.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         Pnl_MainMenu.add(Lbl_HelloName, gridBagConstraints);
 
@@ -1067,13 +1091,14 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
         Pnl_WordsMenu.add(Btn_Cancel_Words, gridBagConstraints);
 
-        Lbl_WordsLength.setText("Words Length :");
+        Lbl_WordsLength.setText("Words Length:");
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_WordsMenu.add(Lbl_WordsLength, gridBagConstraints);
 
@@ -1099,7 +1124,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_WordsMenu.add(Btn_ShortWords, gridBagConstraints);
@@ -1125,6 +1150,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_WordsMenu.add(Btn_MediumWords, gridBagConstraints);
@@ -1150,9 +1177,93 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         Pnl_WordsMenu.add(Btn_EveryWords, gridBagConstraints);
+
+        Lbl_SpellingSpeed.setText("Spelling Speed:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        Pnl_WordsMenu.add(Lbl_SpellingSpeed, gridBagConstraints);
+
+        Btn_SpellingSlow.setBackground(new java.awt.Color(240,240,240));
+        Btn_SpellingSlow.setText("Slow");
+        Btn_SpellingSlow.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_SpellingSlowBtn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_SpellingSlowBtn_PlayFocusLost(evt);
+            }
+        });
+        Btn_SpellingSlow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_SpellingSlowActionPerformed(evt);
+            }
+        });
+        Btn_SpellingSlow.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_SpellingSlowKeyPressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        Pnl_WordsMenu.add(Btn_SpellingSlow, gridBagConstraints);
+
+        Btn_SpellingMedium.setBackground(new java.awt.Color(240,240,240));
+        Btn_SpellingMedium.setText("Medium");
+        Btn_SpellingMedium.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_SpellingMediumBtn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_SpellingMediumBtn_PlayFocusLost(evt);
+            }
+        });
+        Btn_SpellingMedium.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_SpellingMediumActionPerformed(evt);
+            }
+        });
+        Btn_SpellingMedium.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_SpellingMediumKeyPressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        Pnl_WordsMenu.add(Btn_SpellingMedium, gridBagConstraints);
+
+        Btn_SpellingFast.setBackground(new java.awt.Color(240,240,240));
+        Btn_SpellingFast.setText("Fast");
+        Btn_SpellingFast.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                Btn_SpellingFastBtn_PlayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Btn_SpellingFastBtn_PlayFocusLost(evt);
+            }
+        });
+        Btn_SpellingFast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_SpellingFastActionPerformed(evt);
+            }
+        });
+        Btn_SpellingFast.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Btn_SpellingFastKeyPressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        Pnl_WordsMenu.add(Btn_SpellingFast, gridBagConstraints);
 
         Pnl_Global.add(Pnl_WordsMenu, "card4");
 
@@ -1196,7 +1307,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, heigth / 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, heigth / 10, 0);
         Pnl_MainMenu.add(Lbl_Title, gridBagConstraints);
 
         //Panel Choose Game (Letters or Words)
@@ -1215,6 +1326,10 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Btn_Cancel_Letters.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
 
         //Panel Words Menu
+        Lbl_SpellingSpeed.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
+        Btn_SpellingSlow.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
+        Btn_SpellingMedium.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
+        Btn_SpellingFast.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
         Lbl_WordsLength.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
         Btn_ShortWords.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
         Btn_MediumWords.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
@@ -1228,9 +1343,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         Btn_ReturnMenu.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
         Btn_PlayLetter.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
         Lbl_ScoreFixed.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
-        Lbl_ScoreVar.setFont(new Font(font, Font.PLAIN, width / 30));
+        Lbl_ScoreVar.setFont(new Font(font, Font.PLAIN, width / 35));
         Lbl_TimerFixed.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
-        Lbl_TimerVar.setFont(new Font(font, Font.PLAIN, width / 30));
+        Lbl_TimerVar.setFont(new Font(font, Font.PLAIN, width / 35));
         Lbl_Correction.setFont(new Font(font, Font.PLAIN, width / 25));
         if (this.dataGame.getGameType() == 4) { //Words Game
             //Pnl_KeyBoard.setPreferredSize(new Dimension((width / 2) + 200, (heigth / 2)));
@@ -1242,8 +1357,8 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
 
         //Panel Score
         Btn_QuitScore.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_MENU));
-        Lbl_FinalScoreFix.setFont(new Font(font, Font.PLAIN, width / 30));
-        Lbl_FinalScoreVar.setFont(new Font(font, Font.PLAIN, width / 30));
+        Lbl_FinalScoreFix.setFont(new Font(font, Font.PLAIN, width / 35));
+        Lbl_FinalScoreVar.setFont(new Font(font, Font.PLAIN, width / 35));
 
         for (Component cp : Pnl_ListScores.getComponents()) {
             cp.setFont(new Font(font, Font.PLAIN, width / FONT_SIZE_SCORES_BOARD));
@@ -1327,10 +1442,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_ReturnMenuActionPerformed
 
     private void Btn_PlayLetterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_PlayLetterActionPerformed
-        if(this.dataGame.getGameType() == 4){
+        if (this.dataGame.getGameType() == 4) {
             this.wordsGame.playWord();
+        } else {
+            alphabetGame.playLetter();
         }
-        else alphabetGame.playLetter();
     }//GEN-LAST:event_Btn_PlayLetterActionPerformed
 
     private void Btn_QuitScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_QuitScoreActionPerformed
@@ -1725,7 +1841,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         if (evt.getKeyCode() == 38) {
             Btn_EveryWords.requestFocus();
         }
-        
+
         //Enter
         if (evt.getKeyCode() == 10) {
             Btn_ChronoW.doClick();
@@ -1763,7 +1879,11 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         }
         //Up Arrow:
         if (evt.getKeyCode() == 38) {
-            Btn_TrainingW.requestFocus();
+            if (Btn_TrainingW.isEnabled()) {
+                Btn_TrainingW.requestFocus();
+            } else {
+                Btn_ShortWords.requestFocus();
+            }
         }
     }//GEN-LAST:event_Btn_Cancel_WordsKeyPressed
 
@@ -1780,16 +1900,15 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_ShortWordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ShortWordsActionPerformed
         // TODO add your handling code here:
         if (Btn_ShortWords.isSelected()) {
+            this.wordLengthChosen = true;
             this.dataGame.setWordLengthMax(SHORT_WORDS);
             Btn_MediumWords.setSelected(false);
             Btn_EveryWords.setSelected(false);
-            Btn_TrainingW.setEnabled(true);
-            Btn_ChronoW.setEnabled(true);
             Btn_ChangeColorSelected(Btn_ShortWords);
         } else {
-            Btn_TrainingW.setEnabled(false);
-            Btn_ChronoW.setEnabled(false);
+            this.wordLengthChosen = false;
         }
+        this.enableBtnTrainingChronoW();
     }//GEN-LAST:event_Btn_ShortWordsActionPerformed
 
     private void Btn_ShortWordsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_ShortWordsKeyPressed
@@ -1798,9 +1917,17 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         if (evt.getKeyCode() == 10) {
             Btn_ShortWords.doClick();
         }
+        //Up Arrow:
+        if (evt.getKeyCode() == 38) {
+            Btn_SpellingSlow.requestFocus();
+        }
         //Down Arrow:
         if (evt.getKeyCode() == 40) {
-            Btn_TrainingW.requestFocus();
+            if (Btn_TrainingW.isEnabled()) {
+                Btn_TrainingW.requestFocus();
+            } else {
+                Btn_Cancel_Words.requestFocus();
+            }
         }
         //Left Arrow
         if (evt.getKeyCode() == 39) {
@@ -1819,18 +1946,17 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_Btn_MediumWordsBtn_PlayFocusLost
 
     private void Btn_MediumWordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_MediumWordsActionPerformed
-       // TODO add your handling code here:
-       if (Btn_MediumWords.isSelected()) {
+        // TODO add your handling code here:
+        if (Btn_MediumWords.isSelected()) {
+            this.wordLengthChosen = true;
             this.dataGame.setWordLengthMax(MEDIUM_WORDS);
             Btn_ShortWords.setSelected(false);
             Btn_EveryWords.setSelected(false);
-            Btn_TrainingW.setEnabled(true);
-            Btn_ChronoW.setEnabled(true);
             Btn_ChangeColorSelected(Btn_MediumWords);
         } else {
-            Btn_TrainingW.setEnabled(false);
-            Btn_ChronoW.setEnabled(false);
+            this.wordLengthChosen = false;
         }
+        this.enableBtnTrainingChronoW();
     }//GEN-LAST:event_Btn_MediumWordsActionPerformed
 
     private void Btn_MediumWordsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_MediumWordsKeyPressed
@@ -1838,9 +1964,18 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         if (evt.getKeyCode() == 10) {
             Btn_MediumWords.doClick();
         }
+        //Up Arrow:
+        if (evt.getKeyCode() == 38) {
+            Btn_SpellingMedium.requestFocus();
+        }
+
         //Down Arrow:
         if (evt.getKeyCode() == 40) {
-            Btn_TrainingW.requestFocus();
+            if (Btn_TrainingW.isEnabled()) {
+                Btn_TrainingW.requestFocus();
+            } else {
+                Btn_Cancel_Words.requestFocus();
+            }
         }
         //Left Arrow
         if (evt.getKeyCode() == 37) {
@@ -1865,16 +2000,16 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private void Btn_EveryWordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_EveryWordsActionPerformed
         // TODO add your handling code here:
         if (Btn_EveryWords.isSelected()) {
+            this.wordLengthChosen = true;
             this.dataGame.setWordLengthMax(EVERY_WORD);
             Btn_MediumWords.setSelected(false);
             Btn_ShortWords.setSelected(false);
-            Btn_TrainingW.setEnabled(true);
-            Btn_ChronoW.setEnabled(true);
+
             Btn_ChangeColorSelected(Btn_EveryWords);
         } else {
-            Btn_TrainingW.setEnabled(false);
-            Btn_ChronoW.setEnabled(false);
+            this.wordLengthChosen = false;
         }
+        this.enableBtnTrainingChronoW();
     }//GEN-LAST:event_Btn_EveryWordsActionPerformed
 
     private void Btn_EveryWordsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_EveryWordsKeyPressed
@@ -1883,15 +2018,144 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
         if (evt.getKeyCode() == 10) {
             Btn_EveryWords.doClick();
         }
+        //Up Arrow:
+        if (evt.getKeyCode() == 38) {
+            Btn_SpellingFast.requestFocus();
+        }
         //Down Arrow:
         if (evt.getKeyCode() == 40) {
-            Btn_ChronoW.requestFocus();
+            if (Btn_ChronoW.isEnabled()) {
+                Btn_ChronoW.requestFocus();
+            } else {
+                Btn_Cancel_Words.requestFocus();
+            }
         }
         //Left Arrow
         if (evt.getKeyCode() == 37) {
             Btn_MediumWords.requestFocus();
         }
     }//GEN-LAST:event_Btn_EveryWordsKeyPressed
+
+    private void Btn_SpellingSlowBtn_PlayFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_SpellingSlowBtn_PlayFocusGained
+        // TODO add your handling code here:
+        Btn_ChangeColorFocus(evt);
+    }//GEN-LAST:event_Btn_SpellingSlowBtn_PlayFocusGained
+
+    private void Btn_SpellingSlowBtn_PlayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_SpellingSlowBtn_PlayFocusLost
+        // TODO add your handling code here:
+        Btn_ChangeColorDefault(evt);
+    }//GEN-LAST:event_Btn_SpellingSlowBtn_PlayFocusLost
+
+    private void Btn_SpellingSlowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_SpellingSlowActionPerformed
+        if (Btn_SpellingSlow.isSelected()) {
+            this.spellingSpeedChosen = true;
+            this.dataGame.setSpellingSpeed("slow");
+            Btn_SpellingMedium.setSelected(false);
+            Btn_SpellingFast.setSelected(false);
+            Btn_ChangeColorSelected(Btn_SpellingSlow);
+        } else {
+            this.spellingSpeedChosen = false;
+        }
+        this.enableBtnTrainingChronoW();
+    }//GEN-LAST:event_Btn_SpellingSlowActionPerformed
+
+    private void Btn_SpellingSlowKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_SpellingSlowKeyPressed
+        // TODO add your handling code here:
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_SpellingSlow.doClick();
+        }
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_ShortWords.requestFocus();
+        }
+        //Right Arrow
+        if (evt.getKeyCode() == 39) {
+            Btn_SpellingMedium.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_SpellingSlowKeyPressed
+
+    private void Btn_SpellingMediumBtn_PlayFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_SpellingMediumBtn_PlayFocusGained
+        // TODO add your handling code here:
+        Btn_ChangeColorFocus(evt);
+    }//GEN-LAST:event_Btn_SpellingMediumBtn_PlayFocusGained
+
+    private void Btn_SpellingMediumBtn_PlayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_SpellingMediumBtn_PlayFocusLost
+        // TODO add your handling code here:
+        Btn_ChangeColorDefault(evt);
+    }//GEN-LAST:event_Btn_SpellingMediumBtn_PlayFocusLost
+
+    private void Btn_SpellingMediumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_SpellingMediumActionPerformed
+        if (Btn_SpellingMedium.isSelected()) {
+            this.spellingSpeedChosen = true;
+            this.dataGame.setSpellingSpeed("medium");
+            Btn_SpellingSlow.setSelected(false);
+            Btn_SpellingFast.setSelected(false);
+            Btn_ChangeColorSelected(Btn_SpellingMedium);
+        } else {
+            this.spellingSpeedChosen = false;
+        }
+        this.enableBtnTrainingChronoW();
+    }//GEN-LAST:event_Btn_SpellingMediumActionPerformed
+
+    private void Btn_SpellingMediumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_SpellingMediumKeyPressed
+        // TODO add your handling code here:
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_SpellingMedium.doClick();
+        }
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_MediumWords.requestFocus();
+        }
+        //Left Arrow
+        if (evt.getKeyCode() == 37) {
+            Btn_SpellingSlow.requestFocus();
+        }
+        //Right Arrow
+        if (evt.getKeyCode() == 39) {
+            Btn_SpellingFast.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_SpellingMediumKeyPressed
+
+    private void Btn_SpellingFastBtn_PlayFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_SpellingFastBtn_PlayFocusGained
+        // TODO add your handling code here:
+        Btn_ChangeColorFocus(evt);
+    }//GEN-LAST:event_Btn_SpellingFastBtn_PlayFocusGained
+
+    private void Btn_SpellingFastBtn_PlayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_SpellingFastBtn_PlayFocusLost
+        // TODO add your handling code here:
+        Btn_ChangeColorDefault(evt);
+    }//GEN-LAST:event_Btn_SpellingFastBtn_PlayFocusLost
+
+    private void Btn_SpellingFastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_SpellingFastActionPerformed
+        if (Btn_SpellingFast.isSelected()) {
+            this.spellingSpeedChosen = true;
+            this.dataGame.setSpellingSpeed("fast");
+            Btn_SpellingSlow.setSelected(false);
+            Btn_SpellingMedium.setSelected(false);
+            Btn_ChangeColorSelected(Btn_SpellingFast);
+        } else {
+            this.spellingSpeedChosen = false;
+        }
+        this.enableBtnTrainingChronoW();
+    }//GEN-LAST:event_Btn_SpellingFastActionPerformed
+
+    private void Btn_SpellingFastKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Btn_SpellingFastKeyPressed
+        // TODO add your handling code here:
+        //Enter
+        if (evt.getKeyCode() == 10) {
+            Btn_SpellingFast.doClick();
+        }
+        //Down Arrow:
+        if (evt.getKeyCode() == 40) {
+            Btn_EveryWords.requestFocus();
+        }
+        //Left Arrow
+        if (evt.getKeyCode() == 37) {
+            Btn_SpellingMedium.requestFocus();
+        }
+    }//GEN-LAST:event_Btn_SpellingFastKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1914,6 +2178,9 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton Btn_ReturnMain;
     private javax.swing.JButton Btn_ReturnMenu;
     private javax.swing.JToggleButton Btn_ShortWords;
+    private javax.swing.JToggleButton Btn_SpellingFast;
+    private javax.swing.JToggleButton Btn_SpellingMedium;
+    private javax.swing.JToggleButton Btn_SpellingSlow;
     private javax.swing.JButton Btn_Training;
     private javax.swing.JButton Btn_TrainingW;
     private javax.swing.JToggleButton Btn_Vowels;
@@ -1929,6 +2196,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel Lbl_ModeW;
     private javax.swing.JLabel Lbl_ScoreFixed;
     private javax.swing.JLabel Lbl_ScoreVar;
+    private javax.swing.JLabel Lbl_SpellingSpeed;
     private javax.swing.JLabel Lbl_TimerFixed;
     private javax.swing.JLabel Lbl_TimerVar;
     private javax.swing.JLabel Lbl_Title;

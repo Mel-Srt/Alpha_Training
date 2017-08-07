@@ -157,7 +157,7 @@ public class WordsGame implements Game{
         if (selectedWord != null) {
             if(threadSound != null)threadSound.interrupt();
             Word aWord = new Word(selectedWord);
-            threadSound = new Thread(new PlayWord(aWord));
+            threadSound = new Thread(new PlayWord(aWord, this.dataGame.getSpellingSpeed()));
             threadSound.start();
         }
     }

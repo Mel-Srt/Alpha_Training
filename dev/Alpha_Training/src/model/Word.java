@@ -15,10 +15,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Word {
 
-    String word;
-    int lengthWord;
-    char name;
-    File sounds[];
+    private String word;
+    private int lengthWord;
+    private char name;
+    private File sounds[];
 
     public Word(String word) {
         this.word = word.toLowerCase();
@@ -33,11 +33,11 @@ public class Word {
         }
     }
 
-    public void playSounds() throws UnsupportedAudioFileException, LineUnavailableException {
+    public void playSounds(int spellingSpeed) throws UnsupportedAudioFileException, LineUnavailableException {
         while (true) {
             try {
                 for (int i = 0; i < lengthWord; i++) {
-                    if(i==0)Thread.sleep(200);
+                    //if(i==0)Thread.sleep(200);
                     Clip clip = AudioSystem.getClip();
                     try {
                         clip.open(AudioSystem.getAudioInputStream(sounds[i]));
@@ -45,7 +45,8 @@ public class Word {
                         Logger.getLogger(Word.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     clip.start();
-                    Thread.sleep(clip.getMicrosecondLength() / 500);
+                    //Thread.sleep(clip.getMicrosecondLength() / 500);
+                    Thread.sleep(spellingSpeed);
                 }
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt(); 
