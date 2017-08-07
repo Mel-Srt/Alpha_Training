@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class ScoreFile {
 
     private static ScoreFile instance;
-    File f;
+    private File f;
 
     //Using: call ScoreFile.getInstance().method();
     public static synchronized ScoreFile getInstance() {

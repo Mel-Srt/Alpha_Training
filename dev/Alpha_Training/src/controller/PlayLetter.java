@@ -13,7 +13,7 @@ import model.LetterAlphabet;
  */
 class PlayLetter implements Runnable {
 
-    LetterAlphabet letterAlphabet;
+    private LetterAlphabet letterAlphabet;
 
     public PlayLetter(LetterAlphabet letter) {
         this.letterAlphabet = letter;

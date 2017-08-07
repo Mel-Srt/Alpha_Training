@@ -7,7 +7,7 @@ import javax.sound.sampled.Clip;
 
 public class SoundGame  implements Runnable{
 	
-		File sound;
+		private File sound;
 		
 	public SoundGame(boolean bool){
 		

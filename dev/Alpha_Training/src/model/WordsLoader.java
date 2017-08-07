@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class WordsLoader {
     private static WordsLoader instance;
-    File f;
+    private File f;
     
     //Using: call WordsLoader.getInstance().method();
     public static synchronized WordsLoader getInstance() {
