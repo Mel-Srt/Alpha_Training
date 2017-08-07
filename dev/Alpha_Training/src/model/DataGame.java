@@ -13,8 +13,17 @@ public class DataGame implements Observable {
     private boolean trainingMode;
     private String nickname;
     private String answer;
-    private int gameType; // Alphabet, Vowels or Consonnants
     private float score;
+    
+    //Variables for the Alphabet Game
+    private int gameType; // Alphabet, Vowels or Consonnants
+    
+    //Variables for the word Game :
+    private int wordLengthMax;
+    private int spellingSpeed;
+    private final int SPELLING_SPEED_SLOW = 1000; //Pause between each letters of a word
+    private final int SPELLING_SPEED_MEDIUM = 750;
+    private final int SPELLING_SPEED_FAST = 500;
 
     public DataGame() {
         this.score = 0;
@@ -102,6 +111,21 @@ public class DataGame implements Observable {
     public void setTrainingMode(boolean trainingMode) {
         this.trainingMode = trainingMode;
     }
+    
+    
+    /**
+     * @return the wordLengthMax
+     */
+    public int getWordLengthMax() {
+        return wordLengthMax;
+    }
+
+    /**
+     * @param wordLengthMax the wordLengthMax to set
+     */
+    public void setWordLengthMax(int wordLengthMax) {
+        this.wordLengthMax = wordLengthMax;
+    }
 
     public void addObserver(Observer obs) {
         this.listObserver.add(obs);
@@ -147,5 +171,21 @@ public class DataGame implements Observable {
         for (Observer obs : listObserver) {
             obs.updateCorrectionWord(rightOrFalse, word);
         }
+    }
+
+    /**
+     * @return the spellingSpeed
+     */
+    public int getSpellingSpeed() {
+        return spellingSpeed;
+    }
+
+    /**
+     * @param spellingSpeed the spellingSpeed to set
+     */
+    public void setSpellingSpeed(String difficulty) {
+        if(difficulty == "slow") this.spellingSpeed = SPELLING_SPEED_SLOW;
+        else if(difficulty == "fast") this.spellingSpeed = SPELLING_SPEED_FAST;
+        else this.spellingSpeed = SPELLING_SPEED_MEDIUM;
     }
 }

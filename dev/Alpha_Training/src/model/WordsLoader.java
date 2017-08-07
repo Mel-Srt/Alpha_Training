@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class WordsLoader {
     private static WordsLoader instance;
-    File f;
+    private File f;
     
     //Using: call WordsLoader.getInstance().method();
     public static synchronized WordsLoader getInstance() {
@@ -28,21 +28,22 @@ public class WordsLoader {
         return instance;
     }
     
-    public List<String> readFile() {
+    public List<String> readFile(int maxLengthWord) {
+        System.out.println("difficulté = " + maxLengthWord);
         String pathFile = "files/words.csv";
         List<String> wordsList = new ArrayList<String>();
-
         try (BufferedReader br = new BufferedReader(new FileReader(pathFile))) {
 
             String sCurrentLine;
- 
+            
             while ((sCurrentLine = br.readLine()) != null) {
                 String[] parts = sCurrentLine.split(";");
                 String word = parts[0];
-                wordsList.add(word);
+                if(word.length() <= maxLengthWord){
+                    wordsList.add(word);
+                }
             }
             br.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
