@@ -537,11 +537,6 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_PlayFocusLost(evt);
             }
         });
-        Btn_Alphabet.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Btn_AlphabetMouseClicked(evt);
-            }
-        });
         Btn_Alphabet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_AlphabetActionPerformed(evt);
@@ -570,11 +565,6 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
                 Btn_PlayFocusLost(evt);
             }
         });
-        Btn_Vowels.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Btn_VowelsMouseClicked(evt);
-            }
-        });
         Btn_Vowels.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_VowelsActionPerformed(evt);
@@ -601,11 +591,6 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 Btn_PlayFocusLost(evt);
-            }
-        });
-        Btn_Consonnants.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Btn_ConsonnantsMouseClicked(evt);
             }
         });
         Btn_Consonnants.addActionListener(new java.awt.event.ActionListener() {
@@ -1387,6 +1372,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             Btn_Training.setEnabled(true);
             Btn_Chrono.setEnabled(true);
             Btn_ChangeColorSelected(Btn_Alphabet);
+            requestingFocusThread(Btn_Alphabet);
         } else {
             Btn_Training.setEnabled(false);
             Btn_Chrono.setEnabled(false);
@@ -1402,6 +1388,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             Btn_Training.setEnabled(true);
             Btn_Chrono.setEnabled(true);
             Btn_ChangeColorSelected(Btn_Vowels);
+            requestingFocusThread(Btn_Vowels);
         } else {
             Btn_Training.setEnabled(false);
             Btn_Chrono.setEnabled(false);
@@ -1417,6 +1404,7 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             Btn_Training.setEnabled(true);
             Btn_Chrono.setEnabled(true);
             Btn_ChangeColorSelected(Btn_Consonnants);
+            requestingFocusThread(Btn_Consonnants);
         } else {
             Btn_Training.setEnabled(false);
             Btn_Chrono.setEnabled(false);
@@ -1671,24 +1659,6 @@ public class MainFrame extends javax.swing.JFrame implements Observer {
             Btn_ChangeNickname.doClick();
         }
     }//GEN-LAST:event_Btn_ChangeNicknameKeyPressed
-
-    private void Btn_VowelsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_VowelsMouseClicked
-        // TODO add your handling code here:
-        Btn_Vowels.requestFocus();
-        Btn_Vowels.doClick();
-    }//GEN-LAST:event_Btn_VowelsMouseClicked
-
-    private void Btn_ConsonnantsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_ConsonnantsMouseClicked
-        // TODO add your handling code here:
-        Btn_Consonnants.requestFocus();
-        Btn_Consonnants.doClick();
-    }//GEN-LAST:event_Btn_ConsonnantsMouseClicked
-
-    private void Btn_AlphabetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_AlphabetMouseClicked
-        // TODO add your handling code here:
-        Btn_Alphabet.requestFocus();
-        Btn_Alphabet.doClick();
-    }//GEN-LAST:event_Btn_AlphabetMouseClicked
 
     private void Btn_LettersGameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Btn_LettersGameFocusGained
         // TODO add your handling code here:
