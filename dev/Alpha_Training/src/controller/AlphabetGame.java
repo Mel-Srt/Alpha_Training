@@ -1,7 +1,5 @@
 package controller;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,7 +11,6 @@ import model.DataGame;
 import model.LetterAlphabet;
 import model.ScoreFile;
 import model.ScoreLine;
-import sound.SoundGame;
 
 import view.MainFrame;
 

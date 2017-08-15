@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Character;
 
 /**
  *
@@ -39,7 +40,9 @@ public class WordsLoader {
             while ((sCurrentLine = br.readLine()) != null) {
                 String[] parts = sCurrentLine.split(";");
                 String word = parts[0];
-                if(word.length() <= maxLengthWord){
+                
+                //If the words is included according the difficulty (choice of the player) and it is not a proper noun
+                if(word.length() <= maxLengthWord && (word.charAt(0) != Character.toUpperCase(word.charAt(0)))){
                     wordsList.add(word);
                 }
             }
